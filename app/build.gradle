@@ -1,0 +1,26 @@
+plugins {
+    id 'application'
+    id 'my-library.java-common-conventions'
+}
+
+group = 'edu.austral.ingsis'
+version = '1.0.1'
+
+dependencies {
+    implementation project(':parser')
+    implementation project(':lexer')
+    implementation project(':interpreter')
+}
+
+application {
+    mainClass = 'edu.austral.ingsis.App'
+}
+
+jar {
+    manifest {
+        attributes(
+                'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+                'Main-Class': 'edu.austral.ingsis.App'
+        )
+    }
+}

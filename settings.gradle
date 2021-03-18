@@ -1,0 +1,3 @@
+rootProject.name = 'my-library'
+include 'interpreter', 'lexer', 'parser', 'app'
+
