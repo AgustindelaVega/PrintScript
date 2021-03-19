@@ -2,6 +2,7 @@ package edu.austral.ingsis.parser.impl;
 
 import edu.austral.ingsis.parser.Parser;
 import edu.austral.ingsis.statement.Statement;
+import edu.austral.ingsis.token.Token;
 
 import java.util.List;
 

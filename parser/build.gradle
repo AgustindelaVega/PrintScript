@@ -5,3 +5,7 @@ plugins {
 
 group = 'edu.austral.ingsis'
 version = '1.0.1'
+
+dependencies {
+    implementation project(':lexer')
+}
