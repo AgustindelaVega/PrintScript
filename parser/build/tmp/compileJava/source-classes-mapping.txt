@@ -1,14 +1,22 @@
-edu/austral/ingsis/expression/impl/VariableExpression.java
- edu.austral.ingsis.expression.impl.VariableExpression
+edu/austral/ingsis/visitor/StatementVisitor.java
+ edu.austral.ingsis.visitor.StatementVisitor
 edu/austral/ingsis/statement/Statement.java
  edu.austral.ingsis.statement.Statement
 edu/austral/ingsis/parser/Parser.java
  edu.austral.ingsis.parser.Parser
 edu/austral/ingsis/parser/impl/PrintScriptParser.java
  edu.austral.ingsis.parser.impl.PrintScriptParser
+edu/austral/ingsis/expression/impl/ValueExpression.java
+ edu.austral.ingsis.expression.impl.ValueExpression
+edu/austral/ingsis/expression/impl/VariableExpression.java
+ edu.austral.ingsis.expression.impl.VariableExpression
+edu/austral/ingsis/expression/impl/BinaryExpression.java
+ edu.austral.ingsis.expression.impl.BinaryExpression
 edu/austral/ingsis/expression/Expression.java
  edu.austral.ingsis.expression.Expression
 edu/austral/ingsis/visitor/ExpressionVisitor.java
  edu.austral.ingsis.visitor.ExpressionVisitor
-edu/austral/ingsis/visitor/StatementVisitor.java
- edu.austral.ingsis.visitor.StatementVisitor
+edu/austral/ingsis/statement/impl/DeclarationStatement.java
+ edu.austral.ingsis.statement.impl.DeclarationStatement
+edu/austral/ingsis/statement/impl/PrintStatement.java
+ edu.austral.ingsis.statement.impl.PrintStatement

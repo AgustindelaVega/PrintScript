@@ -1,15 +1,14 @@
 package edu.austral.ingsis.expression.impl;
 
 import edu.austral.ingsis.expression.Expression;
-import edu.austral.ingsis.token.Token;
 import edu.austral.ingsis.visitor.ExpressionVisitor;
 
-public class VariableExpression implements Expression {
+public class ValueExpression implements Expression {
 
-    private Token name;
+    private Object value;
 
-    public VariableExpression(Token name) {
-        this.name = name;
+    public ValueExpression(Object value) {
+        this.value = value;
     }
 
     @Override
@@ -17,7 +16,7 @@ public class VariableExpression implements Expression {
         return expressionVisitor.visit(this);
     }
 
-    public Token getName() {
-        return name;
+    public Object getValue() {
+        return value;
     }
 }
