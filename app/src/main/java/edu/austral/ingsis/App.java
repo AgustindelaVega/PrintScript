@@ -1,12 +1,13 @@
 package edu.austral.ingsis;
 
+import edu.austral.ingsis.token.Token;
+
+import java.util.List;
+
 public class App {
     public static void main(String[] args) {
-        Lexer lexer = new Lexer();
-        Parser parser = new Parser();
-        Interpreter interpreter = new Interpreter();
-        System.out.println(lexer.getName());
-        System.out.println(parser.getName());
-        System.out.println(interpreter.getName());
+        Lexer lexer = new PrintScriptLexer();
+        List<Token> tokens = lexer.lex("./app/src/main/resources/file.txt");
+
     }
 }

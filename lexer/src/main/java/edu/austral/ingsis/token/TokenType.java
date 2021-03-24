@@ -3,7 +3,9 @@ package edu.austral.ingsis.token;
 public enum TokenType {
     LET,
     NUMBER,
+    NUMBERTYPE,
     STRING,
+    STRINGTYPE,
     SEMICOLON,
     COLON,
     ASSIGNATION,
@@ -13,7 +15,6 @@ public enum TokenType {
     MULTIPLY,
     DIVIDE,
     IDENTIFIER,
-    NUMBER_TYPE,
-    STRING_TYPE,
     EOF,
+    NEWLINE,
 }
