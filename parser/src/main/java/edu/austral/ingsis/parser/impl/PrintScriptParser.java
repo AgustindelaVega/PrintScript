@@ -6,6 +6,7 @@ import edu.austral.ingsis.expression.impl.*;
 import edu.austral.ingsis.parser.Parser;
 import edu.austral.ingsis.statement.Statement;
 import edu.austral.ingsis.statement.impl.DeclarationStatement;
+import edu.austral.ingsis.statement.impl.PrintStatement;
 import edu.austral.ingsis.token.Token;
 import edu.austral.ingsis.token.TokenType;
 
@@ -28,23 +29,19 @@ public class PrintScriptParser implements Parser {
         List<Statement> statements = new ArrayList<>();
 
         while(!isAtEnd()) {
-            statements.add(declaration());
+            statements.add(initParse());
         }
 
         return statements;
     }
 
-    private Statement declaration() {
-        if(match(LET)) return varDeclaration(previous());
-        return statement();
-    }
-
-    private Statement statement() {
-        if(match(PRINT)) return null;
+    private Statement initParse() {
+        if(match(LET)) return declarationStatement(previous());
+        if(match(PRINT)) return printStatement();
         throw new ParseException("Parse error", previous());
     }
 
-    private Statement varDeclaration(Token keyword) {
+    private Statement declarationStatement(Token keyword) {
         Token name = consume(IDENTIFIER, "Variable name missing.");
         TokenType type = null;
         Expression expression = null;
@@ -67,8 +64,14 @@ public class PrintScriptParser implements Parser {
         return new DeclarationStatement(keyword, name, type, expression);
     }
 
+    private Statement printStatement() {
+        Expression expression = assignment();
+        consume(SEMICOLON, "';' after variable declaration missing.");
+        return new PrintStatement(expression);
+    }
+
     private Expression assignment() {
-        Expression expr = binary();
+        Expression expression = binary();
 
         if(match(ASSIGNATION)) {
             Token name = previous();
@@ -77,7 +80,7 @@ public class PrintScriptParser implements Parser {
             return new AssigmentExpression(name, value);
         }
 
-        return expr;
+        return expression;
     }
 
 
