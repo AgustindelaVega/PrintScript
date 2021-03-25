@@ -68,11 +68,11 @@ public class PrintScriptParser implements Parser {
     }
 
     private Expression assignment() {
-        Expression expr = addition();
+        Expression expr = binary();
 
         if(match(ASSIGNATION)) {
             Token name = previous();
-            Expression value = addition();
+            Expression value = binary();
 
             return new AssigmentExpression(name, value);
         }
@@ -80,10 +80,11 @@ public class PrintScriptParser implements Parser {
         return expr;
     }
 
-    private Expression addition() {
+
+    private Expression binary() {
         Expression left = unary();
 
-        if(match(MINUS, PLUS)) {
+        if(match(MINUS, PLUS, MULTIPLY, DIVIDE)) {
             Token operator = previous();
             Expression right = unary();
             left = new BinaryExpression(left, right, operator);
