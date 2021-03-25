@@ -1,2 +1,0 @@
-edu/austral/ingsis/App.java
- edu.austral.ingsis.App

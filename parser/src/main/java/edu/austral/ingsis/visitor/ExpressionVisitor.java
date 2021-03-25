@@ -1,9 +1,6 @@
 package edu.austral.ingsis.visitor;
 
-import edu.austral.ingsis.expression.impl.AssigmentExpression;
-import edu.austral.ingsis.expression.impl.BinaryExpression;
-import edu.austral.ingsis.expression.impl.ValueExpression;
-import edu.austral.ingsis.expression.impl.VariableExpression;
+import edu.austral.ingsis.expression.impl.*;
 
 public interface ExpressionVisitor {
 
@@ -11,4 +8,5 @@ public interface ExpressionVisitor {
     Object visit(VariableExpression variableExpression);
     Object visit(BinaryExpression binaryExpression);
     Object visit(AssigmentExpression assigmentExpression);
+    Object visit(UnaryExpression unaryExpression);
 }

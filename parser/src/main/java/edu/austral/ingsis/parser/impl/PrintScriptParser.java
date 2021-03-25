@@ -2,7 +2,7 @@ package edu.austral.ingsis.parser.impl;
 
 import edu.austral.ingsis.exception.ParseException;
 import edu.austral.ingsis.expression.Expression;
-import edu.austral.ingsis.expression.impl.AssigmentExpression;
+import edu.austral.ingsis.expression.impl.*;
 import edu.austral.ingsis.parser.Parser;
 import edu.austral.ingsis.statement.Statement;
 import edu.austral.ingsis.statement.impl.DeclarationStatement;
@@ -32,23 +32,6 @@ public class PrintScriptParser implements Parser {
         }
 
         return statements;
-    }
-
-    private Expression assignment() {
-        Expression expr = addition();
-
-        if(match(ASSIGNATION)) {
-            Token name = previous();
-            Expression value = addition();
-
-            return new AssigmentExpression(name, value);
-        }
-
-        return expr;
-    }
-
-    private Expression addition() {
-        return null;
     }
 
     private Statement declaration() {
@@ -82,6 +65,53 @@ public class PrintScriptParser implements Parser {
 
         consume(SEMICOLON, "';' after variable declaration missing.");
         return new DeclarationStatement(keyword, name, type, expression);
+    }
+
+    private Expression assignment() {
+        Expression expr = addition();
+
+        if(match(ASSIGNATION)) {
+            Token name = previous();
+            Expression value = addition();
+
+            return new AssigmentExpression(name, value);
+        }
+
+        return expr;
+    }
+
+    private Expression addition() {
+        Expression left = unary();
+
+        if(match(MINUS, PLUS)) {
+            Token operator = previous();
+            Expression right = unary();
+            left = new BinaryExpression(left, right, operator);
+        }
+
+        return left;
+    }
+
+    private Expression unary() {
+        if(match(MINUS)) {
+            Token operator = previous();
+            Expression expression = unary();
+            return new UnaryExpression(operator, expression);
+        }
+
+        return primary();
+    }
+
+    private Expression primary() {
+        if(match(NUMBER, STRING)) {
+            return new ValueExpression(previous().getLiteral());
+        }
+
+        if(match(IDENTIFIER)) {
+            return new VariableExpression(previous());
+        }
+
+        throw new ParseException("Expression expected.", peek());
     }
 
 

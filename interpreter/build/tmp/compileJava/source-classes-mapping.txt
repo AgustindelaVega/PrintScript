@@ -1,2 +1,0 @@
-edu/austral/ingsis/Interpreter.java
- edu.austral.ingsis.Interpreter
