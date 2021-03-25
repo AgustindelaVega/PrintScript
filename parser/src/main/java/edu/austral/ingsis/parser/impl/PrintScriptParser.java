@@ -38,7 +38,7 @@ public class PrintScriptParser implements Parser {
     private Statement initParse() {
         if(match(LET)) return declarationStatement(previous());
         if(match(PRINT)) return printStatement();
-        throw new ParseException("Parse error", previous());
+        return assignationStatement();
     }
 
     private Statement declarationStatement(Token keyword) {
@@ -68,6 +68,10 @@ public class PrintScriptParser implements Parser {
         Expression expression = assignment();
         consume(SEMICOLON, "';' after variable declaration missing.");
         return new PrintStatement(expression);
+    }
+
+    private Statement assignationStatement() {
+        return null;
     }
 
     private Expression assignment() {

@@ -1,2 +1,0 @@
-MyLibraryJavaCommonConventionsPlugin.java
- MyLibraryJavaCommonConventionsPlugin
