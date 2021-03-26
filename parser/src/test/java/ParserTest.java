@@ -32,14 +32,14 @@ public class ParserTest {
 
     @Test
     public void TestParseDeclarationStatement_ValueExpression() {
-        tokens.add(new PrintScriptToken(LET, "let", "let", 1));
-        tokens.add(new PrintScriptToken(IDENTIFIER, "x", "x", 1));
-        tokens.add(new PrintScriptToken(COLON, ":", ":", 1));
-        tokens.add(new PrintScriptToken(NUMBERTYPE, "number", "number", 1));
-        tokens.add(new PrintScriptToken(ASSIGNATION, "=", "=", 1));
+        tokens.add(new PrintScriptToken(LET, "let", null, 1));
+        tokens.add(new PrintScriptToken(IDENTIFIER, "x", null, 1));
+        tokens.add(new PrintScriptToken(COLON, ":", null, 1));
+        tokens.add(new PrintScriptToken(NUMBERTYPE, "number", null, 1));
+        tokens.add(new PrintScriptToken(ASSIGNATION, "=", null, 1));
         tokens.add(new PrintScriptToken(NUMBER, "10", 10, 1));
-        tokens.add(new PrintScriptToken(SEMICOLON, ";", ";", 1));
-        tokens.add(new PrintScriptToken(EOF, "", "", 1));
+        tokens.add(new PrintScriptToken(SEMICOLON, ";", null, 1));
+        tokens.add(new PrintScriptToken(EOF, "", null, 1));
 
         List<Statement> statements = parser.parse();
         DeclarationStatement statement = (DeclarationStatement) statements.get(0);
@@ -53,15 +53,15 @@ public class ParserTest {
 
     @Test
     public void TestParseDeclarationStatement_BinaryExpression_Addition() {
-        tokens.add(new PrintScriptToken(LET, "let", "let", 1));
-        tokens.add(new PrintScriptToken(IDENTIFIER, "x", "x", 1));
-        tokens.add(new PrintScriptToken(COLON, ":", ":", 1));
-        tokens.add(new PrintScriptToken(NUMBERTYPE, "number", "number", 1));
-        tokens.add(new PrintScriptToken(ASSIGNATION, "=", "=", 1));
+        tokens.add(new PrintScriptToken(LET, "let", null, 1));
+        tokens.add(new PrintScriptToken(IDENTIFIER, "x", null, 1));
+        tokens.add(new PrintScriptToken(COLON, ":", null, 1));
+        tokens.add(new PrintScriptToken(NUMBERTYPE, "number", null, 1));
+        tokens.add(new PrintScriptToken(ASSIGNATION, "=", null, 1));
         tokens.add(new PrintScriptToken(NUMBER, "10", 10, 1));
-        tokens.add(new PrintScriptToken(PLUS, "+", "+", 1));
+        tokens.add(new PrintScriptToken(PLUS, "+", null, 1));
         tokens.add(new PrintScriptToken(NUMBER, "9", 9, 1));
-        tokens.add(new PrintScriptToken(SEMICOLON, ";", ";", 1));
+        tokens.add(new PrintScriptToken(SEMICOLON, ";", null, 1));
         tokens.add(new PrintScriptToken(EOF, "", "", 1));
 
         List<Statement> statements = parser.parse();
@@ -78,15 +78,15 @@ public class ParserTest {
 
     @Test
     public void TestParseDeclarationStatement_BinaryExpression_Multiplication() {
-        tokens.add(new PrintScriptToken(LET, "let", "let", 1));
-        tokens.add(new PrintScriptToken(IDENTIFIER, "x", "x", 1));
-        tokens.add(new PrintScriptToken(COLON, ":", ":", 1));
-        tokens.add(new PrintScriptToken(NUMBERTYPE, "number", "number", 1));
-        tokens.add(new PrintScriptToken(ASSIGNATION, "=", "=", 1));
+        tokens.add(new PrintScriptToken(LET, "let", null, 1));
+        tokens.add(new PrintScriptToken(IDENTIFIER, "x", null, 1));
+        tokens.add(new PrintScriptToken(COLON, ":", null, 1));
+        tokens.add(new PrintScriptToken(NUMBERTYPE, "number", null, 1));
+        tokens.add(new PrintScriptToken(ASSIGNATION, "=", null, 1));
         tokens.add(new PrintScriptToken(NUMBER, "10", 10, 1));
-        tokens.add(new PrintScriptToken(MULTIPLY, "*", "*", 1));
+        tokens.add(new PrintScriptToken(MULTIPLY, "*", null, 1));
         tokens.add(new PrintScriptToken(NUMBER, "9", 9, 1));
-        tokens.add(new PrintScriptToken(SEMICOLON, ";", ";", 1));
+        tokens.add(new PrintScriptToken(SEMICOLON, ";", null, 1));
         tokens.add(new PrintScriptToken(EOF, "", "", 1));
 
         List<Statement> statements = parser.parse();
@@ -103,9 +103,9 @@ public class ParserTest {
 
     @Test
     public void TestParsePrintStatement_ValueExpression() {
-        tokens.add(new PrintScriptToken(PRINT, "print", "print", 1));
+        tokens.add(new PrintScriptToken(PRINT, "print", null, 1));
         tokens.add(new PrintScriptToken(NUMBER, "10", 10, 1));
-        tokens.add(new PrintScriptToken(SEMICOLON, ";", ";", 1));
+        tokens.add(new PrintScriptToken(SEMICOLON, ";", null, 1));
         tokens.add(new PrintScriptToken(EOF, "", "", 1));
 
         List<Statement> statements = parser.parse();
@@ -134,11 +134,11 @@ public class ParserTest {
 
     @Test
     public void TestParseMultipleStatements() {
-        tokens.add(new PrintScriptToken(LET, "let", "let", 1));
-        tokens.add(new PrintScriptToken(IDENTIFIER, "x", "x", 1));
-        tokens.add(new PrintScriptToken(COLON, ":", ":", 1));
-        tokens.add(new PrintScriptToken(NUMBERTYPE, "number", "number", 1));
-        tokens.add(new PrintScriptToken(SEMICOLON, ";", ";", 1));
+        tokens.add(new PrintScriptToken(LET, "let", null, 1));
+        tokens.add(new PrintScriptToken(IDENTIFIER, "x", null, 1));
+        tokens.add(new PrintScriptToken(COLON, ":", null, 1));
+        tokens.add(new PrintScriptToken(NUMBERTYPE, "number", null, 1));
+        tokens.add(new PrintScriptToken(SEMICOLON, ";", null, 1));
         tokens.add(new PrintScriptToken(IDENTIFIER, "x", null, 1));
         tokens.add(new PrintScriptToken(ASSIGNATION, "=", null, 1));
         tokens.add(new PrintScriptToken(NUMBER, "10", 10, 1));

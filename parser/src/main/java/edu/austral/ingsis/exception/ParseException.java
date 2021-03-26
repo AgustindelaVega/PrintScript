@@ -2,7 +2,7 @@ package edu.austral.ingsis.exception;
 
 import edu.austral.ingsis.token.Token;
 
-public class ParseException extends RuntimeException{
+public class ParseException extends RuntimeException {
 
     private String message;
     private Token token;
