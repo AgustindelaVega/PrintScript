@@ -5,6 +5,7 @@ import edu.austral.ingsis.expression.Expression;
 import edu.austral.ingsis.expression.impl.*;
 import edu.austral.ingsis.parser.Parser;
 import edu.austral.ingsis.statement.Statement;
+import edu.austral.ingsis.statement.impl.AssigmentStatement;
 import edu.austral.ingsis.statement.impl.DeclarationStatement;
 import edu.austral.ingsis.statement.impl.PrintStatement;
 import edu.austral.ingsis.token.Token;
@@ -71,17 +72,24 @@ public class PrintScriptParser implements Parser {
     }
 
     private Statement assignationStatement() {
-        return null;
+        Expression expression = assignment();
+        consume(SEMICOLON, "';' after variable declaration missing.");
+        return new AssigmentStatement(expression);
     }
 
     private Expression assignment() {
         Expression expression = binary();
 
         if(match(ASSIGNATION)) {
-            Token name = previous();
+            Token token = previous();
             Expression value = binary();
 
-            return new AssigmentExpression(name, value);
+            if(expression instanceof VariableExpression) {
+                Token name = ((VariableExpression)expression).getName();
+                return new AssigmentExpression(name, value);
+            }
+
+            throw new ParseException("Assigment parse error.", token);
         }
 
         return expression;

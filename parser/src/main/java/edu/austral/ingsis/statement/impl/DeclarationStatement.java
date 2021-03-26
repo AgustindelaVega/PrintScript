@@ -23,7 +23,7 @@ public class DeclarationStatement implements Statement {
 
     @Override
     public void accept(StatementVisitor statementVisitor) {
-
+        statementVisitor.visit(this);
     }
 
     public Token getKeyword() {

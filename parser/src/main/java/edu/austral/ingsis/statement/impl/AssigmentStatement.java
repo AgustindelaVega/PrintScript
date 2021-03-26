@@ -4,11 +4,11 @@ import edu.austral.ingsis.expression.Expression;
 import edu.austral.ingsis.statement.Statement;
 import edu.austral.ingsis.visitor.StatementVisitor;
 
-public class PrintStatement implements Statement {
+public class AssigmentStatement implements Statement {
 
     private Expression expression;
 
-    public PrintStatement(Expression expression) {
+    public AssigmentStatement(Expression expression) {
         this.expression = expression;
     }
 
