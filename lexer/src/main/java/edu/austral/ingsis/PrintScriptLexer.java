@@ -28,26 +28,10 @@ public class PrintScriptLexer implements Lexer {
     }
 
     private void addPatterns() {
-        tokenTypePatterns.put(LET, "let");
-        tokenTypePatterns.put(STRINGTYPE, "string");
-        tokenTypePatterns.put(NUMBERTYPE, "number");
-        tokenTypePatterns.put(PRINT, "print");
-
-        tokenTypePatterns.put(STRING, "[\\\"'].*[\\\"']");
-        tokenTypePatterns.put(NUMBER, "-?[0-9.]+");
-        tokenTypePatterns.put(IDENTIFIER, "[a-zA-Z]+\\w*");
-
-        tokenTypePatterns.put(SEMICOLON, ";");
-        tokenTypePatterns.put(COLON, ":");
-        tokenTypePatterns.put(NEWLINE, "\n");
-
-        tokenTypePatterns.put(ASSIGNATION, "[=]");
-        tokenTypePatterns.put(PLUS, "[+]");
-        tokenTypePatterns.put(MINUS, "[-]");
-        tokenTypePatterns.put(DIVIDE, "[/]");
-        tokenTypePatterns.put(MULTIPLY, "[*]");
-        tokenTypePatterns.put(LEFTPARENTHESIS, "[(]");
-        tokenTypePatterns.put(RIGHTPARENTHESIS, "[)]");
+        for (TokenType value : values()) {
+            if (value != EOF)
+                tokenTypePatterns.put(value, value.getRegex());
+        }
     }
 
     private Matcher getMatcher(String input) {
