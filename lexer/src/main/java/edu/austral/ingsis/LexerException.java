@@ -2,15 +2,17 @@ package edu.austral.ingsis;
 
 public class LexerException extends RuntimeException {
     private final String message;
-    private final Integer line;
 
     public LexerException(String message, Integer line) {
-        this.message = message;
-        this.line = line;
+        this.message = line + ": " + message;
+    }
+
+    public LexerException(String message, Integer line, Integer column) {
+        this.message = "(" +line + ", " + column + ") "+ ": " + message;
     }
 
     @Override
     public String getMessage() {
-        return line + ": " + message;
+        return message;
     }
 }

@@ -1,2 +1,8 @@
 /.gradle/
 /.idea/
+/lexer/build/
+/parser/build/
+/interpreter/build/
+/buildSrc/.gradle/
+/buildSrc/build/
+/app/build/

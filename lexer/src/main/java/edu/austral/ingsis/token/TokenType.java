@@ -17,4 +17,6 @@ public enum TokenType {
     IDENTIFIER,
     EOF,
     NEWLINE,
+    LEFTPARENTHESIS,
+    RIGHTPARENTHESIS,
 }

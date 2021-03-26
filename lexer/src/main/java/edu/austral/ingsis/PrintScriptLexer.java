@@ -46,7 +46,8 @@ public class PrintScriptLexer implements Lexer {
         tokenTypePatterns.put(MINUS, "[-]");
         tokenTypePatterns.put(DIVIDE, "[/]");
         tokenTypePatterns.put(MULTIPLY, "[*]");
-
+        tokenTypePatterns.put(LEFTPARENTHESIS, "[(]");
+        tokenTypePatterns.put(RIGHTPARENTHESIS, "[)]");
     }
 
     private Matcher getMatcher(String input) {
@@ -72,32 +73,52 @@ public class PrintScriptLexer implements Lexer {
 
     @Override
     public List<Token> lex(String src) {
-        Matcher matcher = getMatcher(getFileLines(src));
+        String input = getFileLines(src);
+        Matcher matcher = getMatcher(input);
+        int charCount = 0;
 
         while (matcher.find()) {
-            if(matcher.group().equals("\n")) {
+            String match = matcher.group();
+            int matchIndex = matcher.start();
+            if(match.equals("\n")) {
                 line++;
+                charCount = matcher.end();
                 continue;
+            }
+            if (!tokens.isEmpty()) {
+                String lexeme = tokens.get(tokens.size() - 1).getLexeme();
+                String processedInput = input.substring(0, matchIndex);
+                int endIndex = processedInput.lastIndexOf(lexeme) + lexeme.length();
+                if (endIndex != matchIndex && !input.substring(endIndex, matchIndex).trim().isEmpty()) {
+                    throw new LexerException("Error matching group \" " + input.substring(endIndex, matchIndex) + " \"", line, endIndex - charCount);
+                }
             }
             tokenTypePatterns.keySet().stream()
                     .filter(tokenType -> matcher.group(tokenType.name()) != null)
                     .findFirst()
                     .map(tokenType -> {
                         if(tokenType == NUMBER){
-                            return addToken(tokenType, matcher.group(), this.line, Double.parseDouble(matcher.group()));
+                            return addToken(tokenType, matcher.group(), line, Double.parseDouble(matcher.group()));
                         }else if(tokenType == STRING) {
-                            return addToken(tokenType, matcher.group(), this.line, matcher.group().replaceAll("[\"']", ""));
+                            return addToken(tokenType, matcher.group(), line, matcher.group().replaceAll("[\"']", ""));
                         } else {
-                            return addToken(tokenType, matcher.group(), this.line,null);
+                            return addToken(tokenType, matcher.group(), line,null);
                         }
-                    })
-                    .orElseThrow(() -> new LexerException("Error matching group \" " + matcher.group() + " \"", this.line));
+                    }).orElseThrow(() -> new LexerException("Error matching group \" " + matcher.group(), line));
+
+        }
+        if (!tokens.isEmpty()) {
+            int lastIndex = input.lastIndexOf(tokens.get(tokens.size() - 1).getLexeme()) + 1;
+            if (!input.substring(lastIndex).trim().isEmpty())
+                throw new LexerException("Error matching group \" " + input.substring(lastIndex) + " \"", line, lastIndex - charCount);
+        } else if (!input.trim().isEmpty()){
+            throw new LexerException("Error matching group \" " + input + " \"", line, input.length());
         }
 
         tokens.add(
                 TokenBuilder.createBuilder()
                         .addType(EOF)
-                        .addLine(this.line)
+                        .addLine(line)
                         .addLexeme("")
                         .addLiteral(null)
                         .buildToken());
