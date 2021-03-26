@@ -1,7 +1,10 @@
 package edu.austral.ingsis;
 
-public class Lexer {
-    public String getName(){
-        return "Lexer";
-    }
+import edu.austral.ingsis.token.Token;
+
+import java.util.List;
+
+public interface Lexer {
+
+    List<Token> lex(String src);
 }
