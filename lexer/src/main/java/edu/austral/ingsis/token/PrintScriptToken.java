@@ -1,13 +1,13 @@
 package edu.austral.ingsis.token;
 
-class PrintScriptToken implements Token{
+public class PrintScriptToken implements Token{
 
     private final TokenType type;
     private final String lexeme;
     private final Object literal;
     private final int line;
 
-    PrintScriptToken(TokenType type, String lexeme, Object literal, int line) {
+    public PrintScriptToken(TokenType type, String lexeme, Object literal, int line) {
         this.type = type;
         this.lexeme = lexeme;
         this.literal = literal;
