@@ -35,7 +35,7 @@ public class ParserTest {
         tokens.add(new PrintScriptToken(LET, "let", "let", 1));
         tokens.add(new PrintScriptToken(IDENTIFIER, "x", "x", 1));
         tokens.add(new PrintScriptToken(COLON, ":", ":", 1));
-        tokens.add(new PrintScriptToken(NUMBER_TYPE, "number", "number", 1));
+        tokens.add(new PrintScriptToken(NUMBERTYPE, "number", "number", 1));
         tokens.add(new PrintScriptToken(ASSIGNATION, "=", "=", 1));
         tokens.add(new PrintScriptToken(NUMBER, "10", 10, 1));
         tokens.add(new PrintScriptToken(SEMICOLON, ";", ";", 1));
@@ -47,7 +47,7 @@ public class ParserTest {
         assertEquals(LET, statement.getKeyword().getType());
         assertEquals(IDENTIFIER, statement.getName().getType());
         assertEquals("x", statement.getName().getLexeme());
-        assertEquals(NUMBER_TYPE, statement.getType());
+        assertEquals(NUMBERTYPE, statement.getType());
         assertEquals(10, ((ValueExpression) statement.getExpression()).getValue());
     }
 
@@ -56,7 +56,7 @@ public class ParserTest {
         tokens.add(new PrintScriptToken(LET, "let", "let", 1));
         tokens.add(new PrintScriptToken(IDENTIFIER, "x", "x", 1));
         tokens.add(new PrintScriptToken(COLON, ":", ":", 1));
-        tokens.add(new PrintScriptToken(NUMBER_TYPE, "number", "number", 1));
+        tokens.add(new PrintScriptToken(NUMBERTYPE, "number", "number", 1));
         tokens.add(new PrintScriptToken(ASSIGNATION, "=", "=", 1));
         tokens.add(new PrintScriptToken(NUMBER, "10", 10, 1));
         tokens.add(new PrintScriptToken(PLUS, "+", "+", 1));
@@ -70,7 +70,7 @@ public class ParserTest {
         assertEquals(LET, statement.getKeyword().getType());
         assertEquals(IDENTIFIER, statement.getName().getType());
         assertEquals("x", statement.getName().getLexeme());
-        assertEquals(NUMBER_TYPE, statement.getType());
+        assertEquals(NUMBERTYPE, statement.getType());
         assertEquals(10, ((ValueExpression)((BinaryExpression) statement.getExpression()).getLeft()).getValue());
         assertEquals(PLUS, ((BinaryExpression) statement.getExpression()).getOperator().getType());
         assertEquals(9, ((ValueExpression)((BinaryExpression) statement.getExpression()).getRight()).getValue());
@@ -81,7 +81,7 @@ public class ParserTest {
         tokens.add(new PrintScriptToken(LET, "let", "let", 1));
         tokens.add(new PrintScriptToken(IDENTIFIER, "x", "x", 1));
         tokens.add(new PrintScriptToken(COLON, ":", ":", 1));
-        tokens.add(new PrintScriptToken(NUMBER_TYPE, "number", "number", 1));
+        tokens.add(new PrintScriptToken(NUMBERTYPE, "number", "number", 1));
         tokens.add(new PrintScriptToken(ASSIGNATION, "=", "=", 1));
         tokens.add(new PrintScriptToken(NUMBER, "10", 10, 1));
         tokens.add(new PrintScriptToken(MULTIPLY, "*", "*", 1));
@@ -95,7 +95,7 @@ public class ParserTest {
         assertEquals(LET, statement.getKeyword().getType());
         assertEquals(IDENTIFIER, statement.getName().getType());
         assertEquals("x", statement.getName().getLexeme());
-        assertEquals(NUMBER_TYPE, statement.getType());
+        assertEquals(NUMBERTYPE, statement.getType());
         assertEquals(10, ((ValueExpression)((BinaryExpression) statement.getExpression()).getLeft()).getValue());
         assertEquals(MULTIPLY, ((BinaryExpression) statement.getExpression()).getOperator().getType());
         assertEquals(9, ((ValueExpression)((BinaryExpression) statement.getExpression()).getRight()).getValue());
@@ -137,7 +137,7 @@ public class ParserTest {
         tokens.add(new PrintScriptToken(LET, "let", "let", 1));
         tokens.add(new PrintScriptToken(IDENTIFIER, "x", "x", 1));
         tokens.add(new PrintScriptToken(COLON, ":", ":", 1));
-        tokens.add(new PrintScriptToken(NUMBER_TYPE, "number", "number", 1));
+        tokens.add(new PrintScriptToken(NUMBERTYPE, "number", "number", 1));
         tokens.add(new PrintScriptToken(SEMICOLON, ";", ";", 1));
         tokens.add(new PrintScriptToken(IDENTIFIER, "x", null, 1));
         tokens.add(new PrintScriptToken(ASSIGNATION, "=", null, 1));
@@ -152,7 +152,7 @@ public class ParserTest {
         assertEquals(LET, declarationStatement.getKeyword().getType());
         assertEquals(IDENTIFIER, declarationStatement.getName().getType());
         assertEquals("x", declarationStatement.getName().getLexeme());
-        assertEquals(NUMBER_TYPE, declarationStatement.getType());
+        assertEquals(NUMBERTYPE, declarationStatement.getType());
         assertNull(declarationStatement.getExpression());
         assertTrue(statements.get(1) instanceof AssigmentStatement);
         assertEquals(IDENTIFIER, ((AssigmentExpression) assigmentStatement.getExpression()).getName().getType());

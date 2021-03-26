@@ -11,10 +11,10 @@ import edu.austral.ingsis.statement.impl.PrintStatement;
 import edu.austral.ingsis.token.Token;
 import edu.austral.ingsis.token.TokenType;
 
-import static edu.austral.ingsis.token.TokenType.*;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import static edu.austral.ingsis.token.TokenType.*;
 
 public class PrintScriptParser implements Parser {
 
@@ -48,10 +48,10 @@ public class PrintScriptParser implements Parser {
         Expression expression = null;
 
         if(match(COLON)) {
-            if(match(STRING_TYPE)) {
-                type = STRING_TYPE;
-            } else if(match(NUMBER_TYPE)) {
-                type = NUMBER_TYPE;
+            if(match(STRINGTYPE)) {
+                type = STRINGTYPE;
+            } else if(match(NUMBERTYPE)) {
+                type = NUMBERTYPE;
             }
         } else {
             throw new ParseException("Variable type missing.", previous());
