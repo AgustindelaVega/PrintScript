@@ -4,3 +4,5 @@
 /lexer/build/
 /buildSrc/build/
 /buildSrc/.gradle/
+/interpreter/build/
+/app/build/
