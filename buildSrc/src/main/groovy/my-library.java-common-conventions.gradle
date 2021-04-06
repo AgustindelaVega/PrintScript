@@ -46,3 +46,10 @@ jacocoTestCoverageVerification {
 task format {
     dependsOn tasks.googleJavaFormat
 }
+
+task copyGitHooks(type: Copy) {
+    from "$rootDir/config/git-hooks"
+    into "$rootDir/.git/hooks"
+}
+
+build.dependsOn copyGitHooks
