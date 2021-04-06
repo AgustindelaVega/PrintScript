@@ -6,18 +6,18 @@ import edu.austral.ingsis.visitor.ExpressionVisitor;
 
 public class VariableExpression implements Expression {
 
-    private Token name;
+  private Token name;
 
-    public VariableExpression(Token name) {
-        this.name = name;
-    }
+  public VariableExpression(Token name) {
+    this.name = name;
+  }
 
-    @Override
-    public Object accept(ExpressionVisitor expressionVisitor) {
-        return expressionVisitor.visit(this);
-    }
+  @Override
+  public Object accept(ExpressionVisitor expressionVisitor) {
+    return expressionVisitor.visit(this);
+  }
 
-    public Token getName() {
-        return name;
-    }
+  public Token getName() {
+    return name;
+  }
 }

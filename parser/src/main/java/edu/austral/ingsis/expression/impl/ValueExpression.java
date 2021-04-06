@@ -5,18 +5,18 @@ import edu.austral.ingsis.visitor.ExpressionVisitor;
 
 public class ValueExpression implements Expression {
 
-    private Object value;
+  private Object value;
 
-    public ValueExpression(Object value) {
-        this.value = value;
-    }
+  public ValueExpression(Object value) {
+    this.value = value;
+  }
 
-    @Override
-    public Object accept(ExpressionVisitor expressionVisitor) {
-        return expressionVisitor.visit(this);
-    }
+  @Override
+  public Object accept(ExpressionVisitor expressionVisitor) {
+    return expressionVisitor.visit(this);
+  }
 
-    public Object getValue() {
-        return value;
-    }
+  public Object getValue() {
+    return value;
+  }
 }

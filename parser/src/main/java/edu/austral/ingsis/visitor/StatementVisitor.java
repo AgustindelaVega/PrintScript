@@ -6,7 +6,9 @@ import edu.austral.ingsis.statement.impl.PrintStatement;
 
 public interface StatementVisitor {
 
-    void visit(AssigmentStatement assigmentStatement);
-    void visit(DeclarationStatement declarationStatement);
-    void visit(PrintStatement printStatement);
+  void visit(AssigmentStatement assigmentStatement);
+
+  void visit(DeclarationStatement declarationStatement);
+
+  void visit(PrintStatement printStatement);
 }

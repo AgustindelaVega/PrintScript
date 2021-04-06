@@ -6,18 +6,18 @@ import edu.austral.ingsis.visitor.StatementVisitor;
 
 public class AssigmentStatement implements Statement {
 
-    private Expression expression;
+  private Expression expression;
 
-    public AssigmentStatement(Expression expression) {
-        this.expression = expression;
-    }
+  public AssigmentStatement(Expression expression) {
+    this.expression = expression;
+  }
 
-    @Override
-    public void accept(StatementVisitor statementVisitor) {
-        statementVisitor.visit(this);
-    }
+  @Override
+  public void accept(StatementVisitor statementVisitor) {
+    statementVisitor.visit(this);
+  }
 
-    public Expression getExpression() {
-        return expression;
-    }
+  public Expression getExpression() {
+    return expression;
+  }
 }
