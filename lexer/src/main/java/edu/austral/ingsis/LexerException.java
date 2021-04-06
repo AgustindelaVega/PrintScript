@@ -11,8 +11,8 @@ public class LexerException extends RuntimeException {
     this.message = "(" + line + ", " + column + ") " + ": " + message;
   }
 
-    @Override
-    public String getMessage() {
-        return message;
-    }
+  @Override
+  public String getMessage() {
+    return message;
+  }
 }
