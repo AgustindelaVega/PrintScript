@@ -35,6 +35,8 @@ checkstyleTest {
     source = 'src/test/java'
 }
 
+check.dependsOn(checkstyleMain)
+check.dependsOn(checkstyleTest)
 
 jacocoTestReport {
     dependsOn test
