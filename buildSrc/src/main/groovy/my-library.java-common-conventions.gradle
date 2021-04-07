@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'jacoco'
+    id 'com.github.sherter.google-java-format'
 }
 
 repositories {
@@ -9,3 +11,45 @@ repositories {
 dependencies {
     testImplementation 'junit:junit:4.13'
 }
+
+test {
+    finalizedBy jacocoTestReport
+}
+
+check.dependsOn jacocoTestCoverageVerification
+
+jacoco {
+    toolVersion = "0.8.6"
+}
+
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination file("${buildDir}/jacocoHtml")
+    }
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                counter = 'LINE'
+                minimum = 0.75
+            }
+        }
+    }
+}
+
+task format {
+    dependsOn tasks.googleJavaFormat
+}
+
+task copyGitHooks(type: Copy) {
+    from "$rootDir/config/git-hooks"
+    into "$rootDir/.git/hooks"
+}
+
+build.dependsOn copyGitHooks

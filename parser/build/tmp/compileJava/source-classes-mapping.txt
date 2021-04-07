@@ -1,2 +1,0 @@
-edu/austral/ingsis/Parser.java
- edu.austral.ingsis.Parser

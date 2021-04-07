@@ -1,0 +1,2 @@
+let str: string = "test string";
+let num: number = 13;
