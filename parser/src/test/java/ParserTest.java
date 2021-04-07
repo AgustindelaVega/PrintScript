@@ -150,7 +150,7 @@ public class ParserTest {
     tokens.add(new PrintScriptToken(SEMICOLON, ";", null, 1));
     tokens.add(new PrintScriptToken(IDENTIFIER, "x", null, 1));
     tokens.add(new PrintScriptToken(ASSIGNATION, "=", null, 1));
-    tokens.add(new PrintScriptToken(NUMBER, "10", 10, 1));
+    tokens.add(new PrintScriptToken(NUMBER, "10", 11, 1));
     tokens.add(new PrintScriptToken(SEMICOLON, ";", null, 1));
     tokens.add(new PrintScriptToken(EOF, "", null, 1));
 
