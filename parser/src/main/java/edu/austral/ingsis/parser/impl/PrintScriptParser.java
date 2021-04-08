@@ -20,13 +20,10 @@ public class PrintScriptParser implements Parser {
   private List<Token> tokens;
   private int current = 0;
 
-  public PrintScriptParser(List<Token> tokens) {
-    this.tokens = tokens;
-  }
-
   @Override
-  public List<Statement> parse() {
+  public List<Statement> parse(List<Token> tokens) {
     List<Statement> statements = new ArrayList<>();
+    this.tokens = tokens;
 
     while (!isAtEnd()) {
       statements.add(initParse());

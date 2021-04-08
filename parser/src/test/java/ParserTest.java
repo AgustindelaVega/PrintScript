@@ -25,7 +25,7 @@ public class ParserTest {
   @BeforeEach
   public void setUp() {
     tokens = new ArrayList<>();
-    parser = new PrintScriptParser(tokens);
+    parser = new PrintScriptParser();
   }
 
   @Test
@@ -39,7 +39,7 @@ public class ParserTest {
     tokens.add(new PrintScriptToken(SEMICOLON, ";", null, 1));
     tokens.add(new PrintScriptToken(EOF, "", null, 1));
 
-    List<Statement> statements = parser.parse();
+    List<Statement> statements = parser.parse(tokens);
     DeclarationStatement statement = (DeclarationStatement) statements.get(0);
 
     assertEquals(LET, statement.getKeyword().getType());
@@ -62,7 +62,7 @@ public class ParserTest {
     tokens.add(new PrintScriptToken(SEMICOLON, ";", null, 1));
     tokens.add(new PrintScriptToken(EOF, "", "", 1));
 
-    List<Statement> statements = parser.parse();
+    List<Statement> statements = parser.parse(tokens);
     DeclarationStatement statement = (DeclarationStatement) statements.get(0);
 
     assertEquals(LET, statement.getKeyword().getType());
@@ -91,7 +91,7 @@ public class ParserTest {
     tokens.add(new PrintScriptToken(SEMICOLON, ";", null, 1));
     tokens.add(new PrintScriptToken(EOF, "", "", 1));
 
-    List<Statement> statements = parser.parse();
+    List<Statement> statements = parser.parse(tokens);
     DeclarationStatement statement = (DeclarationStatement) statements.get(0);
 
     assertEquals(LET, statement.getKeyword().getType());
@@ -114,7 +114,7 @@ public class ParserTest {
     tokens.add(new PrintScriptToken(SEMICOLON, ";", null, 1));
     tokens.add(new PrintScriptToken(EOF, "", "", 1));
 
-    List<Statement> statements = parser.parse();
+    List<Statement> statements = parser.parse(tokens);
     PrintStatement statement = (PrintStatement) statements.get(0);
 
     assertTrue(statements.get(0) instanceof PrintStatement);
@@ -129,7 +129,7 @@ public class ParserTest {
     tokens.add(new PrintScriptToken(SEMICOLON, ";", null, 1));
     tokens.add(new PrintScriptToken(EOF, "", null, 1));
 
-    List<Statement> statements = parser.parse();
+    List<Statement> statements = parser.parse(tokens);
     AssigmentStatement statement = (AssigmentStatement) statements.get(0);
 
     assertTrue(statements.get(0) instanceof AssigmentStatement);
@@ -154,7 +154,7 @@ public class ParserTest {
     tokens.add(new PrintScriptToken(SEMICOLON, ";", null, 1));
     tokens.add(new PrintScriptToken(EOF, "", null, 1));
 
-    List<Statement> statements = parser.parse();
+    List<Statement> statements = parser.parse(tokens);
     DeclarationStatement declarationStatement = (DeclarationStatement) statements.get(0);
     AssigmentStatement assigmentStatement = (AssigmentStatement) statements.get(1);
 
