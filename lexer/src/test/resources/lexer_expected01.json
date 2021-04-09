@@ -1,0 +1,79 @@
+[
+  {
+    "type": "LET",
+    "lexeme": "let",
+    "line": 1
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "str",
+    "line": 1
+  },
+  {
+    "type": "COLON",
+    "lexeme": ":",
+    "line": 1
+  },
+  {
+    "type": "STRINGTYPE",
+    "lexeme": "string",
+    "line": 1
+  },
+  {
+    "type": "ASSIGNATION",
+    "lexeme": "\u003d",
+    "line": 1
+  },
+  {
+    "type": "STRING",
+    "lexeme": "\"test string\"",
+    "literal": "test string",
+    "line": 1
+  },
+  {
+    "type": "SEMICOLON",
+    "lexeme": ";",
+    "line": 1
+  },
+  {
+    "type": "LET",
+    "lexeme": "let",
+    "line": 2
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "num",
+    "line": 2
+  },
+  {
+    "type": "COLON",
+    "lexeme": ":",
+    "line": 2
+  },
+  {
+    "type": "NUMBERTYPE",
+    "lexeme": "number",
+    "line": 2
+  },
+  {
+    "type": "ASSIGNATION",
+    "lexeme": "\u003d",
+    "line": 2
+  },
+  {
+    "type": "NUMBER",
+    "lexeme": "13",
+    "literal": 13.0,
+    "line": 2
+  },
+  {
+    "type": "SEMICOLON",
+    "lexeme": ";",
+    "line": 2
+  },
+  {
+    "type": "EOF",
+    "lexeme": "",
+    "line": 2
+  }
+]

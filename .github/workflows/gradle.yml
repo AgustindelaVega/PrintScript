@@ -23,6 +23,8 @@ jobs:
         distribution: 'adopt'
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
+    - name: Gradle Clean
+      run: ./gradlew clean
     - name: Compile Java
       run: ./gradlew compileJava
     - name: Build with Gradle

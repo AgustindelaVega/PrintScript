@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'jacoco'
     id 'com.github.sherter.google-java-format'
+    id 'checkstyle'
 }
 
 repositories {
@@ -10,6 +11,7 @@ repositories {
 
 dependencies {
     testImplementation 'junit:junit:4.13'
+    implementation 'com.google.code.gson:gson:2.8.6'
 }
 
 test {
@@ -22,6 +24,20 @@ jacoco {
     toolVersion = "0.8.6"
 }
 
+checkstyle {
+    toolVersion "8.41.1"
+    configFile file("${rootDir}/config/checkstyle/checkstyle.xml")
+}
+
+checkstyleMain {
+    source = 'src/main/java'
+}
+checkstyleTest {
+    source = 'src/test/java'
+}
+
+check.dependsOn(checkstyleMain)
+check.dependsOn(checkstyleTest)
 
 jacocoTestReport {
     dependsOn test

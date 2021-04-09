@@ -2,7 +2,7 @@ package edu.austral.ingsis.parser.impl;
 
 import static edu.austral.ingsis.token.TokenType.*;
 
-import edu.austral.ingsis.exception.ParseException;
+import edu.austral.ingsis.exceptions.ParseException;
 import edu.austral.ingsis.expression.Expression;
 import edu.austral.ingsis.expression.impl.*;
 import edu.austral.ingsis.parser.Parser;
@@ -14,19 +14,23 @@ import edu.austral.ingsis.token.Token;
 import edu.austral.ingsis.token.TokenType;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PrintScriptParser implements Parser {
 
   private List<Token> tokens;
   private int current = 0;
 
-  public PrintScriptParser(List<Token> tokens) {
-    this.tokens = tokens;
-  }
-
   @Override
-  public List<Statement> parse() {
+  public List<Statement> parse(List<Token> tokens) {
     List<Statement> statements = new ArrayList<>();
+    this.tokens = tokens;
+    this.tokens =
+        this.tokens.stream()
+            .filter(
+                token ->
+                    (token.getType() != LEFTPARENTHESIS) && (token.getType() != RIGHTPARENTHESIS))
+            .collect(Collectors.toList());
 
     while (!isAtEnd()) {
       statements.add(initParse());
@@ -36,12 +40,13 @@ public class PrintScriptParser implements Parser {
   }
 
   private Statement initParse() {
-    if (match(LET)) return declarationStatement(previous());
+    if (match(LET)) return declarationStatement();
     if (match(PRINT)) return printStatement();
     return assignationStatement();
   }
 
-  private Statement declarationStatement(Token keyword) {
+  private Statement declarationStatement() {
+    Token keyword = previous();
     Token name = consume(IDENTIFIER, "Variable name missing.");
     TokenType type = null;
     Expression expression = null;

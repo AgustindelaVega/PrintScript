@@ -1,7 +1,12 @@
 package edu.austral.ingsis;
 
-public class Interpreter {
-  public String getName() {
-    return "Interpreter";
-  }
+import edu.austral.ingsis.runtime.RuntimeState;
+import edu.austral.ingsis.statement.Statement;
+import java.util.List;
+
+public interface Interpreter {
+
+  void interpret(List<Statement> statements);
+
+  RuntimeState getEnvironment();
 }

@@ -1,0 +1,28 @@
+[
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "x",
+    "line": 1
+  },
+  {
+    "type": "ASSIGNATION",
+    "lexeme": "=",
+    "line": 1
+  },
+  {
+    "type": "NUMBER",
+    "lexeme": "10",
+    "literal": 10,
+    "line": 1
+  },
+  {
+    "type": "SEMICOLON",
+    "lexeme": ";",
+    "line": 1
+  },
+  {
+    "type": "EOF",
+    "lexeme": "",
+    "line": 1
+  }
+]
