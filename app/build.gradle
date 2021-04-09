@@ -10,6 +10,7 @@ dependencies {
     compile project(':parser')
     compile project(':lexer')
     compile project(':interpreter')
+    compile project(':utils')
     compile 'info.picocli:picocli:4.6.1'
     annotationProcessor 'info.picocli:picocli-codegen:4.6.1'
 }
