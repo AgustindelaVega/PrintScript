@@ -29,6 +29,23 @@ public class PrintScriptToken implements Token {
         + '}';
   }
 
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == this) {
+      return true;
+    }
+    if (!(obj instanceof PrintScriptToken)) {
+      return false;
+    }
+
+    PrintScriptToken token = (PrintScriptToken) obj;
+
+    boolean b1 = type.equals(token.type);
+    boolean b2 = lexeme.equals(token.lexeme);
+    boolean b3 = (literal == null) ? literal == token.literal : literal.equals(token.literal);
+    return b1 && b2 && b3 && line == token.getLine();
+  }
+
   public TokenType getType() {
     return type;
   }
