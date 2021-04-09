@@ -40,12 +40,13 @@ public class PrintScriptParser implements Parser {
   }
 
   private Statement initParse() {
-    if (match(LET)) return declarationStatement(previous());
+    if (match(LET)) return declarationStatement();
     if (match(PRINT)) return printStatement();
     return assignationStatement();
   }
 
-  private Statement declarationStatement(Token keyword) {
+  private Statement declarationStatement() {
+    Token keyword = previous();
     Token name = consume(IDENTIFIER, "Variable name missing.");
     TokenType type = null;
     Expression expression = null;
