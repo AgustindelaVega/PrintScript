@@ -17,6 +17,11 @@ public class CLI implements Callable<Integer> {
       description = "Archive file")
   File archive;
 
+  @CommandLine.Option(
+      names = {"-v", "--validate"},
+      description = "Validate only")
+  private final boolean onlyValidate = false;
+
   private final Lexer lexer = new PrintScriptLexer();
   private final Parser parser = new PrintScriptParser();
   // private final Interpreter interpreter = new PrintScriptInterpreter();
@@ -29,6 +34,9 @@ public class CLI implements Callable<Integer> {
     try {
       tokens = lexer.lex(archive.getPath());
       statements = parser.parse(tokens);
+      if (onlyValidate) {
+        return 0;
+      }
       // interpreter.interpret(statements);
     } catch (LexerException | ParseException e) {
       e.printStackTrace();
