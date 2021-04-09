@@ -1,6 +1,6 @@
 package edu.austral.ingsis;
 
-import edu.austral.ingsis.exception.ParseException;
+import edu.austral.ingsis.exceptions.ParseException;
 import edu.austral.ingsis.parser.Parser;
 import edu.austral.ingsis.parser.impl.PrintScriptParser;
 import edu.austral.ingsis.statement.Statement;
