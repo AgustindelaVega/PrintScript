@@ -1,6 +1,5 @@
 package edu.austral.ingsis;
 
-import edu.austral.ingsis.exceptions.InterpreterException;
 import edu.austral.ingsis.runtime.RuntimeState;
 import edu.austral.ingsis.statement.Statement;
 import java.util.List;
@@ -18,7 +17,7 @@ public class PrintScriptInterpreter implements Interpreter {
   }
 
   @Override
-  public void interpret(List<Statement> statements) throws InterpreterException {
+  public void interpret(List<Statement> statements) {
     for (Statement statement : statements) {
       statement.accept(visitor);
     }
