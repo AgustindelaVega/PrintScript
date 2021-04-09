@@ -7,21 +7,28 @@ group = 'edu.austral.ingsis'
 version = '1.0.1'
 
 dependencies {
-    implementation project(':parser')
-    implementation project(':lexer')
-    implementation project(':interpreter')
-    implementation 'info.picocli:picocli:4.6.1'
+    compile project(':parser')
+    compile project(':lexer')
+    compile project(':interpreter')
+    compile 'info.picocli:picocli:4.6.1'
+    annotationProcessor 'info.picocli:picocli-codegen:4.6.1'
+}
+
+compileJava {
+    options.compilerArgs += ["-Aproject=${project.group}/${project.name}"]
 }
 
 application {
-    mainClass = 'edu.austral.ingsis.App'
+    mainClass = 'edu.austral.ingsis.PrintScript'
 }
 
 jar {
     manifest {
         attributes(
-                'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
-                'Main-Class': 'edu.austral.ingsis.App'
+                'Main-Class': 'edu.austral.ingsis.PrintScript'
         )
+    }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
