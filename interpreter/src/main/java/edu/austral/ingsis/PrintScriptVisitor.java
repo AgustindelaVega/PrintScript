@@ -16,7 +16,7 @@ import edu.austral.ingsis.visitor.StatementVisitor;
 
 public class PrintScriptVisitor implements ExpressionVisitor, StatementVisitor {
 
-  private RuntimeState runtimeState = new PrintScriptRuntimeState();
+  private final RuntimeState runtimeState = new PrintScriptRuntimeState();
 
   public RuntimeState getEnvironment() {
     return runtimeState;
@@ -29,6 +29,7 @@ public class PrintScriptVisitor implements ExpressionVisitor, StatementVisitor {
 
     switch (binaryExpression.getOperator().getType()) {
       case MINUS:
+        checkNumberOperands(binaryExpression.getOperator(), left, right);
         return (double) left - (double) right;
       case PLUS:
         if (left instanceof Number && right instanceof Number) {
@@ -50,7 +51,7 @@ public class PrintScriptVisitor implements ExpressionVisitor, StatementVisitor {
     throw new InterpreterException(operator, "Operands must be numbers");
   }
 
-  private void checkNumberOperands(Token operator, Object object) {
+  private void checkNumberOperand(Token operator, Object object) {
     if (object instanceof Double) return;
     throw new InterpreterException(operator, "Operand must be a number");
   }
@@ -64,7 +65,7 @@ public class PrintScriptVisitor implements ExpressionVisitor, StatementVisitor {
     Object right = evaluate(unaryExpression.getExpression());
 
     if (unaryExpression.getOperator().getType() == MINUS) {
-      checkNumberOperands(unaryExpression.getOperator(), right);
+      checkNumberOperand(unaryExpression.getOperator(), right);
       return -(double) right;
     }
     return null;
