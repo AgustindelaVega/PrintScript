@@ -2,7 +2,7 @@ package edu.austral.ingsis.parser.impl;
 
 import static edu.austral.ingsis.token.TokenType.*;
 
-import edu.austral.ingsis.exception.ParseException;
+import edu.austral.ingsis.exceptions.ParseException;
 import edu.austral.ingsis.expression.Expression;
 import edu.austral.ingsis.expression.impl.*;
 import edu.austral.ingsis.parser.Parser;
@@ -14,6 +14,7 @@ import edu.austral.ingsis.token.Token;
 import edu.austral.ingsis.token.TokenType;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PrintScriptParser implements Parser {
 
@@ -24,6 +25,12 @@ public class PrintScriptParser implements Parser {
   public List<Statement> parse(List<Token> tokens) {
     List<Statement> statements = new ArrayList<>();
     this.tokens = tokens;
+    this.tokens =
+        this.tokens.stream()
+            .filter(
+                token ->
+                    (token.getType() != LEFTPARENTHESIS) && (token.getType() != RIGHTPARENTHESIS))
+            .collect(Collectors.toList());
 
     while (!isAtEnd()) {
       statements.add(initParse());

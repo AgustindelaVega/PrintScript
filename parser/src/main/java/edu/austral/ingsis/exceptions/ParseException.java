@@ -1,4 +1,4 @@
-package edu.austral.ingsis.exception;
+package edu.austral.ingsis.exceptions;
 
 import edu.austral.ingsis.token.Token;
 
