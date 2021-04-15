@@ -14,16 +14,41 @@ import edu.austral.ingsis.statement.impl.DeclarationStatement;
 import edu.austral.ingsis.statement.impl.PrintStatement;
 import edu.austral.ingsis.token.PrintScriptToken;
 import edu.austral.ingsis.token.Token;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.io.FileUtils;
+import org.json.JSONException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class ParserTest {
 
   private Parser parser;
   private List<Token> tokens;
+  private final Gson gson = new Gson();
+
+  private List<PrintScriptToken> getTokensFromJSON(String src) throws FileNotFoundException {
+    return gson.fromJson(
+        new java.io.FileReader(src), new TypeToken<List<PrintScriptToken>>() {}.getType());
+  }
+
+  private void writeStatementsToJSON(List<Statement> statements, String testNumber)
+      throws FileNotFoundException {
+    String json = gson.toJson(statements);
+    try {
+      FileWriter myWriter =
+          new FileWriter("./src/test/resources/parser_actual" + testNumber + ".json");
+      myWriter.write(json);
+      myWriter.close();
+      System.out.println("Successfully wrote to the file.");
+    } catch (IOException e) {
+      System.out.println("An error occurred.");
+      e.printStackTrace();
+    }
+  }
 
   @BeforeEach
   public void setUp() {
@@ -32,7 +57,7 @@ public class ParserTest {
   }
 
   @Test
-  public void TestParseDeclarationStatement_ValueExpression() throws FileNotFoundException {
+  public void test001_ParseDeclarationStatement_ValueExpression() throws FileNotFoundException {
     tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src01.json"));
 
     List<Statement> statements = parser.parse(tokens);
@@ -46,7 +71,7 @@ public class ParserTest {
   }
 
   @Test
-  public void TestParseDeclarationStatement_BinaryExpression_Addition()
+  public void test002_ParseDeclarationStatement_BinaryExpression_Addition()
       throws FileNotFoundException {
     tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src02.json"));
 
@@ -67,7 +92,7 @@ public class ParserTest {
   }
 
   @Test
-  public void TestParseDeclarationStatement_BinaryExpression_Multiplication()
+  public void test003_ParseDeclarationStatement_BinaryExpression_Multiplication()
       throws FileNotFoundException {
     tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src03.json"));
 
@@ -88,7 +113,7 @@ public class ParserTest {
   }
 
   @Test
-  public void TestParsePrintStatement_ValueExpression() throws FileNotFoundException {
+  public void test004_ParsePrintStatement_ValueExpression() throws FileNotFoundException {
     tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src04.json"));
 
     List<Statement> statements = parser.parse(tokens);
@@ -99,7 +124,7 @@ public class ParserTest {
   }
 
   @Test
-  public void TestParseAssigmentStatement_AssigmentExpression() throws FileNotFoundException {
+  public void test005_ParseAssigmentStatement_AssigmentExpression() throws FileNotFoundException {
     tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src05.json"));
 
     List<Statement> statements = parser.parse(tokens);
@@ -115,7 +140,7 @@ public class ParserTest {
   }
 
   @Test
-  public void TestParseMultipleStatements() throws FileNotFoundException {
+  public void test006_ParseMultipleStatements() throws FileNotFoundException {
     tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src06.json"));
 
     List<Statement> statements = parser.parse(tokens);
@@ -139,9 +164,37 @@ public class ParserTest {
             .getValue());
   }
 
-  private List<PrintScriptToken> getTokensFromJSON(String src) throws FileNotFoundException {
-    return new Gson()
-        .fromJson(
-            new java.io.FileReader(src), new TypeToken<List<PrintScriptToken>>() {}.getType());
+  @Test
+  public void test007_ParseDeclarationStatementWithBooleanType() throws FileNotFoundException {
+    tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src07.json"));
+
+    List<Statement> statements = parser.parse(tokens);
+    DeclarationStatement statement = (DeclarationStatement) statements.get(0);
+
+    assertEquals(LET, statement.getKeyword().getType());
+    assertEquals(IDENTIFIER, statement.getName().getType());
+    assertEquals("x", statement.getName().getLexeme());
+    assertEquals(BOOLEAN, statement.getType());
+    assertEquals(true, ((ValueExpression) statement.getExpression()).getValue());
+  }
+
+  @Test
+  public void test008_ParseMultipleDeclarationStatementWithIntegerAndDecimalNumbers()
+      throws IOException, JSONException {
+    tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src07.json"));
+
+    List<Statement> statements = parser.parse(tokens);
+    DeclarationStatement integerDeclaration = (DeclarationStatement) statements.get(0);
+    // DeclarationStatement decimalDeclaration = (DeclarationStatement) statements.get(1);
+
+    writeStatementsToJSON(statements, "07");
+
+    String expectedJson =
+        FileUtils.readFileToString(
+            new File("./src/test/resources/parser_expected07.json"), (String) null);
+    String actualJson =
+        FileUtils.readFileToString(
+            new File("./src/test/resources/parser_actual07.json"), (String) null);
+    JSONAssert.assertEquals(expectedJson, actualJson, JSONCompareMode.STRICT);
   }
 }
