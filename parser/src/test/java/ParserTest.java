@@ -3,15 +3,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import edu.austral.ingsis.expression.impl.AssigmentExpression;
-import edu.austral.ingsis.expression.impl.BinaryExpression;
-import edu.austral.ingsis.expression.impl.ValueExpression;
 import edu.austral.ingsis.parser.Parser;
 import edu.austral.ingsis.parser.impl.PrintScriptParser;
 import edu.austral.ingsis.statement.Statement;
-import edu.austral.ingsis.statement.impl.AssigmentStatement;
-import edu.austral.ingsis.statement.impl.DeclarationStatement;
-import edu.austral.ingsis.statement.impl.PrintStatement;
 import edu.austral.ingsis.token.PrintScriptToken;
 import edu.austral.ingsis.token.Token;
 import java.io.*;
@@ -35,8 +29,7 @@ public class ParserTest {
         new java.io.FileReader(src), new TypeToken<List<PrintScriptToken>>() {}.getType());
   }
 
-  private void writeStatementsToJSON(List<Statement> statements, String testNumber)
-      throws FileNotFoundException {
+  private void writeStatementsToJSON(List<Statement> statements, String testNumber) {
     String json = gson.toJson(statements);
     try {
       FileWriter myWriter =
@@ -50,6 +43,18 @@ public class ParserTest {
     }
   }
 
+  private void compareStatementsFromJsons(
+      String testNumber, String expectedJsonFile, String actualJsonFile)
+      throws IOException, JSONException {
+    List<Statement> statements = parser.parse(tokens);
+
+    writeStatementsToJSON(statements, testNumber);
+
+    String expectedJson = FileUtils.readFileToString(new File(expectedJsonFile), (String) null);
+    String actualJson = FileUtils.readFileToString(new File(actualJsonFile), (String) null);
+    JSONAssert.assertEquals(expectedJson, actualJson, JSONCompareMode.STRICT);
+  }
+
   @BeforeEach
   public void setUp() {
     tokens = new ArrayList<>();
@@ -57,144 +62,86 @@ public class ParserTest {
   }
 
   @Test
-  public void test001_ParseDeclarationStatement_ValueExpression() throws FileNotFoundException {
+  public void test01_ParseDeclarationStatement_ValueExpression() throws IOException, JSONException {
     tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src01.json"));
 
-    List<Statement> statements = parser.parse(tokens);
-    DeclarationStatement statement = (DeclarationStatement) statements.get(0);
-
-    assertEquals(LET, statement.getKeyword().getType());
-    assertEquals(IDENTIFIER, statement.getName().getType());
-    assertEquals("x", statement.getName().getLexeme());
-    assertEquals(NUMBERTYPE, statement.getType());
-    assertEquals(10.0, ((ValueExpression) statement.getExpression()).getValue());
+    compareStatementsFromJsons(
+        "01",
+        "./src/test/resources/parser_expected01.json",
+        "./src/test/resources/parser_actual01.json");
   }
 
   @Test
-  public void test002_ParseDeclarationStatement_BinaryExpression_Addition()
-      throws FileNotFoundException {
+  public void test02_ParseDeclarationStatement_BinaryExpression_Addition()
+      throws IOException, JSONException {
     tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src02.json"));
 
-    List<Statement> statements = parser.parse(tokens);
-    DeclarationStatement statement = (DeclarationStatement) statements.get(0);
-
-    assertEquals(LET, statement.getKeyword().getType());
-    assertEquals(IDENTIFIER, statement.getName().getType());
-    assertEquals("x", statement.getName().getLexeme());
-    assertEquals(NUMBERTYPE, statement.getType());
-    assertEquals(
-        10.0,
-        ((ValueExpression) ((BinaryExpression) statement.getExpression()).getLeft()).getValue());
-    assertEquals(PLUS, ((BinaryExpression) statement.getExpression()).getOperator().getType());
-    assertEquals(
-        9.0,
-        ((ValueExpression) ((BinaryExpression) statement.getExpression()).getRight()).getValue());
+    compareStatementsFromJsons(
+        "02",
+        "./src/test/resources/parser_expected02.json",
+        "./src/test/resources/parser_actual02.json");
   }
 
   @Test
-  public void test003_ParseDeclarationStatement_BinaryExpression_Multiplication()
-      throws FileNotFoundException {
+  public void test03_ParseDeclarationStatement_BinaryExpression_Multiplication()
+      throws IOException, JSONException {
     tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src03.json"));
 
-    List<Statement> statements = parser.parse(tokens);
-    DeclarationStatement statement = (DeclarationStatement) statements.get(0);
-
-    assertEquals(LET, statement.getKeyword().getType());
-    assertEquals(IDENTIFIER, statement.getName().getType());
-    assertEquals("x", statement.getName().getLexeme());
-    assertEquals(NUMBERTYPE, statement.getType());
-    assertEquals(
-        10.0,
-        ((ValueExpression) ((BinaryExpression) statement.getExpression()).getLeft()).getValue());
-    assertEquals(MULTIPLY, ((BinaryExpression) statement.getExpression()).getOperator().getType());
-    assertEquals(
-        9.0,
-        ((ValueExpression) ((BinaryExpression) statement.getExpression()).getRight()).getValue());
+    compareStatementsFromJsons(
+        "03",
+        "./src/test/resources/parser_expected03.json",
+        "./src/test/resources/parser_actual03.json");
   }
 
   @Test
-  public void test004_ParsePrintStatement_ValueExpression() throws FileNotFoundException {
+  public void test04_ParsePrintStatement_ValueExpression() throws IOException, JSONException {
     tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src04.json"));
 
-    List<Statement> statements = parser.parse(tokens);
-    PrintStatement statement = (PrintStatement) statements.get(0);
-
-    assertTrue(statements.get(0) instanceof PrintStatement);
-    assertEquals(10.0, ((ValueExpression) statement.getExpression()).getValue());
+    compareStatementsFromJsons(
+        "04",
+        "./src/test/resources/parser_expected04.json",
+        "./src/test/resources/parser_actual04.json");
   }
 
   @Test
-  public void test005_ParseAssigmentStatement_AssigmentExpression() throws FileNotFoundException {
+  public void test05_ParseAssigmentStatement_AssigmentExpression()
+      throws IOException, JSONException {
     tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src05.json"));
 
-    List<Statement> statements = parser.parse(tokens);
-    AssigmentStatement statement = (AssigmentStatement) statements.get(0);
-
-    assertTrue(statements.get(0) instanceof AssigmentStatement);
-    assertEquals(IDENTIFIER, ((AssigmentExpression) statement.getExpression()).getName().getType());
-    assertEquals("x", ((AssigmentExpression) statement.getExpression()).getName().getLexeme());
-    assertEquals(
-        10.0,
-        ((ValueExpression) ((AssigmentExpression) statement.getExpression()).getExpression())
-            .getValue());
+    compareStatementsFromJsons(
+        "05",
+        "./src/test/resources/parser_expected05.json",
+        "./src/test/resources/parser_actual05.json");
   }
 
   @Test
-  public void test006_ParseMultipleStatements() throws FileNotFoundException {
+  public void test06_ParseMultipleStatements() throws IOException, JSONException {
     tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src06.json"));
 
-    List<Statement> statements = parser.parse(tokens);
-    DeclarationStatement declarationStatement = (DeclarationStatement) statements.get(0);
-    AssigmentStatement assigmentStatement = (AssigmentStatement) statements.get(1);
-
-    assertEquals(LET, declarationStatement.getKeyword().getType());
-    assertEquals(IDENTIFIER, declarationStatement.getName().getType());
-    assertEquals("x", declarationStatement.getName().getLexeme());
-    assertEquals(NUMBERTYPE, declarationStatement.getType());
-    assertNull(declarationStatement.getExpression());
-    assertTrue(statements.get(1) instanceof AssigmentStatement);
-    assertEquals(
-        IDENTIFIER, ((AssigmentExpression) assigmentStatement.getExpression()).getName().getType());
-    assertEquals(
-        "x", ((AssigmentExpression) assigmentStatement.getExpression()).getName().getLexeme());
-    assertEquals(
-        10.0,
-        ((ValueExpression)
-                ((AssigmentExpression) assigmentStatement.getExpression()).getExpression())
-            .getValue());
+    compareStatementsFromJsons(
+        "06",
+        "./src/test/resources/parser_expected06.json",
+        "./src/test/resources/parser_actual06.json");
   }
 
   @Test
-  public void test007_ParseDeclarationStatementWithBooleanType() throws FileNotFoundException {
+  public void test07_ParseDeclarationStatementWithBooleanType() throws IOException, JSONException {
     tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src07.json"));
 
-    List<Statement> statements = parser.parse(tokens);
-    DeclarationStatement statement = (DeclarationStatement) statements.get(0);
-
-    assertEquals(LET, statement.getKeyword().getType());
-    assertEquals(IDENTIFIER, statement.getName().getType());
-    assertEquals("x", statement.getName().getLexeme());
-    assertEquals(BOOLEAN, statement.getType());
-    assertEquals(true, ((ValueExpression) statement.getExpression()).getValue());
+    compareStatementsFromJsons(
+        "07",
+        "./src/test/resources/parser_expected07.json",
+        "./src/test/resources/parser_actual07.json");
   }
 
   @Test
-  public void test008_ParseMultipleDeclarationStatementWithIntegerAndDecimalNumbers()
+  public void test08_ParseMultipleDeclarationStatementWithIntegerAndDecimalNumbers()
       throws IOException, JSONException {
-    tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src07.json"));
+    tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src08.json"));
 
-    List<Statement> statements = parser.parse(tokens);
-    DeclarationStatement integerDeclaration = (DeclarationStatement) statements.get(0);
-    // DeclarationStatement decimalDeclaration = (DeclarationStatement) statements.get(1);
-
-    writeStatementsToJSON(statements, "07");
-
-    String expectedJson =
-        FileUtils.readFileToString(
-            new File("./src/test/resources/parser_expected07.json"), (String) null);
-    String actualJson =
-        FileUtils.readFileToString(
-            new File("./src/test/resources/parser_actual07.json"), (String) null);
-    JSONAssert.assertEquals(expectedJson, actualJson, JSONCompareMode.STRICT);
+    compareStatementsFromJsons(
+        "08",
+        "./src/test/resources/parser_expected08.json",
+        "./src/test/resources/parser_actual08.json");
   }
 }
