@@ -25,20 +25,9 @@
     "line": 1
   },
   {
-    "type": "MINUS",
-    "lexeme": "-",
-    "literal": null,
-    "line": 1
-  },
-  {
     "type": "NUMBER",
-    "lexeme": "11",
-    "literal": 11,
-    "line": 1
-  },
-  {
-    "type": "SEMICOLON",
-    "lexeme": ";",
+    "lexeme": "9",
+    "literal": 9,
     "line": 1
   },
   {

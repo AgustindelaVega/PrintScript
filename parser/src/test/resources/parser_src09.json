@@ -15,8 +15,8 @@
     "line": 1
   },
   {
-    "type": "BOOLEAN",
-    "lexeme": "boolean",
+    "type": "NUMBERTYPE",
+    "lexeme": "number",
     "line": 1
   },
   {
@@ -25,9 +25,9 @@
     "line": 1
   },
   {
-    "type": "TRUE",
-    "lexeme": "true",
-    "literal": true,
+    "type": "NUMBER",
+    "lexeme": "9",
+    "literal": 9,
     "line": 1
   },
   {
@@ -51,20 +51,20 @@
     "line": 2
   },
   {
-    "type": "BOOLEAN",
-    "lexeme": "boolean",
-    "line": 2
+    "type": "NUMBERTYPE",
+    "lexeme": "number",
+    "line": 1
   },
   {
     "type": "ASSIGNATION",
     "lexeme": "=",
-    "line": 2
+    "line": 1
   },
   {
-    "type": "FALSE",
-    "lexeme": "false",
-    "literal": false,
-    "line": 2
+    "type": "NUMBER",
+    "lexeme": "12.5",
+    "literal": 12.5,
+    "line": 1
   },
   {
     "type": "SEMICOLON",

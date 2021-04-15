@@ -5,9 +5,19 @@
     "line": 1
   },
   {
+    "type": "LEFTPARENTHESIS",
+    "lexeme": "(",
+    "line": 1
+  },
+  {
     "type": "NUMBER",
     "lexeme": "10",
     "literal": 10,
+    "line": 1
+  },
+  {
+    "type": "RIGHTPARENTHESIS",
+    "lexeme": ")",
     "line": 1
   },
   {

@@ -10,9 +10,9 @@
       "lexeme": "x",
       "line": 1
     },
-    "type": "BOOLEAN",
+    "type": "NUMBERTYPE",
     "expression": {
-      "value": true
+      "value": 9.0
     }
   },
   {
@@ -26,9 +26,9 @@
       "lexeme": "y",
       "line": 2
     },
-    "type": "BOOLEAN",
+    "type": "NUMBERTYPE",
     "expression": {
-      "value": false
+      "value": 12.5
     }
   }
 ]

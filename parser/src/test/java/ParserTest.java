@@ -3,6 +3,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import edu.austral.ingsis.exceptions.ParseException;
 import edu.austral.ingsis.parser.Parser;
 import edu.austral.ingsis.parser.impl.PrintScriptParser;
 import edu.austral.ingsis.statement.Statement;
@@ -62,7 +63,8 @@ public class ParserTest {
   }
 
   @Test
-  public void test01_ParseDeclarationStatement_ValueExpression() throws IOException, JSONException {
+  public void test01_ParseDeclarationStatementWithValueExpression()
+      throws IOException, JSONException {
     tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src01.json"));
 
     compareStatementsFromJsons(
@@ -72,7 +74,7 @@ public class ParserTest {
   }
 
   @Test
-  public void test02_ParseDeclarationStatement_BinaryExpression_Addition()
+  public void test02_ParseDeclarationStatementWithBinaryExpressionAndAddition()
       throws IOException, JSONException {
     tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src02.json"));
 
@@ -83,7 +85,7 @@ public class ParserTest {
   }
 
   @Test
-  public void test03_ParseDeclarationStatement_BinaryExpression_Multiplication()
+  public void test03_ParseDeclarationStatementWithBinaryExpressionAndMultiplication()
       throws IOException, JSONException {
     tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src03.json"));
 
@@ -94,7 +96,7 @@ public class ParserTest {
   }
 
   @Test
-  public void test04_ParsePrintStatement_ValueExpression() throws IOException, JSONException {
+  public void test04_ParsePrintStatementWithValueExpression() throws IOException, JSONException {
     tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src04.json"));
 
     compareStatementsFromJsons(
@@ -104,7 +106,7 @@ public class ParserTest {
   }
 
   @Test
-  public void test05_ParseAssigmentStatement_AssigmentExpression()
+  public void test05_ParseAssigmentStatementWithAssigmentExpression()
       throws IOException, JSONException {
     tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src05.json"));
 
@@ -125,7 +127,8 @@ public class ParserTest {
   }
 
   @Test
-  public void test07_ParseDeclarationStatementWithBooleanType() throws IOException, JSONException {
+  public void test07_ParseDeclarationStatementWithBothBooleanValues()
+      throws IOException, JSONException {
     tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src07.json"));
 
     compareStatementsFromJsons(
@@ -135,7 +138,7 @@ public class ParserTest {
   }
 
   @Test
-  public void test08_ParseMultipleDeclarationStatementWithIntegerAndDecimalNumbers()
+  public void test08_ParseDeclarationStatementWithUnaryExpression()
       throws IOException, JSONException {
     tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src08.json"));
 
@@ -143,5 +146,24 @@ public class ParserTest {
         "08",
         "./src/test/resources/parser_expected08.json",
         "./src/test/resources/parser_actual08.json");
+  }
+
+  @Test
+  public void test09_ParseMultipleDeclarationStatementWithIntegerAndDecimalNumbers()
+      throws IOException, JSONException {
+    tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src09.json"));
+
+    compareStatementsFromJsons(
+        "09",
+        "./src/test/resources/parser_expected09.json",
+        "./src/test/resources/parser_actual09.json");
+  }
+
+  @Test
+  public void test10_ParseDeclarationStatementWithoutSemicolonShouldThrowAParseException()
+      throws FileNotFoundException {
+    tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src10.json"));
+
+    assertThrows(ParseException.class, () -> parser.parse(tokens));
   }
 }
