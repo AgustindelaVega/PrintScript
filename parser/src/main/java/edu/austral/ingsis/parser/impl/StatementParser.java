@@ -63,7 +63,10 @@ public class StatementParser {
   }
 
   private Statement printStatement() {
+    tokenStream.consume(LEFTPARENTHESIS, "Expect '(' after 'if'.");
     Expression expression = expressionParser.parse(tokenStream);
+    tokenStream.consume(RIGHTPARENTHESIS, "Expect ')' after 'if'.");
+
     tokenStream.consume(SEMICOLON, "';' after variable declaration missing.");
     return new PrintStatement(expression);
   }

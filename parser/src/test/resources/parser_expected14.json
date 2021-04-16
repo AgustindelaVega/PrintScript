@@ -22,6 +22,22 @@
           }
         }
       ]
+    },
+    "elseBranching": {
+      "statements": [
+        {
+          "expression": {
+            "name": {
+              "type": "IDENTIFIER",
+              "lexeme": "x",
+              "line": 1
+            },
+            "expression": {
+              "value": 11.0
+            }
+          }
+        }
+      ]
     }
   }
 ]

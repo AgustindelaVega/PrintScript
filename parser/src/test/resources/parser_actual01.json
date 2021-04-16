@@ -1,18 +1,1 @@
-[
-  {
-    "keyword": {
-      "type": "LET",
-      "lexeme": "let",
-      "line": 1
-    },
-    "name": {
-      "type": "IDENTIFIER",
-      "lexeme": "x",
-      "line": 1
-    },
-    "type": "NUMBERTYPE",
-    "expression": {
-      "value": 10.0
-    }
-  }
-]
+[{"keyword":{"type":"LET","lexeme":"let","line":1},"name":{"type":"IDENTIFIER","lexeme":"x","line":1},"type":"NUMBERTYPE","expression":{"value":10.0}}]
