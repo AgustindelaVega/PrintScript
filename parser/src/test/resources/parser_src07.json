@@ -1,0 +1,50 @@
+[
+  {
+    "type": "LET",
+    "lexeme": "let",
+    "line": 1
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "x",
+    "line": 1
+  },
+  {
+    "type": "COLON",
+    "lexeme": ":",
+    "line": 1
+  },
+  {
+    "type": "NUMBERTYPE",
+    "lexeme": "number",
+    "line": 1
+  },
+  {
+    "type": "ASSIGNATION",
+    "lexeme": "=",
+    "line": 1
+  },
+  {
+    "type": "MINUS",
+    "lexeme": "-",
+    "literal": null,
+    "line": 1
+  },
+  {
+    "type": "NUMBER",
+    "lexeme": "11",
+    "literal": 11,
+    "line": 1
+  },
+  {
+    "type": "SEMICOLON",
+    "lexeme": ";",
+    "line": 1
+  },
+  {
+    "type": "EOF",
+    "lexeme": "",
+    "line": 1
+  }
+]
+

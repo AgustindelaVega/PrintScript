@@ -1,7 +1,17 @@
 [
   {
+    "type": "LET",
+    "lexeme": "let",
+    "line": 1
+  },
+  {
     "type": "IDENTIFIER",
     "lexeme": "x",
+    "line": 1
+  },
+  {
+    "type": "STRINGTYPE",
+    "lexeme": "string",
     "line": 1
   },
   {
@@ -26,3 +36,4 @@
     "line": 1
   }
 ]
+

@@ -12,8 +12,8 @@ public class PrintScriptInterpreter implements Interpreter {
   }
 
   @Override
-  public RuntimeState getEnvironment() {
-    return visitor.getEnvironment();
+  public RuntimeState getRuntimeState() {
+    return visitor.getRuntimeState();
   }
 
   @Override
