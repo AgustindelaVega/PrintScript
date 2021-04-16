@@ -24,6 +24,10 @@ application {
     mainClass = 'edu.austral.ingsis.PrintScript'
 }
 
+configurations {
+    compile
+}
+
 jar {
     manifest {
         attributes(
