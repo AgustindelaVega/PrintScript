@@ -7,7 +7,7 @@ group = 'edu.austral.ingsis'
 version = '1.0.1'
 
 dependencies {
-    compile 'info.picocli:picocli:4.6.1'
+    implementation 'info.picocli:picocli:4.6.1'
     annotationProcessor 'info.picocli:picocli-codegen:4.6.1'
 
     implementation project(':parser')
