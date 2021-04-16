@@ -10,6 +10,8 @@ version = '1.0.1'
 dependencies {
     implementation project(':lexer')
     implementation 'org.junit.jupiter:junit-jupiter:5.4.2'
+    testImplementation group: 'org.skyscreamer', name: 'jsonassert', version: '1.2.3'
+    implementation group: 'commons-io', name: 'commons-io', version: '2.6'
 }
 
 test {

@@ -18,7 +18,7 @@ public class PrintScriptVisitor implements ExpressionVisitor, StatementVisitor {
 
   private final RuntimeState runtimeState = new PrintScriptRuntimeState();
 
-  public RuntimeState getEnvironment() {
+  public RuntimeState getRuntimeState() {
     return runtimeState;
   }
 
@@ -44,20 +44,6 @@ public class PrintScriptVisitor implements ExpressionVisitor, StatementVisitor {
         return (double) left * (double) right;
     }
     return null;
-  }
-
-  private void checkNumberOperands(Token operator, Object left, Object right) {
-    if (left instanceof Double && right instanceof Double) return;
-    throw new InterpreterException(operator, "Operands must be numbers");
-  }
-
-  private void checkNumberOperand(Token operator, Object object) {
-    if (object instanceof Double) return;
-    throw new InterpreterException(operator, "Operand must be a number");
-  }
-
-  private Object evaluate(Expression expression) {
-    return expression.accept(this);
   }
 
   @Override
@@ -111,16 +97,26 @@ public class PrintScriptVisitor implements ExpressionVisitor, StatementVisitor {
     if (value == null) {
       runtimeState.addValue(
           declarationStatement.getName().getLexeme(), declarationStatement.getType(), null);
-    } else if (declarationStatement.getType() == NUMBERTYPE) {
-      if (!(value instanceof Double)) {
-        throw new InterpreterException(declarationStatement.getName(), "Expected a number");
-      }
-    } else if (declarationStatement.getType() == STRINGTYPE) {
-      if (!(value instanceof String)) {
-        throw new InterpreterException(declarationStatement.getName(), "Expected a string");
-      }
+    } else if (declarationStatement.getType() == NUMBERTYPE && !(value instanceof Double)) {
+      throw new InterpreterException(declarationStatement.getName(), "Expected a number");
+    } else if (declarationStatement.getType() == STRINGTYPE && !(value instanceof String)) {
+      throw new InterpreterException(declarationStatement.getName(), "Expected a string");
     }
     runtimeState.addValue(
         declarationStatement.getName().getLexeme(), declarationStatement.getType(), value);
+  }
+
+  private void checkNumberOperands(Token operator, Object left, Object right) {
+    if (left instanceof Double && right instanceof Double) return;
+    throw new InterpreterException(operator, "Operands must be numbers");
+  }
+
+  private void checkNumberOperand(Token operator, Object object) {
+    if (object instanceof Double) return;
+    throw new InterpreterException(operator, "Operand must be a number");
+  }
+
+  private Object evaluate(Expression expression) {
+    return expression.accept(this);
   }
 }

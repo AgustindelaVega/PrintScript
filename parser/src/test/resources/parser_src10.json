@@ -1,10 +1,5 @@
 [
   {
-    "type": "IDENTIFIER",
-    "lexeme": "x",
-    "line": 1
-  },
-  {
     "type": "ASSIGNATION",
     "lexeme": "=",
     "line": 1
@@ -26,3 +21,4 @@
     "line": 1
   }
 ]
+
