@@ -7,10 +7,7 @@ import edu.austral.ingsis.exceptions.ParseException;
 import edu.austral.ingsis.expression.Expression;
 import edu.austral.ingsis.parser.streams.PrintScriptTokenStream;
 import edu.austral.ingsis.statement.Statement;
-import edu.austral.ingsis.statement.impl.AssigmentStatement;
-import edu.austral.ingsis.statement.impl.DeclarationStatement;
-import edu.austral.ingsis.statement.impl.IfStatement;
-import edu.austral.ingsis.statement.impl.PrintStatement;
+import edu.austral.ingsis.statement.impl.*;
 import edu.austral.ingsis.token.Token;
 import edu.austral.ingsis.token.TokenType;
 import java.util.ArrayList;
@@ -35,6 +32,7 @@ public class StatementParser {
     if (tokenStream.match(LET, CONST)) return declarationStatement();
     if (tokenStream.match(IF)) return ifStatement();
     if (tokenStream.match(PRINT)) return printStatement();
+    if (tokenStream.match(LEFTBRACE)) return new BlockStatement(blockStatement());
     return assignationStatement();
   }
 
@@ -78,9 +76,9 @@ public class StatementParser {
 
   // TODO: test if statement
   private Statement ifStatement() {
-    tokenStream.consume(LEFTBRACE, "Expect '(' after 'if'");
+    tokenStream.consume(LEFTPARENTHESIS, "Expect '(' after 'if'.");
     Expression condition = expressionParser.parse(tokenStream);
-    tokenStream.consume(LEFTBRACE, "Expect ')' after 'if'");
+    tokenStream.consume(RIGHTPARENTHESIS, "Expect ')' after 'if'.");
 
     Statement thenBranching = statement();
     Statement elseBranching = null;
@@ -94,8 +92,11 @@ public class StatementParser {
   private List<Statement> blockStatement() {
     List<Statement> statements = new ArrayList<>();
 
-    // TODO: implement this
+    while (!tokenStream.check(RIGHTBRACE) && !tokenStream.isAtEnd()) {
+      statements.add(statement());
+    }
 
+    tokenStream.consume(RIGHTBRACE, "Expect '}' after block end.");
     return statements;
   }
 }

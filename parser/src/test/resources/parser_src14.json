@@ -1,0 +1,59 @@
+[
+  {
+    "type": "IF",
+    "lexeme": "if",
+    "line": 1
+  },
+  {
+    "type": "LEFTPARENTHESIS",
+    "lexeme": "(",
+    "line": 1
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "flag",
+    "line": 1
+  },
+  {
+    "type": "RIGHTPARENTHESIS",
+    "lexeme": ")",
+    "line": 1
+  },
+  {
+    "type": "LEFTBRACE",
+    "lexeme": "{",
+    "line": 1
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "x",
+    "line": 1
+  },
+  {
+    "type": "ASSIGNATION",
+    "lexeme": "=",
+    "line": 1
+  },
+  {
+    "type": "NUMBER",
+    "lexeme": "10",
+    "literal": 10,
+    "line": 1
+  },
+  {
+    "type": "SEMICOLON",
+    "lexeme": ";",
+    "line": 1
+  },
+  {
+    "type": "RIGHTBRACE",
+    "lexeme": "}",
+    "line": 1
+  },
+  {
+    "type": "EOF",
+    "lexeme": "",
+    "line": 1
+  }
+]
+

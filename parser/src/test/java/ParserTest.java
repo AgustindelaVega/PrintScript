@@ -193,4 +193,14 @@ public class ParserTest {
         "./src/test/resources/parser_expected13.json",
         "./src/test/resources/parser_actual13.json");
   }
+
+  @Test
+  public void test14_ParseIfStatement() throws IOException, JSONException {
+    tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src14.json"));
+
+    compareStatementsFromJsons(
+        "14",
+        "./src/test/resources/parser_expected14.json",
+        "./src/test/resources/parser_actual14.json");
+  }
 }

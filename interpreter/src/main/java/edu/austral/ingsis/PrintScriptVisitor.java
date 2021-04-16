@@ -7,10 +7,7 @@ import edu.austral.ingsis.expression.Expression;
 import edu.austral.ingsis.expression.impl.*;
 import edu.austral.ingsis.runtime.PrintScriptRuntimeState;
 import edu.austral.ingsis.runtime.RuntimeState;
-import edu.austral.ingsis.statement.impl.AssigmentStatement;
-import edu.austral.ingsis.statement.impl.DeclarationStatement;
-import edu.austral.ingsis.statement.impl.IfStatement;
-import edu.austral.ingsis.statement.impl.PrintStatement;
+import edu.austral.ingsis.statement.impl.*;
 import edu.austral.ingsis.token.Token;
 import edu.austral.ingsis.visitor.ExpressionVisitor;
 import edu.austral.ingsis.visitor.StatementVisitor;
@@ -84,6 +81,9 @@ public class PrintScriptVisitor implements ExpressionVisitor, StatementVisitor {
 
   @Override
   public void visit(IfStatement ifStatement) {}
+
+  @Override
+  public void visit(BlockStatement blockStatement) {}
 
   @Override
   public void visit(AssigmentStatement assigmentStatement) {
