@@ -166,4 +166,20 @@ public class ParserTest {
 
     assertThrows(ParseException.class, () -> parser.parse(tokens));
   }
+
+  @Test
+  public void test11_ParseDeclarationStatementWithoutColonShouldThrowAParseException()
+      throws FileNotFoundException {
+    tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src11.json"));
+
+    assertThrows(ParseException.class, () -> parser.parse(tokens));
+  }
+
+  @Test
+  public void test12_ParseAssignmentStatementWithoutIdentifierShouldThrowAParseException()
+      throws FileNotFoundException {
+    tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src12.json"));
+
+    assertThrows(ParseException.class, () -> parser.parse(tokens));
+  }
 }

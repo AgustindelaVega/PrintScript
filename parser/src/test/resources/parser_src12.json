@@ -1,0 +1,55 @@
+[
+  {
+<<<<<<< HEAD
+    "type": "LET",
+    "lexeme": "let",
+    "line": 1
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "x",
+    "line": 1
+  },
+  {
+    "type": "COLON",
+    "lexeme": ":",
+    "line": 1
+  },
+  {
+    "type": "NUMBERTYPE",
+    "lexeme": "number",
+    "line": 1
+  },
+  {
+    "type": "ASSIGNATION",
+    "lexeme": "=",
+    "line": 1
+  },
+  {
+    "type": "NUMBER",
+    "lexeme": "9",
+    "literal": 9,
+=======
+    "type": "ASSIGNATION",
+    "lexeme": "=",
+    "line": 1
+  },
+  {
+    "type": "STRING",
+    "lexeme": "test",
+    "literal": "test",
+    "line": 1
+  },
+  {
+    "type": "SEMICOLON",
+    "lexeme": ";",
+>>>>>>> development
+    "line": 1
+  },
+  {
+    "type": "EOF",
+    "lexeme": "",
+    "line": 1
+  }
+]
+

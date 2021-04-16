@@ -10,9 +10,9 @@
     "line": 1
   },
   {
-    "type": "NUMBER",
-    "lexeme": "10",
-    "literal": 10,
+    "type": "STRING",
+    "lexeme": "test",
+    "literal": "test",
     "line": 1
   },
   {
