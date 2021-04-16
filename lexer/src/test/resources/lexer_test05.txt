@@ -1,0 +1,3 @@
+let test: boolean = true;
+const num: number = 12;
+print(num > 1);
