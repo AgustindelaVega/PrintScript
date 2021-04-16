@@ -182,4 +182,15 @@ public class ParserTest {
 
     assertThrows(ParseException.class, () -> parser.parse(tokens));
   }
+
+  @Test
+  public void test13_ParseDeclarationStatementWithBooleanBinaryGreaterOperation()
+      throws IOException, JSONException {
+    tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src13.json"));
+
+    compareStatementsFromJsons(
+        "13",
+        "./src/test/resources/parser_expected13.json",
+        "./src/test/resources/parser_actual13.json");
+  }
 }

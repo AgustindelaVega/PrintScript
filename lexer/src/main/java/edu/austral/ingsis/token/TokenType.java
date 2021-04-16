@@ -10,6 +10,8 @@ public enum TokenType {
   PRINT("print"),
   FALSE("false"),
   TRUE("true"),
+  IF("if"),
+  ELSE("else"),
 
   STRING("[\\\"'].*[\\\"']"),
   SEMICOLON(";"),

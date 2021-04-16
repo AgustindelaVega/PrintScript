@@ -9,6 +9,7 @@ import edu.austral.ingsis.runtime.PrintScriptRuntimeState;
 import edu.austral.ingsis.runtime.RuntimeState;
 import edu.austral.ingsis.statement.impl.AssigmentStatement;
 import edu.austral.ingsis.statement.impl.DeclarationStatement;
+import edu.austral.ingsis.statement.impl.IfStatement;
 import edu.austral.ingsis.statement.impl.PrintStatement;
 import edu.austral.ingsis.token.Token;
 import edu.austral.ingsis.visitor.ExpressionVisitor;
@@ -80,6 +81,9 @@ public class PrintScriptVisitor implements ExpressionVisitor, StatementVisitor {
     Object value = evaluate(printStatement.getExpression());
     System.out.println(value);
   }
+
+  @Override
+  public void visit(IfStatement ifStatement) {}
 
   @Override
   public void visit(AssigmentStatement assigmentStatement) {
