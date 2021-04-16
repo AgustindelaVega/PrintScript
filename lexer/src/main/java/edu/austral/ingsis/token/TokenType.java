@@ -12,8 +12,6 @@ public enum TokenType {
   TRUE("true"),
 
   STRING("[\\\"'].*[\\\"']"),
-  FALSE("false"),
-  TRUE("true"),
   SEMICOLON(";"),
   COLON(":"),
 
