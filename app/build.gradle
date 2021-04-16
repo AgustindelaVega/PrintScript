@@ -27,7 +27,7 @@ application {
 jar {
     manifest {
         attributes(
-                'Class-Path': configurations.implementation.collect { it.getName() }.join(' '),
+                'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
                 'Main-Class': 'edu.austral.ingsis.PrintScript'
         )
     }
