@@ -42,13 +42,13 @@ public class CLI implements Callable<Integer> {
       }
       interpreter.interpret(statements);
       interpreter
-          .getEnvironment()
+          .getRuntimeState()
           .getValues()
           .keySet()
           .forEach(
               key -> {
                 System.out.println(
-                    key + ": " + interpreter.getEnvironment().getValues().get(key).getValue());
+                    key + ": " + interpreter.getRuntimeState().getValues().get(key).getValue());
               });
       System.out.println("OK");
     } catch (LexerException | ParseException | InterpreterException e) {

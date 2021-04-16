@@ -8,5 +8,5 @@ public interface Interpreter {
 
   void interpret(List<Statement> statements);
 
-  RuntimeState getEnvironment();
+  RuntimeState getRuntimeState();
 }

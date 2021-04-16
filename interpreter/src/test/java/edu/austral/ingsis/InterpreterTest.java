@@ -24,15 +24,15 @@ public class InterpreterTest {
 
     interpreter.interpret(statements);
 
-    Assert.assertEquals(2, interpreter.getEnvironment().getValues().size());
+    Assert.assertEquals(2, interpreter.getRuntimeState().getValues().size());
     Assert.assertEquals(
-        TokenType.STRINGTYPE, interpreter.getEnvironment().getValues().get("str").getType());
+        TokenType.STRINGTYPE, interpreter.getRuntimeState().getValues().get("str").getType());
     Assert.assertEquals(
-        "test string", interpreter.getEnvironment().getValues().get("str").getValue());
+        "test string", interpreter.getRuntimeState().getValues().get("str").getValue());
 
     Assert.assertEquals(
-        TokenType.NUMBERTYPE, interpreter.getEnvironment().getValues().get("num").getType());
-    Assert.assertEquals(13.0, interpreter.getEnvironment().getValues().get("num").getValue());
+        TokenType.NUMBERTYPE, interpreter.getRuntimeState().getValues().get("num").getType());
+    Assert.assertEquals(13.0, interpreter.getRuntimeState().getValues().get("num").getValue());
   }
 
   @Test
@@ -43,22 +43,23 @@ public class InterpreterTest {
 
     interpreter.interpret(statements);
 
-    Assert.assertEquals(4, interpreter.getEnvironment().getValues().size());
-    Assert.assertEquals(
-        TokenType.NUMBERTYPE, interpreter.getEnvironment().getValues().get("num").getType());
-    Assert.assertEquals(26.0, interpreter.getEnvironment().getValues().get("num").getValue());
+    Assert.assertEquals(4, interpreter.getRuntimeState().getValues().size());
 
     Assert.assertEquals(
-        TokenType.NUMBERTYPE, interpreter.getEnvironment().getValues().get("num2").getType());
-    Assert.assertEquals(2.0, interpreter.getEnvironment().getValues().get("num2").getValue());
+        TokenType.NUMBERTYPE, interpreter.getRuntimeState().getValues().get("num").getType());
+    Assert.assertEquals(26.0, interpreter.getRuntimeState().getValues().get("num").getValue());
 
     Assert.assertEquals(
-        TokenType.NUMBERTYPE, interpreter.getEnvironment().getValues().get("num3").getType());
-    Assert.assertEquals(168.0, interpreter.getEnvironment().getValues().get("num3").getValue());
+        TokenType.NUMBERTYPE, interpreter.getRuntimeState().getValues().get("num2").getType());
+    Assert.assertEquals(2.0, interpreter.getRuntimeState().getValues().get("num2").getValue());
 
     Assert.assertEquals(
-        TokenType.NUMBERTYPE, interpreter.getEnvironment().getValues().get("num4").getType());
-    Assert.assertEquals(1.0, interpreter.getEnvironment().getValues().get("num4").getValue());
+        TokenType.NUMBERTYPE, interpreter.getRuntimeState().getValues().get("num3").getType());
+    Assert.assertEquals(168.0, interpreter.getRuntimeState().getValues().get("num3").getValue());
+
+    Assert.assertEquals(
+        TokenType.NUMBERTYPE, interpreter.getRuntimeState().getValues().get("num4").getType());
+    Assert.assertEquals(1.0, interpreter.getRuntimeState().getValues().get("num4").getValue());
   }
 
   @Test(expected = InterpreterException.class)
@@ -79,8 +80,8 @@ public class InterpreterTest {
     interpreter.interpret(statements);
 
     Assert.assertEquals(
-        TokenType.NUMBERTYPE, interpreter.getEnvironment().getValues().get("num2").getType());
-    Assert.assertEquals(34.0, interpreter.getEnvironment().getValues().get("num2").getValue());
+        TokenType.NUMBERTYPE, interpreter.getRuntimeState().getValues().get("num2").getType());
+    Assert.assertEquals(34.0, interpreter.getRuntimeState().getValues().get("num2").getValue());
   }
 
   @Test(expected = InterpreterException.class)
