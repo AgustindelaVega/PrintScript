@@ -15,21 +15,6 @@ public class PrintScriptToken implements Token {
   }
 
   @Override
-  public String toString() {
-    return "PrintScriptToken{"
-        + "type="
-        + type
-        + ", lexeme='"
-        + lexeme
-        + '\''
-        + ", literal="
-        + literal
-        + ", line="
-        + line
-        + '}';
-  }
-
-  @Override
   public boolean equals(Object obj) {
     if (obj == this) {
       return true;

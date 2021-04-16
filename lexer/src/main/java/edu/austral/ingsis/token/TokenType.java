@@ -8,21 +8,35 @@ public enum TokenType {
   STRINGTYPE("string"),
   BOOLEAN("boolean"),
   PRINT("print"),
-  IDENTIFIER("[a-zA-Z]+\\w*"),
+  FALSE("false"),
+  TRUE("true"),
+
   STRING("[\\\"'].*[\\\"']"),
   FALSE("false"),
   TRUE("true"),
   SEMICOLON(";"),
   COLON(":"),
+
   ASSIGNATION("[=]"),
   MINUS("[-]"),
   PLUS("[+]"),
   MULTIPLY("[*]"),
   DIVIDE("[/]"),
+
   EOF(""),
   NEWLINE("\n"),
+
   LEFTPARENTHESIS("[(]"),
-  RIGHTPARENTHESIS("[)]");
+  RIGHTPARENTHESIS("[)]"),
+  LEFTBRACE("[{]"),
+  RIGHTBRACE("[}]"),
+
+  GREATER("[>]"),
+  GREATEREQUAL(">="),
+  LESS("[<]"),
+  LESSEQUAL("<="),
+
+  IDENTIFIER("[a-zA-Z]+\\w*");
 
   private final String regex;
 

@@ -3,40 +3,41 @@ package edu.austral.ingsis;
 import static org.junit.Assert.assertThrows;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import edu.austral.ingsis.token.PrintScriptToken;
 import edu.austral.ingsis.token.Token;
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import org.apache.commons.io.FileUtils;
+import org.json.JSONException;
 import org.junit.Assert;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class LexerTest {
 
+  private Lexer lexer;
+  private final Gson gson = new Gson();
+
   @Test
-  public void testLexerValidInput() throws FileNotFoundException {
-    Lexer lexer = new PrintScriptLexer();
+  public void testLexerValidInput() throws IOException, JSONException {
     String src = FileReader.getFileLines("./src/test/resources/lexer_test01.txt");
-
-    List<Token> tokens = lexer.lex(src);
-    List<PrintScriptToken> expectedTokens =
-        getTokensFromJSON("./src/test/resources/lexer_expected01.json");
-
-    Assert.assertArrayEquals(expectedTokens.toArray(), tokens.toArray());
+    compareTokensFromJsons(
+        "01",
+        "./src/test/resources/lexer_expected01.json",
+        "./src/test/resources/lexer_actual01.json",
+        src);
   }
 
   @Test
-  public void testLexerValidInput2() throws FileNotFoundException {
-    Lexer lexer = new PrintScriptLexer();
+  public void testLexerValidInput2() throws IOException, JSONException {
     String src = FileReader.getFileLines("./src/test/resources/lexer_test02.txt");
-    List<Token> tokens = lexer.lex(src);
-
-    List<PrintScriptToken> expectedTokens =
-        getTokensFromJSON("./src/test/resources/lexer_expected02.json");
-
-    Assert.assertArrayEquals(expectedTokens.toArray(), tokens.toArray());
+    compareTokensFromJsons(
+        "02",
+        "./src/test/resources/lexer_expected02.json",
+        "./src/test/resources/lexer_actual02.json",
+        src);
   }
 
   @Test
@@ -47,7 +48,7 @@ public class LexerTest {
             LexerException.class,
             () -> lexer.lex(FileReader.getFileLines("./src/test/resources/lexer_test03.txt")));
 
-    String expectedMessage = "(1, 13) : Error matching group \" {} \"";
+    String expectedMessage = "(1, 14) : Error matching group \" ?? \"";
     String actualMessage = exception.getMessage();
 
     Assert.assertTrue(actualMessage.contains(expectedMessage));
@@ -67,23 +68,38 @@ public class LexerTest {
     Assert.assertTrue(actualMessage.contains(expectedMessage));
   }
 
-  public static void writeTokenListToJSON(List<Token> tokens, String testNumber) {
-    String json = new Gson().toJson(tokens);
+  @Test
+  public void testLexerValidInput3() throws IOException, JSONException {
+    String src = FileReader.getFileLines("./src/test/resources/lexer_test05.txt");
+    compareTokensFromJsons(
+        "05",
+        "./src/test/resources/lexer_expected05.json",
+        "./src/test/resources/lexer_actual05.json",
+        src);
+  }
+
+  private void writeTokensToJSON(List<Token> tokens, String testNumber) {
+    String json = gson.toJson(tokens);
     try {
       FileWriter myWriter =
-          new FileWriter("./src/test/resources/lexer_expected" + testNumber + "_COPY.json");
+          new FileWriter("./src/test/resources/lexer_actual" + testNumber + ".json");
       myWriter.write(json);
       myWriter.close();
-      System.out.println("Successfully wrote to the file.");
     } catch (IOException e) {
-      System.out.println("An error occurred.");
       e.printStackTrace();
     }
   }
 
-  public static List<PrintScriptToken> getTokensFromJSON(String src) throws FileNotFoundException {
-    return new Gson()
-        .fromJson(
-            new java.io.FileReader(src), new TypeToken<List<PrintScriptToken>>() {}.getType());
+  private void compareTokensFromJsons(
+      String testNumber, String expectedJsonFile, String actualJsonFile, String fileLines)
+      throws IOException, JSONException {
+    Lexer lexer = new PrintScriptLexer();
+    List<Token> tokens = lexer.lex(fileLines);
+
+    writeTokensToJSON(tokens, testNumber);
+
+    String expectedJson = FileUtils.readFileToString(new File(expectedJsonFile), (String) null);
+    String actualJson = FileUtils.readFileToString(new File(actualJsonFile), (String) null);
+    JSONAssert.assertEquals(expectedJson, actualJson, JSONCompareMode.STRICT);
   }
 }
