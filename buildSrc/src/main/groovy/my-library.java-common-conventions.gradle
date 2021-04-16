@@ -3,6 +3,7 @@ plugins {
     id 'jacoco'
     id 'com.github.sherter.google-java-format'
     id 'checkstyle'
+    id("maven-publish")
 }
 
 repositories {
@@ -69,3 +70,21 @@ task copyGitHooks(type: Copy) {
 }
 
 build.dependsOn copyGitHooks
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/AgustindelaVega/PrintScript")
+            credentials {
+                username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_USERNAME")
+                password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+    publications {
+        gpr(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
