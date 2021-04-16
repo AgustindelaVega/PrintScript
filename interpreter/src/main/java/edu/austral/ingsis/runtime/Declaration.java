@@ -9,4 +9,6 @@ public interface Declaration {
   Object getValue();
 
   void setValue(Object value);
+
+  TokenType getKeyWord();
 }

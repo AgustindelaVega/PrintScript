@@ -40,7 +40,7 @@ public class CLI implements Callable<Integer> {
         System.out.println("Validation OK");
         return 0;
       }
-      interpreter.interpret(statements);
+      interpreter.interpret(statements, null);
       interpreter
           .getRuntimeState()
           .getValues()

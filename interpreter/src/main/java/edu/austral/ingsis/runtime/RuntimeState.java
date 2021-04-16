@@ -7,7 +7,7 @@ import java.util.Map;
 public interface RuntimeState {
   Map<String, Declaration> getValues();
 
-  void addValue(String name, TokenType type, Object value);
+  void addValue(String name, TokenType type, Object value, Token keyWord);
 
   void assign(Token name, Object value);
 
