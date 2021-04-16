@@ -38,7 +38,7 @@ public class ExpressionParser {
   private Expression binary() {
     Expression left = unary();
 
-    if (tokenStream.match(MINUS, PLUS, MULTIPLY, DIVIDE)) {
+    if (tokenStream.match(MINUS, PLUS, MULTIPLY, DIVIDE, GREATER, GREATEREQUAL, LESS, LESSEQUAL)) {
       Token operator = tokenStream.previous();
       Expression right = unary();
       left = new BinaryExpression(left, right, operator);
