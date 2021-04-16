@@ -77,7 +77,6 @@ public class StatementParser {
     return new AssigmentStatement(expression);
   }
 
-  // TODO: test if statement
   private Statement ifStatement() {
     tokenStream.consume(LEFTPARENTHESIS, "Expect '(' after 'if'.");
     Expression condition = expressionParser.parse(tokenStream);

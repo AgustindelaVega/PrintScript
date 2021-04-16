@@ -127,4 +127,16 @@ public class InterpreterTest {
 
     Assert.assertEquals("else", output.get(0));
   }
+
+  @Test
+  public void interpreterTest_08() {
+    List<Token> tokens =
+        lexer.lex(FileReader.getFileLines("./src/test/resources/interpreter_test08.txt"));
+    List<Statement> statements = parser.parse(tokens);
+    final List<String> output = new ArrayList<>();
+
+    interpreter.interpret(statements, output::add);
+
+    Assert.assertEquals("-4.0", output.get(0));
+  }
 }
