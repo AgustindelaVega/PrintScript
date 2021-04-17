@@ -20,11 +20,16 @@ public class CLI implements Callable<Integer> {
   File file;
 
   @CommandLine.Option(
-      names = {"-v", "--validate"},
+      names = {"-ov", "--onlyvalidate"},
       description = "Validate only")
   private boolean onlyValidate = false;
 
-  private final Lexer lexer = new PrintScriptLexer();
+  @CommandLine.Option(
+      names = {"-v", "--version"},
+      description = "Version (1.1 for latest)")
+  private String version = "1.1";
+
+  private final Lexer lexer = new PrintScriptLexer(version);
   private final Parser parser = new PrintScriptParser();
   private final Interpreter interpreter = new PrintScriptInterpreter();
   private Consumer<String> printConsumer;
