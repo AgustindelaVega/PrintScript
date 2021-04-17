@@ -6,6 +6,7 @@ import edu.austral.ingsis.token.Token;
 import edu.austral.ingsis.token.TokenBuilder;
 import edu.austral.ingsis.token.TokenType;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,14 +20,14 @@ public class PrintScriptLexer implements Lexer {
 
   private final List<TokenType> patterns = new ArrayList<>();
 
-  public PrintScriptLexer() {
-    addPatterns();
+  public PrintScriptLexer(String version) {
+    addPatterns(version);
   }
 
-  private void addPatterns() {
-    for (TokenType value : values()) {
-      if (value != EOF) patterns.add(value);
-    }
+  private void addPatterns(String version) {
+    if (version.equals("1.0")) patterns.addAll(getV1_0Tokens());
+    else patterns.addAll(Arrays.asList(values()));
+    patterns.remove(EOF);
   }
 
   private Matcher getMatcher(String input) {

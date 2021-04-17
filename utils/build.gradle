@@ -3,5 +3,5 @@ plugins {
     id 'my-library.java-common-conventions'
 }
 
-group = 'edu.austral.ingsis'
-version = '1.0.1'
+group = 'edu.austral.ingsis.ps'
+version = '1.1'

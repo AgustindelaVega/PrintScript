@@ -19,6 +19,7 @@ public class LexerTest {
 
   private Lexer lexer;
   private final Gson gson = new Gson();
+  private final String VERSION = "1.1";
 
   @Test
   public void testLexerValidInput() throws IOException, JSONException {
@@ -42,7 +43,7 @@ public class LexerTest {
 
   @Test
   public void testLexerInvalidInput() {
-    Lexer lexer = new PrintScriptLexer();
+    Lexer lexer = new PrintScriptLexer(VERSION);
     Exception exception =
         assertThrows(
             LexerException.class,
@@ -56,7 +57,7 @@ public class LexerTest {
 
   @Test
   public void testLexerInvalidInput2() {
-    Lexer lexer = new PrintScriptLexer();
+    Lexer lexer = new PrintScriptLexer(VERSION);
     Exception exception =
         assertThrows(
             LexerException.class,
@@ -93,7 +94,7 @@ public class LexerTest {
   private void compareTokensFromJsons(
       String testNumber, String expectedJsonFile, String actualJsonFile, String fileLines)
       throws IOException, JSONException {
-    Lexer lexer = new PrintScriptLexer();
+    Lexer lexer = new PrintScriptLexer(VERSION);
     List<Token> tokens = lexer.lex(fileLines);
 
     writeTokensToJSON(tokens, testNumber);

@@ -1,5 +1,9 @@
 package edu.austral.ingsis.token;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public enum TokenType {
   LET("let"),
   CONST("const"),
@@ -46,5 +50,28 @@ public enum TokenType {
 
   public String getRegex() {
     return regex;
+  }
+
+  public static List<TokenType> getV1_0Tokens() {
+    return new ArrayList<>(
+        Arrays.asList(
+            LET,
+            NUMBER,
+            NUMBERTYPE,
+            STRINGTYPE,
+            PRINT,
+            STRING,
+            SEMICOLON,
+            COLON,
+            ASSIGNATION,
+            MINUS,
+            PLUS,
+            MULTIPLY,
+            DIVIDE,
+            EOF,
+            NEWLINE,
+            IDENTIFIER,
+            LEFTPARENTHESIS,
+            RIGHTPARENTHESIS));
   }
 }

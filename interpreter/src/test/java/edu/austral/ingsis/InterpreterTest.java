@@ -15,7 +15,7 @@ public class InterpreterTest {
 
   private Interpreter interpreter = new PrintScriptInterpreter();
   private Parser parser = new PrintScriptParser();
-  private Lexer lexer = new PrintScriptLexer();
+  private Lexer lexer = new PrintScriptLexer("1.1");
 
   @Test
   public void interpreterTest_01() {

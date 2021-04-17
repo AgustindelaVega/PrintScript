@@ -4,13 +4,12 @@ plugins {
     id 'com.adarshr.test-logger' version '2.1.1'
 }
 
-group = 'edu.austral.ingsis'
-version = '1.0.1'
+group = 'edu.austral.ingsis.ps'
+version = '1.1'
 
 dependencies {
     implementation project(':utils')
     implementation 'com.google.code.gson:gson:2.8.6'
-    implementation 'org.junit.jupiter:junit-jupiter:5.4.2'
     implementation 'org.junit.jupiter:junit-jupiter:5.4.2'
     testImplementation group: 'org.skyscreamer', name: 'jsonassert', version: '1.2.3'
     implementation group: 'commons-io', name: 'commons-io', version: '2.6'
