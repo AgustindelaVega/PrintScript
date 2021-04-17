@@ -7,7 +7,7 @@ import java.util.List;
 public class PrintScriptInterpreter implements Interpreter {
   PrintScriptVisitor visitor;
 
-  PrintScriptInterpreter() {
+  public PrintScriptInterpreter() {
     this.visitor = new PrintScriptVisitor();
   }
 
