@@ -7,11 +7,11 @@ import edu.austral.ingsis.token.Token;
 import edu.austral.ingsis.token.TokenType;
 import java.util.List;
 
-public class PrintScriptTokenStream {
+public class PrintScriptParseHelper implements ParseHelper {
   private List<Token> tokens;
   private int current = 0;
 
-  public PrintScriptTokenStream(List<Token> tokens) {
+  public PrintScriptParseHelper(List<Token> tokens) {
     this.tokens = tokens;
   }
 

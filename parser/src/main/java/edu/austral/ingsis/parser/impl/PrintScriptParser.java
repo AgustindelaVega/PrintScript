@@ -1,7 +1,7 @@
 package edu.austral.ingsis.parser.impl;
 
 import edu.austral.ingsis.parser.Parser;
-import edu.austral.ingsis.parser.streams.PrintScriptTokenStream;
+import edu.austral.ingsis.parser.streams.PrintScriptParseHelper;
 import edu.austral.ingsis.statement.Statement;
 import edu.austral.ingsis.token.Token;
 import java.util.ArrayList;
@@ -12,12 +12,12 @@ public class PrintScriptParser implements Parser {
   private final StatementParser statementParser;
 
   public PrintScriptParser() {
-    this.statementParser = new StatementParser();
+    this.statementParser = new PrintScriptStatementParser();
   }
 
   @Override
   public List<Statement> parse(List<Token> tokens) {
-    PrintScriptTokenStream tokenStream = new PrintScriptTokenStream(tokens);
+    PrintScriptParseHelper tokenStream = new PrintScriptParseHelper(tokens);
 
     List<Statement> statements = new ArrayList<>();
 
