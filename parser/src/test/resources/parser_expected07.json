@@ -12,7 +12,13 @@
     },
     "type": "BOOLEAN",
     "expression": {
-      "value": true
+      "value": true,
+      "tokenValue": {
+        "type": "TRUE",
+        "lexeme": "true",
+        "literal": true,
+        "line": 1
+      }
     }
   },
   {
@@ -28,7 +34,13 @@
     },
     "type": "BOOLEAN",
     "expression": {
-      "value": false
+      "value": false,
+      "tokenValue": {
+        "type": "FALSE",
+        "lexeme": "false",
+        "literal": false,
+        "line": 2
+      }
     }
   }
 ]

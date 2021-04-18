@@ -12,7 +12,13 @@
     },
     "type": "NUMBERTYPE",
     "expression": {
-      "value": 9.0
+      "value": 9.0,
+      "tokenValue": {
+        "type": "NUMBER",
+        "lexeme": "9",
+        "literal": 9.0,
+        "line": 1
+      }
     }
   },
   {
@@ -28,7 +34,13 @@
     },
     "type": "NUMBERTYPE",
     "expression": {
-      "value": 12.5
+      "value": 12.5,
+      "tokenValue": {
+        "type": "NUMBER",
+        "lexeme": "12.5",
+        "literal": 12.5,
+        "line": 1
+      }
     }
   }
 ]

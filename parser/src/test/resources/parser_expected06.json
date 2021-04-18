@@ -20,7 +20,13 @@
         "line": 2
       },
       "expression": {
-        "value": 10.0
+        "value": 10.0,
+        "tokenValue": {
+          "type": "NUMBER",
+          "lexeme": "10",
+          "literal": 10.0,
+          "line": 2
+        }
       }
     }
   }
