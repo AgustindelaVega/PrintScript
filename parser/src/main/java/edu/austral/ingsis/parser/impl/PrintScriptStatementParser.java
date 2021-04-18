@@ -22,6 +22,7 @@ public class PrintScriptStatementParser implements StatementParser {
     this.expressionParser = new PrintScriptExpressionParser();
   }
 
+  @Override
   public Statement parse(ParseHelper parseHelper) {
     this.parseHelper = parseHelper;
 
@@ -49,9 +50,11 @@ public class PrintScriptStatementParser implements StatementParser {
         type = NUMBERTYPE;
       } else if (parseHelper.match(BOOLEAN)) {
         type = BOOLEAN;
+      } else {
+        throw new ParseException("Variable type missing.", parseHelper.previous());
       }
     } else {
-      throw new ParseException("Variable type missing.", parseHelper.previous());
+      throw new ParseException("Colon missing.", parseHelper.previous());
     }
 
     if (parseHelper.match(ASSIGNATION)) {

@@ -15,6 +15,7 @@ public class PrintScriptParseHelper implements ParseHelper {
     this.tokens = tokens;
   }
 
+  @Override
   public boolean match(TokenType... types) {
     for (TokenType type : types) {
       if (check(type)) {
@@ -26,30 +27,36 @@ public class PrintScriptParseHelper implements ParseHelper {
     return false;
   }
 
+  @Override
   public boolean check(TokenType type) {
     if (isAtEnd()) return false;
     return peek().getType() == type;
   }
 
+  @Override
   public Token advance() {
     if (!isAtEnd()) current++;
     return previous();
   }
 
+  @Override
   public Token consume(TokenType type, String message) {
     if (check(type)) return advance();
 
     throw new ParseException(message, peek());
   }
 
+  @Override
   public Token peek() {
     return tokens.get(current);
   }
 
+  @Override
   public Token previous() {
     return tokens.get(current - 1);
   }
 
+  @Override
   public boolean isAtEnd() {
     return peek().getType() == EOF;
   }
