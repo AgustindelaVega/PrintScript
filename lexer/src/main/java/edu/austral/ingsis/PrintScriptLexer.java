@@ -8,6 +8,7 @@ import edu.austral.ingsis.token.TokenType;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -45,39 +46,54 @@ public class PrintScriptLexer implements Lexer {
   public List<Token> lex(String input) {
     Matcher matcher = getMatcher(input);
     int charCount = 0;
+    int columnCount = 0;
 
     while (matcher.find()) {
       int matchIndex = matcher.start();
 
       if (matcher.group().equals("\n")) {
         line++;
+        columnCount = 0;
         charCount = matcher.end();
         continue;
       }
 
       checkInvalidGroup(input, charCount, matchIndex);
-      extractToken(matcher);
+      List<Integer> column = new ArrayList<>();
+
+      extractToken(matcher, input, column::add, columnCount);
+      columnCount += column.get(0);
     }
     checkGroupsRemaining(input, charCount);
 
-    addToken(EOF, "", line, null);
+    addToken(EOF, "", line, null, 0);
     return tokens;
   }
 
-  private void extractToken(Matcher matcher) {
+  private void extractToken(
+      Matcher matcher, String input, Consumer<Integer> columnIncrease, int columnCount) {
     patterns.stream()
         .filter(tokenType -> matcher.group(tokenType.name()) != null)
         .findFirst()
         .map(
             tokenType -> {
+              columnIncrease.accept(matcher.group().length());
               if (tokenType == NUMBER) {
                 return addToken(
-                    tokenType, matcher.group(), line, Double.parseDouble(matcher.group()));
+                    tokenType,
+                    matcher.group(),
+                    line,
+                    Double.parseDouble(matcher.group()),
+                    columnCount);
               } else if (tokenType == STRING) {
                 return addToken(
-                    tokenType, matcher.group(), line, matcher.group().replaceAll("[\"']", ""));
+                    tokenType,
+                    matcher.group(),
+                    line,
+                    matcher.group().replaceAll("[\"']", ""),
+                    columnCount);
               }
-              return addToken(tokenType, matcher.group(), line, null);
+              return addToken(tokenType, matcher.group(), line, null, columnCount);
             });
   }
 
@@ -117,11 +133,12 @@ public class PrintScriptLexer implements Lexer {
     }
   }
 
-  private Token addToken(TokenType type, String lexeme, int line, Object literal) {
+  private Token addToken(TokenType type, String lexeme, int line, Object literal, int column) {
     Token token =
         TokenBuilder.createBuilder()
             .addType(type)
             .addLine(line)
+            .addColumn(column)
             .addLexeme(lexeme)
             .addLiteral(literal)
             .buildToken();

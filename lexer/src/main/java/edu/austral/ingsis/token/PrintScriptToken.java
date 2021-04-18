@@ -6,12 +6,14 @@ public class PrintScriptToken implements Token {
   private final String lexeme;
   private final Object literal;
   private final int line;
+  private final int column;
 
-  public PrintScriptToken(TokenType type, String lexeme, Object literal, int line) {
+  public PrintScriptToken(TokenType type, String lexeme, Object literal, int line, int column) {
     this.type = type;
     this.lexeme = lexeme;
     this.literal = literal;
     this.line = line;
+    this.column = column;
   }
 
   @Override
@@ -28,7 +30,7 @@ public class PrintScriptToken implements Token {
     boolean b1 = type.equals(token.type);
     boolean b2 = lexeme.equals(token.lexeme);
     boolean b3 = (literal == null) ? literal == token.literal : literal.equals(token.literal);
-    return b1 && b2 && b3 && line == token.getLine();
+    return b1 && b2 && b3 && line == token.getLine() && column == token.getColumn();
   }
 
   public TokenType getType() {
@@ -45,5 +47,9 @@ public class PrintScriptToken implements Token {
 
   public int getLine() {
     return line;
+  }
+
+  public int getColumn() {
+    return column;
   }
 }

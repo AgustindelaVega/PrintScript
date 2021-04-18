@@ -120,7 +120,6 @@ public class PrintScriptVisitor implements ExpressionVisitor, StatementVisitor {
           null,
           declarationStatement.getKeyword());
     }
-    // String name, TokenType type, Object value, TokenType keyWord
 
     if (declarationStatement.getType() == BOOLEAN && !(value instanceof Boolean)) {
       throw new InterpreterException(declarationStatement.getName(), "Expected a boolean");
@@ -138,7 +137,7 @@ public class PrintScriptVisitor implements ExpressionVisitor, StatementVisitor {
 
   @Override
   public void visit(IfStatement ifStatement) {
-    if (isTrue(evaluate(ifStatement.getCondition()))) {
+    if (isTrue(evaluate(ifStatement.getCondition()), ifStatement.getCondition().getToken())) {
       ifStatement.getThenBranching().accept(this);
     } else if (ifStatement.getElseBranching() != null) {
       ifStatement.getElseBranching().accept(this);
@@ -172,9 +171,9 @@ public class PrintScriptVisitor implements ExpressionVisitor, StatementVisitor {
     return expression.accept(this);
   }
 
-  private boolean isTrue(Object object) {
-    if (object == null) return false;
+  private boolean isTrue(Object object, Token token) {
+    if (object == null) throw new InterpreterException(token, "Expression Expected");
     if (object instanceof Boolean) return (boolean) object;
-    return true;
+    throw new InterpreterException(token, "Expression Expected");
   }
 }
