@@ -26,11 +26,11 @@ public class PrintScriptExpressionParser implements ExpressionParser {
       Expression value = binary();
 
       if (expression instanceof VariableExpression) {
-        Token name = ((VariableExpression) expression).getName();
+        Token name = ((VariableExpression) expression).getToken();
         return new AssigmentExpression(name, value);
       }
 
-      throw new ParseException("Assigment parse error.", token);
+      throw new ParseException(token, "Assigment parse error.");
     }
 
     return expression;
@@ -59,17 +59,17 @@ public class PrintScriptExpressionParser implements ExpressionParser {
   }
 
   private Expression primary() {
-    if (parseHelper.match(FALSE)) return new ValueExpression(false);
-    if (parseHelper.match(TRUE)) return new ValueExpression(true);
+    if (parseHelper.match(FALSE)) return new ValueExpression(false, parseHelper.previous());
+    if (parseHelper.match(TRUE)) return new ValueExpression(true, parseHelper.previous());
 
     if (parseHelper.match(NUMBER, STRING)) {
-      return new ValueExpression(parseHelper.previous().getLiteral());
+      return new ValueExpression(parseHelper.previous().getLiteral(), parseHelper.previous());
     }
 
     if (parseHelper.match(IDENTIFIER)) {
       return new VariableExpression(parseHelper.previous());
     }
 
-    throw new ParseException("Expression expected.", parseHelper.peek());
+    throw new ParseException(parseHelper.peek(), "Expression expected.");
   }
 }

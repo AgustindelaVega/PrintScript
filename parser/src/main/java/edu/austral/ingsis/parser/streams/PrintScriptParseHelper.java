@@ -43,7 +43,7 @@ public class PrintScriptParseHelper implements ParseHelper {
   public Token consume(TokenType type, String message) {
     if (check(type)) return advance();
 
-    throw new ParseException(message, peek());
+    throw new ParseException(peek(), message);
   }
 
   @Override

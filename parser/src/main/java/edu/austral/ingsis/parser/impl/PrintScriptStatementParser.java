@@ -51,10 +51,10 @@ public class PrintScriptStatementParser implements StatementParser {
       } else if (parseHelper.match(BOOLEAN)) {
         type = BOOLEAN;
       } else {
-        throw new ParseException("Variable type missing.", parseHelper.previous());
+        throw new ParseException(parseHelper.previous(), "Variable type missing.");
       }
     } else {
-      throw new ParseException("Colon missing.", parseHelper.previous());
+      throw new ParseException(parseHelper.previous(), "Colon missing.");
     }
 
     if (parseHelper.match(ASSIGNATION)) {

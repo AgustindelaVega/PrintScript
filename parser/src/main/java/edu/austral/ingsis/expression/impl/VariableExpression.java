@@ -17,7 +17,7 @@ public class VariableExpression implements Expression {
     return expressionVisitor.visit(this);
   }
 
-  public Token getName() {
+  public Token getToken() {
     return name;
   }
 }

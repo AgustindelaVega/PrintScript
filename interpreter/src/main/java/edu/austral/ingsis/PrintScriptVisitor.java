@@ -33,9 +33,9 @@ public class PrintScriptVisitor implements ExpressionVisitor, StatementVisitor {
     Object left = evaluate(binaryExpression.getLeft());
     Object right = evaluate(binaryExpression.getRight());
 
-    switch (binaryExpression.getOperator().getType()) {
+    switch (binaryExpression.getToken().getType()) {
       case MINUS:
-        checkNumberOperands(binaryExpression.getOperator(), left, right);
+        checkNumberOperands(binaryExpression.getToken(), left, right);
         return (double) left - (double) right;
       case PLUS:
         if (left instanceof Number && right instanceof Number) {
@@ -43,22 +43,22 @@ public class PrintScriptVisitor implements ExpressionVisitor, StatementVisitor {
         }
         return left.toString() + right.toString();
       case DIVIDE:
-        checkNumberOperands(binaryExpression.getOperator(), left, right);
+        checkNumberOperands(binaryExpression.getToken(), left, right);
         return (double) left / (double) right;
       case MULTIPLY:
-        checkNumberOperands(binaryExpression.getOperator(), left, right);
+        checkNumberOperands(binaryExpression.getToken(), left, right);
         return (double) left * (double) right;
       case GREATER:
-        checkNumberOperands(binaryExpression.getOperator(), left, right);
+        checkNumberOperands(binaryExpression.getToken(), left, right);
         return (double) left > (double) right;
       case GREATEREQUAL:
-        checkNumberOperands(binaryExpression.getOperator(), left, right);
+        checkNumberOperands(binaryExpression.getToken(), left, right);
         return (double) left >= (double) right;
       case LESS:
-        checkNumberOperands(binaryExpression.getOperator(), left, right);
+        checkNumberOperands(binaryExpression.getToken(), left, right);
         return (double) left < (double) right;
       case LESSEQUAL:
-        checkNumberOperands(binaryExpression.getOperator(), left, right);
+        checkNumberOperands(binaryExpression.getToken(), left, right);
         return (double) left <= (double) right;
     }
     return null;
@@ -68,8 +68,8 @@ public class PrintScriptVisitor implements ExpressionVisitor, StatementVisitor {
   public Object visit(UnaryExpression unaryExpression) {
     Object right = evaluate(unaryExpression.getExpression());
 
-    if (unaryExpression.getOperator().getType() == MINUS) {
-      checkNumberOperand(unaryExpression.getOperator(), right);
+    if (unaryExpression.getToken().getType() == MINUS) {
+      checkNumberOperand(unaryExpression.getToken(), right);
       return -(double) right;
     }
     return null;
@@ -77,14 +77,14 @@ public class PrintScriptVisitor implements ExpressionVisitor, StatementVisitor {
 
   @Override
   public Object visit(VariableExpression variableExpression) {
-    return runtimeState.getValue(variableExpression.getName());
+    return runtimeState.getValue(variableExpression.getToken());
   }
 
   @Override
   public Object visit(AssigmentExpression assignmentExpression) {
     Object value = evaluate(assignmentExpression.getExpression());
 
-    runtimeState.assign(assignmentExpression.getName(), value);
+    runtimeState.assign(assignmentExpression.getToken(), value);
     return value;
   }
 
