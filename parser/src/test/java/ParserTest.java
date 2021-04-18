@@ -153,4 +153,12 @@ public class ParserTest {
 
     compareStatementsFromJsons("./src/test/resources/parser_expected14.json");
   }
+
+  @Test
+  public void test15_ParseDeclarationStatementWithoutVariableTypeShouldThrowAParseException()
+      throws FileNotFoundException {
+    tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src15.json"));
+
+    assertThrows(ParseException.class, () -> parser.parse(tokens));
+  }
 }
