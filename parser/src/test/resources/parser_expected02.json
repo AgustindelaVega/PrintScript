@@ -13,10 +13,22 @@
     "type": "NUMBERTYPE",
     "expression": {
       "left": {
-        "value": 10.0
+        "value": 10.0,
+        "tokenValue": {
+          "type": "NUMBER",
+          "lexeme": "10",
+          "literal": 10.0,
+          "line": 1
+        }
       },
       "right": {
-        "value": 9.0
+        "value": 9.0,
+        "tokenValue": {
+          "type": "NUMBER",
+          "lexeme": "9",
+          "literal": 9.0,
+          "line": 1
+        }
       },
       "operator": {
         "type": "PLUS",

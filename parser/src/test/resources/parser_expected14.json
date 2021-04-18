@@ -17,7 +17,13 @@
               "line": 1
             },
             "expression": {
-              "value": 10.0
+              "value": 10.0,
+              "tokenValue": {
+                "type": "NUMBER",
+                "lexeme": "10",
+                "literal": 10.0,
+                "line": 1
+              }
             }
           }
         }
@@ -33,7 +39,13 @@
               "line": 1
             },
             "expression": {
-              "value": 11.0
+              "value": 11.0,
+              "tokenValue": {
+                "type": "NUMBER",
+                "lexeme": "11",
+                "literal": 11.0,
+                "line": 1
+              }
             }
           }
         }

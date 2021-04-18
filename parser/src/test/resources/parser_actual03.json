@@ -1,1 +1,0 @@
-[{"keyword":{"type":"LET","lexeme":"let","line":1},"name":{"type":"IDENTIFIER","lexeme":"x","line":1},"type":"NUMBERTYPE","expression":{"left":{"value":10.0},"right":{"value":9.0},"operator":{"type":"MULTIPLY","lexeme":"*","line":1}}}]

@@ -30,29 +30,12 @@ public class ParserTest {
         new java.io.FileReader(src), new TypeToken<List<PrintScriptToken>>() {}.getType());
   }
 
-  private void writeStatementsToJSON(List<Statement> statements, String testNumber) {
-    String json = gson.toJson(statements);
-    try {
-      FileWriter myWriter =
-          new FileWriter("./src/test/resources/parser_actual" + testNumber + ".json");
-      myWriter.write(json);
-      myWriter.close();
-      System.out.println("Successfully wrote to the file.");
-    } catch (IOException e) {
-      System.out.println("An error occurred.");
-      e.printStackTrace();
-    }
-  }
-
-  private void compareStatementsFromJsons(
-      String testNumber, String expectedJsonFile, String actualJsonFile)
+  private void compareStatementsFromJsons(String expectedJsonFile)
       throws IOException, JSONException {
     List<Statement> statements = parser.parse(tokens);
 
-    writeStatementsToJSON(statements, testNumber);
-
     String expectedJson = FileUtils.readFileToString(new File(expectedJsonFile), (String) null);
-    String actualJson = FileUtils.readFileToString(new File(actualJsonFile), (String) null);
+    String actualJson = gson.toJson(statements);
     JSONAssert.assertEquals(expectedJson, actualJson, JSONCompareMode.STRICT);
   }
 
@@ -67,10 +50,7 @@ public class ParserTest {
       throws IOException, JSONException {
     tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src01.json"));
 
-    compareStatementsFromJsons(
-        "01",
-        "./src/test/resources/parser_expected01.json",
-        "./src/test/resources/parser_actual01.json");
+    compareStatementsFromJsons("./src/test/resources/parser_expected01.json");
   }
 
   @Test
@@ -78,10 +58,7 @@ public class ParserTest {
       throws IOException, JSONException {
     tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src02.json"));
 
-    compareStatementsFromJsons(
-        "02",
-        "./src/test/resources/parser_expected02.json",
-        "./src/test/resources/parser_actual02.json");
+    compareStatementsFromJsons("./src/test/resources/parser_expected02.json");
   }
 
   @Test
@@ -89,20 +66,14 @@ public class ParserTest {
       throws IOException, JSONException {
     tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src03.json"));
 
-    compareStatementsFromJsons(
-        "03",
-        "./src/test/resources/parser_expected03.json",
-        "./src/test/resources/parser_actual03.json");
+    compareStatementsFromJsons("./src/test/resources/parser_expected03.json");
   }
 
   @Test
   public void test04_ParsePrintStatementWithValueExpression() throws IOException, JSONException {
     tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src04.json"));
 
-    compareStatementsFromJsons(
-        "04",
-        "./src/test/resources/parser_expected04.json",
-        "./src/test/resources/parser_actual04.json");
+    compareStatementsFromJsons("./src/test/resources/parser_expected04.json");
   }
 
   @Test
@@ -110,20 +81,14 @@ public class ParserTest {
       throws IOException, JSONException {
     tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src05.json"));
 
-    compareStatementsFromJsons(
-        "05",
-        "./src/test/resources/parser_expected05.json",
-        "./src/test/resources/parser_actual05.json");
+    compareStatementsFromJsons("./src/test/resources/parser_expected05.json");
   }
 
   @Test
   public void test06_ParseMultipleStatements() throws IOException, JSONException {
     tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src06.json"));
 
-    compareStatementsFromJsons(
-        "06",
-        "./src/test/resources/parser_expected06.json",
-        "./src/test/resources/parser_actual06.json");
+    compareStatementsFromJsons("./src/test/resources/parser_expected06.json");
   }
 
   @Test
@@ -131,10 +96,7 @@ public class ParserTest {
       throws IOException, JSONException {
     tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src07.json"));
 
-    compareStatementsFromJsons(
-        "07",
-        "./src/test/resources/parser_expected07.json",
-        "./src/test/resources/parser_actual07.json");
+    compareStatementsFromJsons("./src/test/resources/parser_expected07.json");
   }
 
   @Test
@@ -142,10 +104,7 @@ public class ParserTest {
       throws IOException, JSONException {
     tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src08.json"));
 
-    compareStatementsFromJsons(
-        "08",
-        "./src/test/resources/parser_expected08.json",
-        "./src/test/resources/parser_actual08.json");
+    compareStatementsFromJsons("./src/test/resources/parser_expected08.json");
   }
 
   @Test
@@ -153,10 +112,7 @@ public class ParserTest {
       throws IOException, JSONException {
     tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src09.json"));
 
-    compareStatementsFromJsons(
-        "09",
-        "./src/test/resources/parser_expected09.json",
-        "./src/test/resources/parser_actual09.json");
+    compareStatementsFromJsons("./src/test/resources/parser_expected09.json");
   }
 
   @Test
@@ -188,19 +144,21 @@ public class ParserTest {
       throws IOException, JSONException {
     tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src13.json"));
 
-    compareStatementsFromJsons(
-        "13",
-        "./src/test/resources/parser_expected13.json",
-        "./src/test/resources/parser_actual13.json");
+    compareStatementsFromJsons("./src/test/resources/parser_expected13.json");
   }
 
   @Test
   public void test14_ParseIfStatement() throws IOException, JSONException {
     tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src14.json"));
 
-    compareStatementsFromJsons(
-        "14",
-        "./src/test/resources/parser_expected14.json",
-        "./src/test/resources/parser_actual14.json");
+    compareStatementsFromJsons("./src/test/resources/parser_expected14.json");
+  }
+
+  @Test
+  public void test15_ParseDeclarationStatementWithoutVariableTypeShouldThrowAParseException()
+      throws FileNotFoundException {
+    tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src15.json"));
+
+    assertThrows(ParseException.class, () -> parser.parse(tokens));
   }
 }
