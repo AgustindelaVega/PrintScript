@@ -35,9 +35,12 @@ public class CLI implements Callable<Integer> {
   private Consumer<String> printConsumer;
   private Consumer<String> errorConsumer;
 
-  public CLI(Consumer<String> printConsumer, Consumer<String> errorConsumer) {
+  public CLI(
+      Consumer<String> printConsumer, Consumer<String> errorConsumer, String version, File file) {
     this.printConsumer = printConsumer;
     this.errorConsumer = errorConsumer;
+    this.version = version;
+    this.file = file;
   }
 
   public CLI() {}

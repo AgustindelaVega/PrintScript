@@ -1,5 +1,6 @@
 package edu.austral.ingsis;
 
+import java.io.File;
 import java.util.function.Consumer;
 import picocli.CommandLine;
 
@@ -10,7 +11,7 @@ public class PrintScript {
   }
 
   public static void executeWithPrintAndErrorConsumers(
-      String[] args, Consumer<String> printConsumer, Consumer<String> errorConsumer) {
-    new CommandLine(new CLI(printConsumer, errorConsumer)).execute(args);
+      File file, String version, Consumer<String> printConsumer, Consumer<String> errorConsumer) {
+    new CommandLine(new CLI(printConsumer, errorConsumer, version, file));
   }
 }
