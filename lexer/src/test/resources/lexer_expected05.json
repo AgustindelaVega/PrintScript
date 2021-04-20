@@ -86,7 +86,7 @@
   },
   {
     "type": "PRINT",
-    "lexeme": "print",
+    "lexeme": "println",
     "line": 3,
     "column": 0
   },
@@ -94,38 +94,38 @@
     "type": "LEFTPARENTHESIS",
     "lexeme": "(",
     "line": 3,
-    "column": 5
+    "column": 7
   },
   {
     "type": "IDENTIFIER",
     "lexeme": "num",
     "line": 3,
-    "column": 6
+    "column": 8
   },
   {
     "type": "GREATER",
     "lexeme": "\u003e",
     "line": 3,
-    "column": 9
+    "column": 11
   },
   {
     "type": "NUMBER",
     "lexeme": "1",
     "literal": 1.0,
     "line": 3,
-    "column": 10
+    "column": 12
   },
   {
     "type": "RIGHTPARENTHESIS",
     "lexeme": ")",
     "line": 3,
-    "column": 11
+    "column": 13
   },
   {
     "type": "SEMICOLON",
     "lexeme": ";",
     "line": 3,
-    "column": 12
+    "column": 14
   },
   {
     "type": "EOF",
