@@ -11,7 +11,7 @@ public enum TokenType {
   NUMBERTYPE("number"),
   STRINGTYPE("string"),
   BOOLEAN("boolean"),
-  PRINT("print"),
+  PRINT("println"),
   FALSE("false"),
   TRUE("true"),
   IF("if"),

@@ -40,7 +40,7 @@ public class LexerTest {
             LexerException.class,
             () -> lexer.lex(FileReader.getFileLines("./src/test/resources/lexer_test03.txt")));
 
-    String expectedMessage = "(1, 14) : Error matching group \" ?? \"";
+    String expectedMessage = "(1, 16) : Error matching group \" ?? \"";
     String actualMessage = exception.getMessage();
 
     Assert.assertTrue(actualMessage.contains(expectedMessage));

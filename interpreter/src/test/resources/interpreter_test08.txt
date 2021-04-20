@@ -1,2 +1,2 @@
 let neg: number = - 12.0;
-print(neg + 8);
+println(neg + 8);

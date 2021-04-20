@@ -1,4 +1,4 @@
-print("test print");
+println("test print");
 let num: number = 14 + 12;
 let num2: number = 14 - 12;
 let num3: number = 14 * 12;
