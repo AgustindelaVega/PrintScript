@@ -5,7 +5,6 @@ import static org.junit.Assert.assertThrows;
 import com.google.gson.Gson;
 import edu.austral.ingsis.token.Token;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import org.apache.commons.io.FileUtils;
@@ -24,21 +23,13 @@ public class LexerTest {
   @Test
   public void testLexerValidInput() throws IOException, JSONException {
     String src = FileReader.getFileLines("./src/test/resources/lexer_test01.txt");
-    compareTokensFromJsons(
-        "01",
-        "./src/test/resources/lexer_expected01.json",
-        "./src/test/resources/lexer_actual01.json",
-        src);
+    compareTokensFromJsons("./src/test/resources/lexer_expected01.json", src);
   }
 
   @Test
   public void testLexerValidInput2() throws IOException, JSONException {
     String src = FileReader.getFileLines("./src/test/resources/lexer_test02.txt");
-    compareTokensFromJsons(
-        "02",
-        "./src/test/resources/lexer_expected02.json",
-        "./src/test/resources/lexer_actual02.json",
-        src);
+    compareTokensFromJsons("./src/test/resources/lexer_expected02.json", src);
   }
 
   @Test
@@ -72,35 +63,16 @@ public class LexerTest {
   @Test
   public void testLexerValidInput3() throws IOException, JSONException {
     String src = FileReader.getFileLines("./src/test/resources/lexer_test05.txt");
-    compareTokensFromJsons(
-        "05",
-        "./src/test/resources/lexer_expected05.json",
-        "./src/test/resources/lexer_actual05.json",
-        src);
+    compareTokensFromJsons("./src/test/resources/lexer_expected05.json", src);
   }
 
-  private void writeTokensToJSON(List<Token> tokens, String testNumber) {
-    String json = gson.toJson(tokens);
-    try {
-      FileWriter myWriter =
-          new FileWriter("./src/test/resources/lexer_actual" + testNumber + ".json");
-      myWriter.write(json);
-      myWriter.close();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
-
-  private void compareTokensFromJsons(
-      String testNumber, String expectedJsonFile, String actualJsonFile, String fileLines)
+  private void compareTokensFromJsons(String expectedJsonFile, String fileLines)
       throws IOException, JSONException {
     Lexer lexer = new PrintScriptLexer(VERSION);
     List<Token> tokens = lexer.lex(fileLines);
 
-    writeTokensToJSON(tokens, testNumber);
-
     String expectedJson = FileUtils.readFileToString(new File(expectedJsonFile), (String) null);
-    String actualJson = FileUtils.readFileToString(new File(actualJsonFile), (String) null);
+    String actualJson = gson.toJson(tokens);
     JSONAssert.assertEquals(expectedJson, actualJson, JSONCompareMode.STRICT);
   }
 }

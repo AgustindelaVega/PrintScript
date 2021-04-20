@@ -3,12 +3,14 @@
     "keyword": {
       "type": "LET",
       "lexeme": "let",
-      "line": 1
+      "line": 1,
+      "column": 0
     },
     "name": {
       "type": "IDENTIFIER",
       "lexeme": "x",
-      "line": 1
+      "line": 1,
+      "column": 0
     },
     "type": "BOOLEAN",
     "expression": {
@@ -18,7 +20,8 @@
           "type": "NUMBER",
           "lexeme": "9",
           "literal": 9.0,
-          "line": 1
+          "line": 1,
+          "column": 0
         }
       },
       "right": {
@@ -27,13 +30,15 @@
           "type": "NUMBER",
           "lexeme": "8",
           "literal": 8.0,
-          "line": 1
+          "line": 1,
+          "column": 0
         }
       },
       "operator": {
         "type": "GREATER",
-        "lexeme": ">",
-        "line": 1
+        "lexeme": "\u003e",
+        "line": 1,
+        "column": 0
       }
     }
   }

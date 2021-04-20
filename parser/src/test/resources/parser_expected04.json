@@ -6,7 +6,8 @@
         "type": "NUMBER",
         "lexeme": "10",
         "literal": 10.0,
-        "line": 1
+        "line": 1,
+        "column": 0
       }
     }
   }

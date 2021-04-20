@@ -2,78 +2,93 @@
   {
     "type": "LET",
     "lexeme": "let",
-    "line": 1
+    "line": 1,
+    "column": 0
   },
   {
     "type": "IDENTIFIER",
     "lexeme": "str",
-    "line": 1
+    "line": 1,
+    "column": 3
   },
   {
     "type": "COLON",
     "lexeme": ":",
-    "line": 1
+    "line": 1,
+    "column": 6
   },
   {
     "type": "STRINGTYPE",
     "lexeme": "string",
-    "line": 1
+    "line": 1,
+    "column": 7
   },
   {
     "type": "ASSIGNATION",
     "lexeme": "\u003d",
-    "line": 1
+    "line": 1,
+    "column": 13
   },
   {
     "type": "STRING",
     "lexeme": "\"test string\"",
     "literal": "test string",
-    "line": 1
+    "line": 1,
+    "column": 14
   },
   {
     "type": "SEMICOLON",
     "lexeme": ";",
-    "line": 1
+    "line": 1,
+    "column": 27
   },
   {
     "type": "LET",
     "lexeme": "let",
-    "line": 2
+    "line": 2,
+    "column": 0
   },
   {
     "type": "IDENTIFIER",
     "lexeme": "num",
-    "line": 2
+    "line": 2,
+    "column": 3
   },
   {
     "type": "COLON",
     "lexeme": ":",
-    "line": 2
+    "line": 2,
+    "column": 6
   },
   {
     "type": "NUMBERTYPE",
     "lexeme": "number",
-    "line": 2
+    "line": 2,
+    "column": 7
   },
   {
     "type": "ASSIGNATION",
     "lexeme": "\u003d",
-    "line": 2
+    "line": 2,
+    "column": 13
   },
   {
     "type": "NUMBER",
     "lexeme": "13",
     "literal": 13.0,
-    "line": 2
+    "line": 2,
+    "column": 14
   },
   {
     "type": "SEMICOLON",
     "lexeme": ";",
-    "line": 2
+    "line": 2,
+    "column": 16
   },
   {
     "type": "EOF",
     "lexeme": "",
-    "line": 2
+    "line": 2,
+    "column": 0
   }
 ]

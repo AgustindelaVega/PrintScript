@@ -13,9 +13,9 @@ import org.junit.Test;
 
 public class InterpreterTest {
 
-  private Interpreter interpreter = new PrintScriptInterpreter();
-  private Parser parser = new PrintScriptParser();
-  private Lexer lexer = new PrintScriptLexer("1.1");
+  private final Interpreter interpreter = new PrintScriptInterpreter();
+  private final Parser parser = new PrintScriptParser();
+  private final Lexer lexer = new PrintScriptLexer("1.1");
 
   @Test
   public void interpreterTest_01() {
