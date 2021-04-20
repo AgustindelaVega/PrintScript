@@ -1,0 +1,35 @@
+[
+  {
+    "keyword": {
+      "type": "LET",
+      "lexeme": "let",
+      "line": 1,
+      "column": 0
+    },
+    "name": {
+      "type": "IDENTIFIER",
+      "lexeme": "x",
+      "line": 1,
+      "column": 0
+    },
+    "type": "NUMBERTYPE",
+    "expression": {
+      "operator": {
+        "type": "MINUS",
+        "lexeme": "-",
+        "line": 1,
+        "column": 0
+      },
+      "expression": {
+        "value": 11.0,
+        "tokenValue": {
+          "type": "NUMBER",
+          "lexeme": "11",
+          "literal": 11.0,
+          "line": 1,
+          "column": 0
+        }
+      }
+    }
+  }
+]

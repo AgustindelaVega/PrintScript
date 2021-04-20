@@ -15,8 +15,8 @@
     "line": 1
   },
   {
-    "type": "NUMBERTYPE",
-    "lexeme": "number",
+    "type": "BOOLEAN",
+    "lexeme": "boolean",
     "line": 1
   },
   {
@@ -25,15 +25,9 @@
     "line": 1
   },
   {
-    "type": "MINUS",
-    "lexeme": "-",
-    "literal": null,
-    "line": 1
-  },
-  {
-    "type": "NUMBER",
-    "lexeme": "11",
-    "literal": 11,
+    "type": "TRUE",
+    "lexeme": "true",
+    "literal": true,
     "line": 1
   },
   {
@@ -42,9 +36,45 @@
     "line": 1
   },
   {
+    "type": "LET",
+    "lexeme": "let",
+    "line": 2
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "y",
+    "line": 2
+  },
+  {
+    "type": "COLON",
+    "lexeme": ":",
+    "line": 2
+  },
+  {
+    "type": "BOOLEAN",
+    "lexeme": "boolean",
+    "line": 2
+  },
+  {
+    "type": "ASSIGNATION",
+    "lexeme": "=",
+    "line": 2
+  },
+  {
+    "type": "FALSE",
+    "lexeme": "false",
+    "literal": false,
+    "line": 2
+  },
+  {
+    "type": "SEMICOLON",
+    "lexeme": ";",
+    "line": 2
+  },
+  {
     "type": "EOF",
     "lexeme": "",
-    "line": 1
+    "line": 2
   }
 ]
 

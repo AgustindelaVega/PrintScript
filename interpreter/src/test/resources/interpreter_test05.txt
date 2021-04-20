@@ -1,1 +1,8 @@
-print(num2 + "test");
+const flag: boolean = true;
+let x: number = 12;
+if(true){
+    x = 1;
+} else {
+    x = 2;
+}
+println(x > 5);

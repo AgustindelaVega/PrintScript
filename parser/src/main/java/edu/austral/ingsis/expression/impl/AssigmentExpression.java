@@ -19,7 +19,8 @@ public class AssigmentExpression implements Expression {
     return expressionVisitor.visit(this);
   }
 
-  public Token getName() {
+  @Override
+  public Token getToken() {
     return name;
   }
 

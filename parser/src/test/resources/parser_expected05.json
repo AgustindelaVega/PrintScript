@@ -1,1 +1,22 @@
-[{"expression":{"name":{"type":"IDENTIFIER","lexeme":"x","line":1},"expression":{"value":"test"}}}]
+[
+  {
+    "expression": {
+      "name": {
+        "type": "IDENTIFIER",
+        "lexeme": "x",
+        "line": 1,
+        "column": 0
+      },
+      "expression": {
+        "value": "test",
+        "tokenValue": {
+          "type": "STRING",
+          "lexeme": "test",
+          "literal": "test",
+          "line": 1,
+          "column": 0
+        }
+      }
+    }
+  }
+]

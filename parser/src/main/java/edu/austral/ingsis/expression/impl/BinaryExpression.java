@@ -28,7 +28,8 @@ public class BinaryExpression implements Expression {
     return right;
   }
 
-  public Token getOperator() {
+  @Override
+  public Token getToken() {
     return operator;
   }
 }

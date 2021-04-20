@@ -1,0 +1,24 @@
+[
+  {
+    "type": "ASSIGNATION",
+    "lexeme": "=",
+    "line": 1
+  },
+  {
+    "type": "STRING",
+    "lexeme": "test",
+    "literal": "test",
+    "line": 1
+  },
+  {
+    "type": "SEMICOLON",
+    "lexeme": ";",
+    "line": 1
+  },
+  {
+    "type": "EOF",
+    "lexeme": "",
+    "line": 1
+  }
+]
+

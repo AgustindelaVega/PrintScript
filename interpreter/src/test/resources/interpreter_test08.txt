@@ -1,0 +1,2 @@
+let neg: number = - 12.0;
+println(neg + 8);

@@ -1,1 +1,27 @@
-[{"keyword":{"type":"LET","lexeme":"let","line":1},"name":{"type":"IDENTIFIER","lexeme":"x","line":1},"type":"NUMBERTYPE","expression":{"value":10.0}}]
+[
+  {
+    "keyword": {
+      "type": "LET",
+      "lexeme": "let",
+      "line": 1,
+      "column": 0
+    },
+    "name": {
+      "type": "IDENTIFIER",
+      "lexeme": "x",
+      "line": 1,
+      "column": 0
+    },
+    "type": "NUMBERTYPE",
+    "expression": {
+      "value": 10.0,
+      "tokenValue": {
+        "type": "NUMBER",
+        "lexeme": "10",
+        "literal": 10.0,
+        "line": 1,
+        "column": 0
+      }
+    }
+  }
+]

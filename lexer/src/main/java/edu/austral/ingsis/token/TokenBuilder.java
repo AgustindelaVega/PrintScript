@@ -3,6 +3,7 @@ package edu.austral.ingsis.token;
 public class TokenBuilder {
   private TokenType type;
   private Integer line;
+  private Integer column;
   private String lexeme;
   private Object literal;
 
@@ -26,8 +27,13 @@ public class TokenBuilder {
     return this;
   }
 
+  public TokenBuilder addColumn(Integer column) {
+    this.column = column;
+    return this;
+  }
+
   public Token buildToken() {
-    return new PrintScriptToken(type, lexeme, literal, line);
+    return new PrintScriptToken(type, lexeme, literal, line, column);
   }
 
   public static TokenBuilder createBuilder() {

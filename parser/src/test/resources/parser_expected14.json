@@ -1,0 +1,60 @@
+[
+  {
+    "condition": {
+      "name": {
+        "type": "IDENTIFIER",
+        "lexeme": "flag",
+        "line": 1,
+        "column": 0
+      }
+    },
+    "thenBranching": {
+      "statements": [
+        {
+          "expression": {
+            "name": {
+              "type": "IDENTIFIER",
+              "lexeme": "x",
+              "line": 1,
+              "column": 0
+            },
+            "expression": {
+              "value": 10.0,
+              "tokenValue": {
+                "type": "NUMBER",
+                "lexeme": "10",
+                "literal": 10.0,
+                "line": 1,
+                "column": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    "elseBranching": {
+      "statements": [
+        {
+          "expression": {
+            "name": {
+              "type": "IDENTIFIER",
+              "lexeme": "x",
+              "line": 1,
+              "column": 0
+            },
+            "expression": {
+              "value": 11.0,
+              "tokenValue": {
+                "type": "NUMBER",
+                "lexeme": "11",
+                "literal": 11.0,
+                "line": 1,
+                "column": 0
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+]

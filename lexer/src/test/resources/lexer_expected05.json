@@ -1,0 +1,136 @@
+[
+  {
+    "type": "LET",
+    "lexeme": "let",
+    "line": 1,
+    "column": 0
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "test",
+    "line": 1,
+    "column": 3
+  },
+  {
+    "type": "COLON",
+    "lexeme": ":",
+    "line": 1,
+    "column": 7
+  },
+  {
+    "type": "BOOLEAN",
+    "lexeme": "boolean",
+    "line": 1,
+    "column": 8
+  },
+  {
+    "type": "ASSIGNATION",
+    "lexeme": "\u003d",
+    "line": 1,
+    "column": 15
+  },
+  {
+    "type": "TRUE",
+    "lexeme": "true",
+    "line": 1,
+    "column": 16
+  },
+  {
+    "type": "SEMICOLON",
+    "lexeme": ";",
+    "line": 1,
+    "column": 20
+  },
+  {
+    "type": "CONST",
+    "lexeme": "const",
+    "line": 2,
+    "column": 0
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "num",
+    "line": 2,
+    "column": 5
+  },
+  {
+    "type": "COLON",
+    "lexeme": ":",
+    "line": 2,
+    "column": 8
+  },
+  {
+    "type": "NUMBERTYPE",
+    "lexeme": "number",
+    "line": 2,
+    "column": 9
+  },
+  {
+    "type": "ASSIGNATION",
+    "lexeme": "\u003d",
+    "line": 2,
+    "column": 15
+  },
+  {
+    "type": "NUMBER",
+    "lexeme": "12",
+    "literal": 12.0,
+    "line": 2,
+    "column": 16
+  },
+  {
+    "type": "SEMICOLON",
+    "lexeme": ";",
+    "line": 2,
+    "column": 18
+  },
+  {
+    "type": "PRINT",
+    "lexeme": "println",
+    "line": 3,
+    "column": 0
+  },
+  {
+    "type": "LEFTPARENTHESIS",
+    "lexeme": "(",
+    "line": 3,
+    "column": 7
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "num",
+    "line": 3,
+    "column": 8
+  },
+  {
+    "type": "GREATER",
+    "lexeme": "\u003e",
+    "line": 3,
+    "column": 11
+  },
+  {
+    "type": "NUMBER",
+    "lexeme": "1",
+    "literal": 1.0,
+    "line": 3,
+    "column": 12
+  },
+  {
+    "type": "RIGHTPARENTHESIS",
+    "lexeme": ")",
+    "line": 3,
+    "column": 13
+  },
+  {
+    "type": "SEMICOLON",
+    "lexeme": ";",
+    "line": 3,
+    "column": 14
+  },
+  {
+    "type": "EOF",
+    "lexeme": "",
+    "line": 3,
+    "column": 0
+  }
+]

@@ -1,80 +1,95 @@
 [
   {
     "type": "PRINT",
-    "lexeme": "print",
-    "line": 1
+    "lexeme": "println",
+    "line": 1,
+    "column": 0
   },
   {
     "type": "LEFTPARENTHESIS",
     "lexeme": "(",
-    "line": 1
+    "line": 1,
+    "column": 7
   },
   {
     "type": "STRING",
     "lexeme": "\"test\"",
     "literal": "test",
-    "line": 1
+    "line": 1,
+    "column": 8
   },
   {
     "type": "RIGHTPARENTHESIS",
     "lexeme": ")",
-    "line": 1
+    "line": 1,
+    "column": 14
   },
   {
     "type": "SEMICOLON",
     "lexeme": ";",
-    "line": 1
+    "line": 1,
+    "column": 15
   },
   {
     "type": "LET",
     "lexeme": "let",
-    "line": 2
+    "line": 2,
+    "column": 0
   },
   {
     "type": "IDENTIFIER",
     "lexeme": "num",
-    "line": 2
+    "line": 2,
+    "column": 3
   },
   {
     "type": "COLON",
     "lexeme": ":",
-    "line": 2
+    "line": 2,
+    "column": 6
   },
   {
     "type": "NUMBERTYPE",
     "lexeme": "number",
-    "line": 2
+    "line": 2,
+    "column": 7
   },
   {
     "type": "ASSIGNATION",
     "lexeme": "\u003d",
-    "line": 2
+    "line": 2,
+    "column": 13
   },
   {
     "type": "NUMBER",
     "lexeme": "14",
     "literal": 14.0,
-    "line": 2
+    "line": 2,
+    "column": 14
   },
   {
     "type": "PLUS",
     "lexeme": "+",
-    "line": 2
+    "line": 2,
+    "column": 16
   },
   {
     "type": "NUMBER",
     "lexeme": "12",
     "literal": 12.0,
-    "line": 2
+    "line": 2,
+    "column": 17
   },
   {
     "type": "SEMICOLON",
     "lexeme": ";",
-    "line": 2
+    "line": 2,
+    "column": 19
   },
   {
     "type": "EOF",
     "lexeme": "",
-    "line": 2
+    "line": 2,
+    "column": 0
   }
 ]

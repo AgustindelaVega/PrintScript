@@ -1,1 +1,14 @@
-[{"expression":{"value":10.0}}]
+[
+  {
+    "expression": {
+      "value": 10.0,
+      "tokenValue": {
+        "type": "NUMBER",
+        "lexeme": "10",
+        "literal": 10.0,
+        "line": 1,
+        "column": 0
+      }
+    }
+  }
+]
