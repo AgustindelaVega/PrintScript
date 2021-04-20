@@ -20,8 +20,8 @@ public class PrintScriptRuntimeState implements RuntimeState {
   }
 
   @Override
-  public void addValue(String name, TokenType type, Object value) {
-    values.put(name, new PrintScriptDeclaration(type, value));
+  public void addValue(String name, TokenType type, Object value, Token keyword) {
+    values.put(name, new PrintScriptDeclaration(type, value, keyword.getType()));
   }
 
   @Override
@@ -30,8 +30,12 @@ public class PrintScriptRuntimeState implements RuntimeState {
       Declaration declaration = values.get(name.getLexeme());
       declaration.setValue(value);
       values.put(name.getLexeme(), declaration);
+      if (values.get(name.getLexeme()).getKeyWord() == TokenType.CONST) {
+        throw new InterpreterException(name, "Cant change value of CONST");
+      }
       return;
     }
+
     throw new InterpreterException(name, "Undefined variable '" + name.getLexeme() + "'.");
   }
 

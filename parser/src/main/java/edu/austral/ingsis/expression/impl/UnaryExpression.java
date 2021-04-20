@@ -19,7 +19,8 @@ public class UnaryExpression implements Expression {
     return expressionVisitor.visit(this);
   }
 
-  public Token getOperator() {
+  @Override
+  public Token getToken() {
     return operator;
   }
 

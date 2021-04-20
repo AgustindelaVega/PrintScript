@@ -1,1 +1,45 @@
-[{"keyword":{"type":"LET","lexeme":"let","line":1},"name":{"type":"IDENTIFIER","lexeme":"x","line":1},"type":"NUMBERTYPE","expression":{"left":{"value":10.0},"right":{"value":9.0},"operator":{"type":"PLUS","lexeme":"+","line":1}}}]
+[
+  {
+    "keyword": {
+      "type": "LET",
+      "lexeme": "let",
+      "line": 1,
+      "column": 0
+    },
+    "name": {
+      "type": "IDENTIFIER",
+      "lexeme": "x",
+      "line": 1,
+      "column": 0
+    },
+    "type": "NUMBERTYPE",
+    "expression": {
+      "left": {
+        "value": 10.0,
+        "tokenValue": {
+          "type": "NUMBER",
+          "lexeme": "10",
+          "literal": 10.0,
+          "line": 1,
+          "column": 0
+        }
+      },
+      "right": {
+        "value": 9.0,
+        "tokenValue": {
+          "type": "NUMBER",
+          "lexeme": "9",
+          "literal": 9.0,
+          "line": 1,
+          "column": 0
+        }
+      },
+      "operator": {
+        "type": "PLUS",
+        "lexeme": "+",
+        "line": 1,
+        "column": 0
+      }
+    }
+  }
+]

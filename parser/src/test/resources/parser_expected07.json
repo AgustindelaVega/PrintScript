@@ -3,22 +3,49 @@
     "keyword": {
       "type": "LET",
       "lexeme": "let",
-      "line": 1
+      "line": 1,
+      "column": 0
     },
     "name": {
       "type": "IDENTIFIER",
       "lexeme": "x",
-      "line": 1
+      "line": 1,
+      "column": 0
     },
-    "type": "NUMBERTYPE",
+    "type": "BOOLEAN",
     "expression": {
-      "operator": {
-        "type": "MINUS",
-        "lexeme": "-",
-        "line": 1
-      },
-      "expression": {
-        "value": 11.0
+      "value": true,
+      "tokenValue": {
+        "type": "TRUE",
+        "lexeme": "true",
+        "literal": true,
+        "line": 1,
+        "column": 0
+      }
+    }
+  },
+  {
+    "keyword": {
+      "type": "LET",
+      "lexeme": "let",
+      "line": 2,
+      "column": 0
+    },
+    "name": {
+      "type": "IDENTIFIER",
+      "lexeme": "y",
+      "line": 2,
+      "column": 0
+    },
+    "type": "BOOLEAN",
+    "expression": {
+      "value": false,
+      "tokenValue": {
+        "type": "FALSE",
+        "lexeme": "false",
+        "literal": false,
+        "line": 2,
+        "column": 0
       }
     }
   }

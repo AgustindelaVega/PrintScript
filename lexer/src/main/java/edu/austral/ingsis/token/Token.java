@@ -10,4 +10,6 @@ public interface Token {
   String getLexeme();
 
   int getLine();
+
+  int getColumn();
 }

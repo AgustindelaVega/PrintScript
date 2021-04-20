@@ -3,13 +3,12 @@ plugins {
     id 'my-library.java-common-conventions'
 }
 
-group = 'edu.austral.ingsis'
-version = '1.0.1'
+group = 'edu.austral.ingsis.ps'
+version = '1.1'
 
 dependencies {
     implementation 'info.picocli:picocli:4.6.1'
     annotationProcessor 'info.picocli:picocli-codegen:4.6.1'
-
     implementation project(':parser')
     implementation project(':lexer')
     implementation project(':interpreter')

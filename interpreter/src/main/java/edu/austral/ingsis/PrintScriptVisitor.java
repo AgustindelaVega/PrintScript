@@ -7,19 +7,25 @@ import edu.austral.ingsis.expression.Expression;
 import edu.austral.ingsis.expression.impl.*;
 import edu.austral.ingsis.runtime.PrintScriptRuntimeState;
 import edu.austral.ingsis.runtime.RuntimeState;
-import edu.austral.ingsis.statement.impl.AssigmentStatement;
-import edu.austral.ingsis.statement.impl.DeclarationStatement;
-import edu.austral.ingsis.statement.impl.PrintStatement;
+import edu.austral.ingsis.statement.Statement;
+import edu.austral.ingsis.statement.impl.*;
 import edu.austral.ingsis.token.Token;
 import edu.austral.ingsis.visitor.ExpressionVisitor;
 import edu.austral.ingsis.visitor.StatementVisitor;
+import java.util.List;
+import java.util.function.Consumer;
 
 public class PrintScriptVisitor implements ExpressionVisitor, StatementVisitor {
 
-  private final RuntimeState runtimeState = new PrintScriptRuntimeState();
+  private RuntimeState runtimeState = new PrintScriptRuntimeState();
+  private Consumer<String> printConsumer;
 
   public RuntimeState getRuntimeState() {
     return runtimeState;
+  }
+
+  public void setPrintConsumer(Consumer<String> printConsumer) {
+    this.printConsumer = printConsumer;
   }
 
   @Override
@@ -27,9 +33,9 @@ public class PrintScriptVisitor implements ExpressionVisitor, StatementVisitor {
     Object left = evaluate(binaryExpression.getLeft());
     Object right = evaluate(binaryExpression.getRight());
 
-    switch (binaryExpression.getOperator().getType()) {
+    switch (binaryExpression.getToken().getType()) {
       case MINUS:
-        checkNumberOperands(binaryExpression.getOperator(), left, right);
+        checkNumberOperands(binaryExpression.getToken(), left, right);
         return (double) left - (double) right;
       case PLUS:
         if (left instanceof Number && right instanceof Number) {
@@ -37,11 +43,23 @@ public class PrintScriptVisitor implements ExpressionVisitor, StatementVisitor {
         }
         return left.toString() + right.toString();
       case DIVIDE:
-        checkNumberOperands(binaryExpression.getOperator(), left, right);
+        checkNumberOperands(binaryExpression.getToken(), left, right);
         return (double) left / (double) right;
       case MULTIPLY:
-        checkNumberOperands(binaryExpression.getOperator(), left, right);
+        checkNumberOperands(binaryExpression.getToken(), left, right);
         return (double) left * (double) right;
+      case GREATER:
+        checkNumberOperands(binaryExpression.getToken(), left, right);
+        return (double) left > (double) right;
+      case GREATEREQUAL:
+        checkNumberOperands(binaryExpression.getToken(), left, right);
+        return (double) left >= (double) right;
+      case LESS:
+        checkNumberOperands(binaryExpression.getToken(), left, right);
+        return (double) left < (double) right;
+      case LESSEQUAL:
+        checkNumberOperands(binaryExpression.getToken(), left, right);
+        return (double) left <= (double) right;
     }
     return null;
   }
@@ -50,8 +68,8 @@ public class PrintScriptVisitor implements ExpressionVisitor, StatementVisitor {
   public Object visit(UnaryExpression unaryExpression) {
     Object right = evaluate(unaryExpression.getExpression());
 
-    if (unaryExpression.getOperator().getType() == MINUS) {
-      checkNumberOperand(unaryExpression.getOperator(), right);
+    if (unaryExpression.getToken().getType() == MINUS) {
+      checkNumberOperand(unaryExpression.getToken(), right);
       return -(double) right;
     }
     return null;
@@ -59,14 +77,14 @@ public class PrintScriptVisitor implements ExpressionVisitor, StatementVisitor {
 
   @Override
   public Object visit(VariableExpression variableExpression) {
-    return runtimeState.getValue(variableExpression.getName());
+    return runtimeState.getValue(variableExpression.getToken());
   }
 
   @Override
   public Object visit(AssigmentExpression assignmentExpression) {
     Object value = evaluate(assignmentExpression.getExpression());
 
-    runtimeState.assign(assignmentExpression.getName(), value);
+    runtimeState.assign(assignmentExpression.getToken(), value);
     return value;
   }
 
@@ -78,7 +96,8 @@ public class PrintScriptVisitor implements ExpressionVisitor, StatementVisitor {
   @Override
   public void visit(PrintStatement printStatement) {
     Object value = evaluate(printStatement.getExpression());
-    System.out.println(value);
+    if (printConsumer != null) printConsumer.accept(value.toString());
+    else System.out.println(value);
   }
 
   @Override
@@ -96,14 +115,46 @@ public class PrintScriptVisitor implements ExpressionVisitor, StatementVisitor {
 
     if (value == null) {
       runtimeState.addValue(
-          declarationStatement.getName().getLexeme(), declarationStatement.getType(), null);
+          declarationStatement.getName().getLexeme(),
+          declarationStatement.getType(),
+          null,
+          declarationStatement.getKeyword());
+    }
+
+    if (declarationStatement.getType() == BOOLEAN && !(value instanceof Boolean)) {
+      throw new InterpreterException(declarationStatement.getName(), "Expected a boolean");
     } else if (declarationStatement.getType() == NUMBERTYPE && !(value instanceof Double)) {
       throw new InterpreterException(declarationStatement.getName(), "Expected a number");
     } else if (declarationStatement.getType() == STRINGTYPE && !(value instanceof String)) {
       throw new InterpreterException(declarationStatement.getName(), "Expected a string");
     }
     runtimeState.addValue(
-        declarationStatement.getName().getLexeme(), declarationStatement.getType(), value);
+        declarationStatement.getName().getLexeme(),
+        declarationStatement.getType(),
+        value,
+        declarationStatement.getKeyword());
+  }
+
+  @Override
+  public void visit(IfStatement ifStatement) {
+    if (isTrue(evaluate(ifStatement.getCondition()), ifStatement.getCondition().getToken())) {
+      ifStatement.getThenBranching().accept(this);
+    } else if (ifStatement.getElseBranching() != null) {
+      ifStatement.getElseBranching().accept(this);
+    }
+  }
+
+  @Override
+  public void visit(BlockStatement blockStatement) {
+    executeBlock(blockStatement.getStatements());
+  }
+
+  private void executeBlock(List<Statement> block) {
+    RuntimeState previous = runtimeState;
+
+    block.forEach(statement -> statement.accept(this));
+
+    runtimeState = previous;
   }
 
   private void checkNumberOperands(Token operator, Object left, Object right) {
@@ -118,5 +169,11 @@ public class PrintScriptVisitor implements ExpressionVisitor, StatementVisitor {
 
   private Object evaluate(Expression expression) {
     return expression.accept(this);
+  }
+
+  private boolean isTrue(Object object, Token token) {
+    if (object == null) throw new InterpreterException(token, "Expression Expected");
+    if (object instanceof Boolean) return (boolean) object;
+    throw new InterpreterException(token, "Expression Expected");
   }
 }
