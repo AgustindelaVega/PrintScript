@@ -12,6 +12,6 @@ public class PrintScript {
 
   public static void executeWithPrintAndErrorConsumers(
       File file, String version, Consumer<String> printConsumer, Consumer<String> errorConsumer) {
-    new CommandLine(new CLI(printConsumer, errorConsumer, version, file));
+    new CommandLine(new CLI(printConsumer, errorConsumer, version, file)).execute();
   }
 }
