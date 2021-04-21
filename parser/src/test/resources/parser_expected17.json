@@ -1,0 +1,86 @@
+[
+  {
+    "keyword": {
+      "type": "CONST",
+      "lexeme": "const",
+      "line": 1,
+      "column": 0
+    },
+    "name": {
+      "type": "IDENTIFIER",
+      "lexeme": "x",
+      "line": 1,
+      "column": 0
+    },
+    "type": "BOOLEAN",
+    "expression": {
+      "left": {
+        "value": 9.0,
+        "tokenValue": {
+          "type": "NUMBER",
+          "lexeme": "9",
+          "literal": 9.0,
+          "line": 1,
+          "column": 0
+        }
+      },
+      "right": {
+        "value": 8.0,
+        "tokenValue": {
+          "type": "NUMBER",
+          "lexeme": "8",
+          "literal": 8.0,
+          "line": 1,
+          "column": 0
+        }
+      },
+      "operator": {
+        "type": "LESSEQUAL",
+        "lexeme": "<=",
+        "line": 1,
+        "column": 0
+      }
+    }
+  },
+  {
+    "condition": {
+      "name": {
+        "type": "IDENTIFIER",
+        "lexeme": "x",
+        "line": 2,
+        "column": 0
+      }
+    },
+    "thenBranching": {
+      "statements": []
+    },
+    "elseBranching": {
+      "statements": [
+        {
+          "expression": {
+            "value": "test else",
+            "tokenValue": {
+              "type": "STRING",
+              "lexeme": "test else",
+              "literal": "test else",
+              "line": 5,
+              "column": 0
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "expression": {
+      "value": "test",
+      "tokenValue": {
+        "type": "STRING",
+        "lexeme": "test",
+        "literal": "test",
+        "line": 7,
+        "column": 0
+      }
+    }
+  }
+]
