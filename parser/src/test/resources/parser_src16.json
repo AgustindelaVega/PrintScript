@@ -1,0 +1,90 @@
+[
+  {
+    "type": "LET",
+    "lexeme": "let",
+    "line": 1
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "x",
+    "line": 1
+  },
+  {
+    "type": "COLON",
+    "lexeme": ":",
+    "line": 1
+  },
+  {
+    "type": "NUMBERTYPE",
+    "lexeme": "number",
+    "line": 1
+  },
+  {
+    "type": "ASSIGNATION",
+    "lexeme": "=",
+    "line": 1
+  },
+  {
+    "type": "NUMBER",
+    "lexeme": "2",
+    "literal": 2.0,
+    "line": 1
+  },
+  {
+    "type": "MULTIPLY",
+    "lexeme": "*",
+    "line": 1
+  },
+  {
+    "type": "NUMBER",
+    "lexeme": "4",
+    "literal": 4.0,
+    "line": 1
+  },
+  {
+    "type": "PLUS",
+    "lexeme": "+",
+    "line": 1
+  },
+  {
+    "type": "NUMBER",
+    "lexeme": "2",
+    "literal": 2.0,
+    "line": 1
+  },
+  {
+    "type": "SEMICOLON",
+    "lexeme": ";",
+    "line": 1
+  },
+  {
+    "type": "PRINT",
+    "lexeme": "println",
+    "line": 2
+  },
+  {
+    "type": "LEFTPARENTHESIS",
+    "lexeme": "(",
+    "line": 2
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "x",
+    "line": 2
+  },
+  {
+    "type": "RIGHTPARENTHESIS",
+    "lexeme": ")",
+    "line": 2
+  },
+  {
+    "type": "SEMICOLON",
+    "lexeme": ";",
+    "line": 2
+  },
+  {
+    "type": "EOF",
+    "lexeme": "",
+    "line": 2
+  }
+]
