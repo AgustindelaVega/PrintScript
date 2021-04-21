@@ -1,7 +1,7 @@
 [
   {
     "type": "PRINT",
-    "lexeme": "print",
+    "lexeme": "println",
     "line": 1
   },
   {

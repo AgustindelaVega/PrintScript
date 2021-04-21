@@ -161,4 +161,19 @@ public class ParserTest {
 
     assertThrows(ParseException.class, () -> parser.parse(tokens));
   }
+
+  @Test
+  public void test16_ParsePrintAndDeclarationStatementWithMultipleOperators()
+      throws IOException, JSONException {
+    tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src16.json"));
+
+    compareStatementsFromJsons("./src/test/resources/parser_expected16.json");
+  }
+
+  @Test
+  public void test17_ParseDeclarationIfElseAndPrintStatements() throws IOException, JSONException {
+    tokens.addAll(getTokensFromJSON("./src/test/resources/parser_src17.json"));
+
+    compareStatementsFromJsons("./src/test/resources/parser_expected17.json");
+  }
 }

@@ -1,0 +1,73 @@
+[
+  {
+    "keyword": {
+      "type": "LET",
+      "lexeme": "let",
+      "line": 1,
+      "column": 0
+    },
+    "name": {
+      "type": "IDENTIFIER",
+      "lexeme": "x",
+      "line": 1,
+      "column": 0
+    },
+    "type": "NUMBERTYPE",
+    "expression": {
+      "left": {
+        "left": {
+          "value": 2.0,
+          "tokenValue": {
+            "type": "NUMBER",
+            "lexeme": "2",
+            "literal": 2.0,
+            "line": 1,
+            "column": 0
+          }
+        },
+        "right": {
+          "value": 4.0,
+          "tokenValue": {
+            "type": "NUMBER",
+            "lexeme": "4",
+            "literal": 4.0,
+            "line": 1,
+            "column": 0
+          }
+        },
+        "operator": {
+          "type": "MULTIPLY",
+          "lexeme": "*",
+          "line": 1,
+          "column": 0
+        }
+      },
+      "right": {
+        "value": 2.0,
+        "tokenValue": {
+          "type": "NUMBER",
+          "lexeme": "2",
+          "literal": 2.0,
+          "line": 1,
+          "column": 0
+        }
+      },
+      "operator": {
+        "type": "PLUS",
+        "lexeme": "+",
+        "line": 1,
+        "column": 0
+      }
+    }
+  },
+  {
+    "expression": {
+      "name": {
+        "type": "IDENTIFIER",
+        "lexeme": "x",
+        "line": 2,
+        "column": 0
+      }
+    }
+  }
+]

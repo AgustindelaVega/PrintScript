@@ -39,7 +39,8 @@ public class PrintScriptExpressionParser implements ExpressionParser {
   private Expression binary() {
     Expression left = unary();
 
-    if (parseHelper.match(MINUS, PLUS, MULTIPLY, DIVIDE, GREATER, GREATEREQUAL, LESS, LESSEQUAL)) {
+    while (parseHelper.match(
+        MINUS, PLUS, MULTIPLY, DIVIDE, GREATER, GREATEREQUAL, LESS, LESSEQUAL)) {
       Token operator = parseHelper.previous();
       Expression right = unary();
       left = new BinaryExpression(left, right, operator);
