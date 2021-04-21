@@ -21,13 +21,15 @@ public class PrintScriptLexer implements Lexer {
 
   private final List<TokenType> patterns = new ArrayList<>();
 
+  private final String version;
+
   public PrintScriptLexer(String version) {
-    addPatterns(version);
+    this.version = version;
+    addPatterns();
   }
 
-  private void addPatterns(String version) {
-    if (version.equals("1.0")) patterns.addAll(getV1_0Tokens());
-    else patterns.addAll(Arrays.asList(values()));
+  private void addPatterns() {
+    patterns.addAll(Arrays.asList(values()));
     patterns.remove(EOF);
   }
 
@@ -67,6 +69,12 @@ public class PrintScriptLexer implements Lexer {
     checkGroupsRemaining(input, charCount);
 
     addToken(EOF, "", line, null, 0);
+    if (version.equals("1.0")) {
+      if (tokens.stream().map(Token::getType).anyMatch(getV1_1Tokens()::contains)) {
+        throw new LexerException("Group not supported by version 1.0", line, columnCount);
+      }
+    }
+
     return tokens;
   }
 
@@ -92,6 +100,12 @@ public class PrintScriptLexer implements Lexer {
                     line,
                     matcher.group().replaceAll("[\"']", ""),
                     columnCount);
+              } else if (tokenType == IDENTIFIER && matcher.group().equals("number")) {
+                return addToken(NUMBERTYPE, matcher.group(), line, null, columnCount);
+              } else if (tokenType == IDENTIFIER && matcher.group().equals("string")) {
+                return addToken(STRINGTYPE, matcher.group(), line, null, columnCount);
+              } else if (tokenType == IDENTIFIER && matcher.group().equals("boolean")) {
+                return addToken(BOOLEAN, matcher.group(), line, null, columnCount);
               }
               return addToken(tokenType, matcher.group(), line, null, columnCount);
             });

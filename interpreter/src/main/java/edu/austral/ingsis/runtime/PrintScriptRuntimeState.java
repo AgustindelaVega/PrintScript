@@ -31,7 +31,7 @@ public class PrintScriptRuntimeState implements RuntimeState {
       declaration.setValue(value);
       values.put(name.getLexeme(), declaration);
       if (values.get(name.getLexeme()).getKeyWord() == TokenType.CONST) {
-        throw new InterpreterException(name, "Cant change value of CONST");
+        throw new InterpreterException(name, "Can't change value of CONST");
       }
       return;
     }
