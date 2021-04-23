@@ -1,4 +1,4 @@
-package edu.austral.ingsis.parser.streams;
+package edu.austral.ingsis.parser.parseHelper;
 
 import static edu.austral.ingsis.token.TokenType.EOF;
 
