@@ -63,7 +63,7 @@ public class PrintScriptLexer implements Lexer {
       checkInvalidGroup(input, charCount, matchIndex);
       List<Integer> column = new ArrayList<>();
 
-      extractToken(matcher, input, column::add, columnCount);
+      extractToken(matcher, column::add, columnCount);
       columnCount += column.get(0);
     }
     checkGroupsRemaining(input, charCount);
@@ -78,8 +78,7 @@ public class PrintScriptLexer implements Lexer {
     return tokens;
   }
 
-  private void extractToken(
-      Matcher matcher, String input, Consumer<Integer> columnIncrease, int columnCount) {
+  private void extractToken(Matcher matcher, Consumer<Integer> columnIncrease, int columnCount) {
     patterns.stream()
         .filter(tokenType -> matcher.group(tokenType.name()) != null)
         .findFirst()
