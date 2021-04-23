@@ -69,10 +69,9 @@ public class PrintScriptLexer implements Lexer {
     checkGroupsRemaining(input, charCount);
 
     addToken(EOF, "", line, null, 0);
-    if (version.equals("1.0")) {
-      if (tokens.stream().map(Token::getType).anyMatch(getV1_1Tokens()::contains)) {
-        throw new LexerException("Group not supported by version 1.0", line, columnCount);
-      }
+    if (version.equals("1.0")
+        && tokens.stream().map(Token::getType).anyMatch(getV1_1Tokens()::contains)) {
+      throw new LexerException("Group not supported by version 1.0", line, columnCount);
     }
 
     return tokens;
