@@ -22,7 +22,7 @@ public class ValueExpression implements Expression {
 
   @Override
   public Token getToken() {
-    return null;
+    return tokenValue;
   }
 
   public Object getValue() {
