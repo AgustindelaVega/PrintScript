@@ -1,6 +1,7 @@
 package edu.austral.ingsis.parser.impl;
 
 import edu.austral.ingsis.parser.Parser;
+import edu.austral.ingsis.parser.parseHelper.ParseHelper;
 import edu.austral.ingsis.parser.parseHelper.PrintScriptParseHelper;
 import edu.austral.ingsis.statement.Statement;
 import edu.austral.ingsis.token.Token;
@@ -17,7 +18,7 @@ public class PrintScriptParser implements Parser {
 
   @Override
   public List<Statement> parse(List<Token> tokens) {
-    PrintScriptParseHelper tokenStream = new PrintScriptParseHelper(tokens);
+    ParseHelper tokenStream = new PrintScriptParseHelper(tokens);
 
     List<Statement> statements = new ArrayList<>();
 
