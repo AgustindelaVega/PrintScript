@@ -50,6 +50,7 @@ public class CLI implements Callable<Integer> {
     lexer = new PrintScriptLexer(version);
     parser = new PrintScriptParser();
     interpreter = new PrintScriptInterpreter();
+    errorConsumer = e -> {};
   }
 
   @Override
