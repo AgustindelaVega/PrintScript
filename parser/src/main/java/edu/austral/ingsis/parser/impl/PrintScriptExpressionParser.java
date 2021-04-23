@@ -19,11 +19,11 @@ public class PrintScriptExpressionParser implements ExpressionParser {
   }
 
   private Expression assignment() {
-    Expression expression = binary();
+    Expression expression = comparison();
 
     if (parseHelper.match(ASSIGNATION)) {
       Token token = parseHelper.previous();
-      Expression value = binary();
+      Expression value = comparison();
 
       if (expression instanceof VariableExpression) {
         Token name = ((VariableExpression) expression).getToken();
@@ -36,11 +36,34 @@ public class PrintScriptExpressionParser implements ExpressionParser {
     return expression;
   }
 
-  private Expression binary() {
+  private Expression comparison() throws ParseException {
+    Expression left = addition();
+
+    while (parseHelper.match(GREATER, GREATEREQUAL, LESS, LESSEQUAL)) {
+      Token operator = parseHelper.previous();
+      Expression right = addition();
+      left = new BinaryExpression(left, right, operator);
+    }
+
+    return left;
+  }
+
+  private Expression addition() throws ParseException {
+    Expression left = multiplication();
+
+    while (parseHelper.match(MINUS, PLUS)) {
+      Token operator = parseHelper.previous();
+      Expression right = multiplication();
+      left = new BinaryExpression(left, right, operator);
+    }
+
+    return left;
+  }
+
+  private Expression multiplication() throws ParseException {
     Expression left = unary();
 
-    while (parseHelper.match(
-        MINUS, PLUS, MULTIPLY, DIVIDE, GREATER, GREATEREQUAL, LESS, LESSEQUAL)) {
+    while (parseHelper.match(DIVIDE, MULTIPLY)) {
       Token operator = parseHelper.previous();
       Expression right = unary();
       left = new BinaryExpression(left, right, operator);
