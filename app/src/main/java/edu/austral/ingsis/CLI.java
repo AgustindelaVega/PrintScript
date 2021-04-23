@@ -29,9 +29,9 @@ public class CLI implements Callable<Integer> {
       description = "Version (1.1 for latest)")
   private String version = "1.1";
 
-  private final Lexer lexer = new PrintScriptLexer(version);
-  private final Parser parser = new PrintScriptParser();
-  private final Interpreter interpreter = new PrintScriptInterpreter();
+  private final Lexer lexer;
+  private final Parser parser;
+  private final Interpreter interpreter;
   private Consumer<String> printConsumer;
   private Consumer<String> errorConsumer;
 
@@ -41,9 +41,16 @@ public class CLI implements Callable<Integer> {
     this.errorConsumer = errorConsumer;
     this.version = version;
     this.file = file;
+    lexer = new PrintScriptLexer(version);
+    parser = new PrintScriptParser();
+    interpreter = new PrintScriptInterpreter();
   }
 
-  public CLI() {}
+  public CLI() {
+    lexer = new PrintScriptLexer(version);
+    parser = new PrintScriptParser();
+    interpreter = new PrintScriptInterpreter();
+  }
 
   @Override
   public Integer call() {
