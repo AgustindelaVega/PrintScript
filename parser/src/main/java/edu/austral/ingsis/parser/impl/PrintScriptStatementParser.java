@@ -5,7 +5,7 @@ import static edu.austral.ingsis.token.TokenType.SEMICOLON;
 
 import edu.austral.ingsis.exceptions.ParseException;
 import edu.austral.ingsis.expression.Expression;
-import edu.austral.ingsis.parser.streams.ParseHelper;
+import edu.austral.ingsis.parser.parseHelper.ParseHelper;
 import edu.austral.ingsis.statement.Statement;
 import edu.austral.ingsis.statement.impl.*;
 import edu.austral.ingsis.token.Token;
