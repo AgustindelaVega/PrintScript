@@ -7,7 +7,7 @@ import java.util.function.Consumer;
 
 public interface Interpreter {
 
-  void interpret(List<Statement> statements, Consumer<String> printConsume);
+  void interpret(List<Statement> statements, Consumer<String> printConsumer);
 
   RuntimeState getRuntimeState();
 }
