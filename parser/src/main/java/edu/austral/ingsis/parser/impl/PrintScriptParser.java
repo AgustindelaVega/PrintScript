@@ -17,12 +17,12 @@ public class PrintScriptParser implements Parser {
 
   @Override
   public List<Statement> parse(List<Token> tokens) {
-    PrintScriptParseHelper tokenStream = new PrintScriptParseHelper(tokens);
+    PrintScriptParseHelper parseHelper = new PrintScriptParseHelper(tokens);
 
     List<Statement> statements = new ArrayList<>();
 
-    while (!tokenStream.isAtEnd()) {
-      statements.add(statementParser.parse(tokenStream));
+    while (!parseHelper.isAtEnd()) {
+      statements.add(statementParser.parse(parseHelper));
     }
 
     return statements;
