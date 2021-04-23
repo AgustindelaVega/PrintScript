@@ -41,7 +41,17 @@ public class PrintScriptVisitor implements ExpressionVisitor, StatementVisitor {
         if (left instanceof Number && right instanceof Number) {
           return (double) left + (double) right;
         }
-        return left.toString() + right.toString();
+        Integer leftIntValue = null;
+        Integer rightIntValue = null;
+        if (left instanceof Double && ((Double) left % 1 == 0)) {
+          leftIntValue = ((Double) left).intValue();
+        }
+        if (right instanceof Double && ((Double) right % 1 == 0)) {
+          rightIntValue = ((Double) right).intValue();
+        }
+        return (leftIntValue != null ? leftIntValue.toString() : left.toString())
+            + (rightIntValue != null ? rightIntValue.toString() : right.toString());
+
       case DIVIDE:
         checkNumberOperands(binaryExpression.getToken(), left, right);
         return (double) left / (double) right;
@@ -96,8 +106,13 @@ public class PrintScriptVisitor implements ExpressionVisitor, StatementVisitor {
   @Override
   public void visit(PrintStatement printStatement) {
     Object value = evaluate(printStatement.getExpression());
-    if (printConsumer != null) printConsumer.accept(value.toString());
-    else System.out.println(value);
+    Integer intValue = null;
+    if (value instanceof Double && ((Double) value % 1 == 0)) {
+      intValue = ((Double) value).intValue();
+    }
+    String printValue = intValue != null ? intValue.toString() : value.toString();
+    if (printConsumer != null) printConsumer.accept(printValue);
+    else System.out.println(printValue);
   }
 
   @Override
@@ -119,6 +134,7 @@ public class PrintScriptVisitor implements ExpressionVisitor, StatementVisitor {
           declarationStatement.getType(),
           null,
           declarationStatement.getKeyword());
+      return;
     }
 
     if (declarationStatement.getType() == BOOLEAN && !(value instanceof Boolean)) {

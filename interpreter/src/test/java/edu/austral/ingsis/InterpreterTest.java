@@ -84,7 +84,7 @@ public class InterpreterTest {
 
     interpreter.interpret(statements, output::add);
 
-    Assert.assertEquals("34.0 test", output.get(0));
+    Assert.assertEquals("34 test", output.get(0));
 
     Assert.assertEquals(
         TokenType.NUMBERTYPE, interpreter.getRuntimeState().getValues().get("num2").getType());
@@ -137,6 +137,6 @@ public class InterpreterTest {
 
     interpreter.interpret(statements, output::add);
 
-    Assert.assertEquals("-4.0", output.get(0));
+    Assert.assertEquals("-4", output.get(0));
   }
 }

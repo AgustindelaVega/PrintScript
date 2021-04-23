@@ -7,21 +7,21 @@ import java.util.List;
 public enum TokenType {
   LET("let"),
   CONST("const"),
-  NUMBER("-?[0-9.]+"),
-  NUMBERTYPE("number"),
-  STRINGTYPE("string"),
-  BOOLEAN("boolean"),
   PRINT("println"),
   FALSE("false"),
   TRUE("true"),
   IF("if"),
   ELSE("else"),
+  NUMBER("[0-9.]+"),
+  IDENTIFIER("(?:\\b[_a-zA-Z]|\\B\\$)[_$a-zA-Z0-9]*+"),
+  NUMBERTYPE("number"),
+  STRINGTYPE("string"),
+  BOOLEAN("boolean"),
 
-  STRING("[\\\"'].*[\\\"']"),
+  STRING("[\"'].*[\"']"),
   SEMICOLON(";"),
   COLON(":"),
 
-  ASSIGNATION("[=]"),
   MINUS("[-]"),
   PLUS("[+]"),
   MULTIPLY("[*]"),
@@ -34,13 +34,11 @@ public enum TokenType {
   RIGHTPARENTHESIS("[)]"),
   LEFTBRACE("[{]"),
   RIGHTBRACE("[}]"),
-
-  GREATER("[>]"),
   GREATEREQUAL(">="),
-  LESS("[<]"),
   LESSEQUAL("<="),
-
-  IDENTIFIER("[a-zA-Z]+\\w*");
+  GREATER("[>]"),
+  LESS("[<]"),
+  ASSIGNATION("[=]");
 
   private final String regex;
 
@@ -52,26 +50,20 @@ public enum TokenType {
     return regex;
   }
 
-  public static List<TokenType> getV1_0Tokens() {
+  public static List<TokenType> getV1_1Tokens() {
     return new ArrayList<>(
         Arrays.asList(
-            LET,
-            NUMBER,
-            NUMBERTYPE,
-            STRINGTYPE,
-            PRINT,
-            STRING,
-            SEMICOLON,
-            COLON,
-            ASSIGNATION,
-            MINUS,
-            PLUS,
-            MULTIPLY,
-            DIVIDE,
-            EOF,
-            NEWLINE,
-            IDENTIFIER,
-            LEFTPARENTHESIS,
-            RIGHTPARENTHESIS));
+            CONST,
+            FALSE,
+            TRUE,
+            IF,
+            ELSE,
+            BOOLEAN,
+            LEFTBRACE,
+            RIGHTBRACE,
+            GREATER,
+            GREATEREQUAL,
+            LESS,
+            LESSEQUAL));
   }
 }
