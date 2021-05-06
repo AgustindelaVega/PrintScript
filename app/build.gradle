@@ -7,12 +7,12 @@ group = 'edu.austral.ingsis.ps'
 version = '1.1'
 
 dependencies {
-    compile 'info.picocli:picocli:4.6.1'
+    implementation 'info.picocli:picocli:4.6.1'
     annotationProcessor 'info.picocli:picocli-codegen:4.6.1'
-    compile project(':parser')
-    compile project(':lexer')
-    compile project(':interpreter')
-    compile project(':utils')
+    implementation project(':parser')
+    implementation project(':lexer')
+    implementation project(':interpreter')
+    implementation project(':utils')
 }
 
 compileJava {
