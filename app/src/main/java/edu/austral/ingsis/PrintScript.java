@@ -69,6 +69,7 @@ public class PrintScript implements Callable<Integer> {
       interpreter.interpret(statements, printConsumer);
     } catch (LexerException | ParseException | InterpreterException e) {
       errorConsumer.accept(e.getMessage());
+      e.printStackTrace();
       return 1;
     }
 
