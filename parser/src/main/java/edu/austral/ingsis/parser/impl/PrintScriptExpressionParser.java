@@ -37,30 +37,30 @@ public class PrintScriptExpressionParser implements ExpressionParser {
   }
 
   private Expression comparison() throws ParseException {
-    Expression left = addition();
+    Expression left = additionAndSubtraction();
 
     while (parseHelper.match(GREATER, GREATEREQUAL, LESS, LESSEQUAL)) {
       Token operator = parseHelper.previous();
-      Expression right = addition();
+      Expression right = additionAndSubtraction();
       left = new BinaryExpression(left, right, operator);
     }
 
     return left;
   }
 
-  private Expression addition() throws ParseException {
-    Expression left = multiplication();
+  private Expression additionAndSubtraction() throws ParseException {
+    Expression left = multiplicationAndDivide();
 
     while (parseHelper.match(MINUS, PLUS)) {
       Token operator = parseHelper.previous();
-      Expression right = multiplication();
+      Expression right = multiplicationAndDivide();
       left = new BinaryExpression(left, right, operator);
     }
 
     return left;
   }
 
-  private Expression multiplication() throws ParseException {
+  private Expression multiplicationAndDivide() throws ParseException {
     Expression left = unary();
 
     while (parseHelper.match(DIVIDE, MULTIPLY)) {

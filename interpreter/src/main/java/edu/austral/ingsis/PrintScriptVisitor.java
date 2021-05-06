@@ -41,17 +41,7 @@ public class PrintScriptVisitor implements ExpressionVisitor, StatementVisitor {
         if (left instanceof Number && right instanceof Number) {
           return (double) left + (double) right;
         }
-        Integer leftIntValue = null;
-        Integer rightIntValue = null;
-        if (left instanceof Double && ((Double) left % 1 == 0)) {
-          leftIntValue = ((Double) left).intValue();
-        }
-        if (right instanceof Double && ((Double) right % 1 == 0)) {
-          rightIntValue = ((Double) right).intValue();
-        }
-        return (leftIntValue != null ? leftIntValue.toString() : left.toString())
-            + (rightIntValue != null ? rightIntValue.toString() : right.toString());
-
+        return doubleToString(left, right);
       case DIVIDE:
         checkNumberOperands(binaryExpression.getToken(), left, right);
         return (double) left / (double) right;
@@ -72,6 +62,19 @@ public class PrintScriptVisitor implements ExpressionVisitor, StatementVisitor {
         return (double) left <= (double) right;
     }
     return null;
+  }
+
+  private Object doubleToString(Object left, Object right) {
+    Integer leftIntValue = null;
+    Integer rightIntValue = null;
+    if (left instanceof Double && ((Double) left % 1 == 0)) {
+      leftIntValue = ((Double) left).intValue();
+    }
+    if (right instanceof Double && ((Double) right % 1 == 0)) {
+      rightIntValue = ((Double) right).intValue();
+    }
+    return (leftIntValue != null ? leftIntValue.toString() : left.toString())
+        + (rightIntValue != null ? rightIntValue.toString() : right.toString());
   }
 
   @Override
