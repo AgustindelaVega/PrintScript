@@ -21,10 +21,10 @@ public class PrintScriptLexer implements Lexer {
 
   private final List<TokenType> patterns = new ArrayList<>();
 
-  private final String version;
+  private String version;
 
-  public PrintScriptLexer(String version) {
-    this.version = version;
+  public PrintScriptLexer() {
+
     addPatterns();
   }
 
@@ -45,7 +45,8 @@ public class PrintScriptLexer implements Lexer {
   }
 
   @Override
-  public List<Token> lex(String input) {
+  public List<Token> lex(String input, String version) {
+    this.version = version;
     Matcher matcher = getMatcher(input);
     int charCount = 0;
     int columnCount = 0;
@@ -69,6 +70,7 @@ public class PrintScriptLexer implements Lexer {
     checkGroupsRemaining(input, charCount);
 
     addToken(EOF, "", line, null, 0);
+    System.out.println(version);
     if (version.equals("1.0")
         && tokens.stream().map(Token::getType).anyMatch(getV1_1Tokens()::contains)) {
       throw new LexerException("Group not supported by version 1.0", line, columnCount);

@@ -7,12 +7,12 @@ group = 'edu.austral.ingsis.ps'
 version = '1.1'
 
 dependencies {
-    implementation 'info.picocli:picocli:4.6.1'
+    compile 'info.picocli:picocli:4.6.1'
     annotationProcessor 'info.picocli:picocli-codegen:4.6.1'
-    implementation project(':parser')
-    implementation project(':lexer')
-    implementation project(':interpreter')
-    implementation project(':utils')
+    compile project(':parser')
+    compile project(':lexer')
+    compile project(':interpreter')
+    compile project(':utils')
 }
 
 compileJava {
@@ -20,7 +20,7 @@ compileJava {
 }
 
 application {
-    mainClass = 'edu.austral.ingsis.PrintScript'
+    mainClass = 'edu.austral.ingsis.CLI'
 }
 
 configurations {
@@ -31,7 +31,7 @@ jar {
     manifest {
         attributes(
                 'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
-                'Main-Class': 'edu.austral.ingsis.PrintScript'
+                'Main-Class': 'edu.austral.ingsis.CLI'
         )
     }
     from {

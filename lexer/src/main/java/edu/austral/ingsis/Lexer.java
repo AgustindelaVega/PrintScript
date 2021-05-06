@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface Lexer {
 
-  List<Token> lex(String src);
+  List<Token> lex(String src, String version);
 }

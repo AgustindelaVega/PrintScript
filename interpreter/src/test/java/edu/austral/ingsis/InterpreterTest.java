@@ -15,13 +15,14 @@ public class InterpreterTest {
 
   private final Interpreter interpreter = new PrintScriptInterpreter();
   private final Parser parser = new PrintScriptParser();
-  private final Lexer lexer = new PrintScriptLexer("1.1");
+  private final Lexer lexer = new PrintScriptLexer();
 
   @Test
   public void interpreterTest_01() {
     List<Statement> statements =
         parser.parse(
-            lexer.lex(FileReader.getFileLines("./src/test/resources/interpreter_test01.txt")));
+            lexer.lex(
+                FileReader.getFileLines("./src/test/resources/interpreter_test01.txt"), "1.1"));
 
     interpreter.interpret(statements, null);
 
@@ -39,7 +40,7 @@ public class InterpreterTest {
   @Test
   public void interpreterTest_02() {
     List<Token> tokens =
-        lexer.lex(FileReader.getFileLines("./src/test/resources/interpreter_test02.txt"));
+        lexer.lex(FileReader.getFileLines("./src/test/resources/interpreter_test02.txt"), "1.1");
     List<Statement> statements = parser.parse(tokens);
     final List<String> output = new ArrayList<>();
 
@@ -69,7 +70,7 @@ public class InterpreterTest {
   @Test(expected = InterpreterException.class)
   public void interpreterTest_03() {
     List<Token> tokens =
-        lexer.lex(FileReader.getFileLines("./src/test/resources/interpreter_test03.txt"));
+        lexer.lex(FileReader.getFileLines("./src/test/resources/interpreter_test03.txt"), "1.1");
     List<Statement> statements = parser.parse(tokens);
 
     interpreter.interpret(statements, null);
@@ -78,7 +79,7 @@ public class InterpreterTest {
   @Test
   public void interpreterTest_04() {
     List<Token> tokens =
-        lexer.lex(FileReader.getFileLines("./src/test/resources/interpreter_test04.txt"));
+        lexer.lex(FileReader.getFileLines("./src/test/resources/interpreter_test04.txt"), "1.1");
     List<Statement> statements = parser.parse(tokens);
     final List<String> output = new ArrayList<>();
 
@@ -94,7 +95,7 @@ public class InterpreterTest {
   @Test
   public void interpreterTest_05() {
     List<Token> tokens =
-        lexer.lex(FileReader.getFileLines("./src/test/resources/interpreter_test05.txt"));
+        lexer.lex(FileReader.getFileLines("./src/test/resources/interpreter_test05.txt"), "1.1");
     List<Statement> statements = parser.parse(tokens);
     final List<String> output = new ArrayList<>();
 
@@ -110,7 +111,7 @@ public class InterpreterTest {
   @Test(expected = InterpreterException.class)
   public void interpreterTest_06() {
     List<Token> tokens =
-        lexer.lex(FileReader.getFileLines("./src/test/resources/interpreter_test06.txt"));
+        lexer.lex(FileReader.getFileLines("./src/test/resources/interpreter_test06.txt"), "1.1");
     List<Statement> statements = parser.parse(tokens);
 
     interpreter.interpret(statements, null);
@@ -119,7 +120,7 @@ public class InterpreterTest {
   @Test
   public void interpreterTest_07() {
     List<Token> tokens =
-        lexer.lex(FileReader.getFileLines("./src/test/resources/interpreter_test07.txt"));
+        lexer.lex(FileReader.getFileLines("./src/test/resources/interpreter_test07.txt"), "1.1");
     List<Statement> statements = parser.parse(tokens);
     final List<String> output = new ArrayList<>();
 
@@ -131,7 +132,7 @@ public class InterpreterTest {
   @Test
   public void interpreterTest_08() {
     List<Token> tokens =
-        lexer.lex(FileReader.getFileLines("./src/test/resources/interpreter_test08.txt"));
+        lexer.lex(FileReader.getFileLines("./src/test/resources/interpreter_test08.txt"), "1.1");
     List<Statement> statements = parser.parse(tokens);
     final List<String> output = new ArrayList<>();
 

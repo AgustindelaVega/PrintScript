@@ -34,11 +34,13 @@ public class LexerTest {
 
   @Test
   public void testLexerInvalidInput() {
-    Lexer lexer = new PrintScriptLexer(VERSION);
+    Lexer lexer = new PrintScriptLexer();
     Exception exception =
         assertThrows(
             LexerException.class,
-            () -> lexer.lex(FileReader.getFileLines("./src/test/resources/lexer_test03.txt")));
+            () ->
+                lexer.lex(
+                    FileReader.getFileLines("./src/test/resources/lexer_test03.txt"), VERSION));
 
     String expectedMessage = "(1, 16) : Error matching group \" ?? \"";
     String actualMessage = exception.getMessage();
@@ -48,11 +50,13 @@ public class LexerTest {
 
   @Test
   public void testLexerInvalidInput2() {
-    Lexer lexer = new PrintScriptLexer(VERSION);
+    Lexer lexer = new PrintScriptLexer();
     Exception exception =
         assertThrows(
             LexerException.class,
-            () -> lexer.lex(FileReader.getFileLines("./src/test/resources/lexer_test04.txt")));
+            () ->
+                lexer.lex(
+                    FileReader.getFileLines("./src/test/resources/lexer_test04.txt"), VERSION));
 
     String expectedMessage = "(2, 15) : Error matching group \"  ! \"";
     String actualMessage = exception.getMessage();
@@ -68,8 +72,8 @@ public class LexerTest {
 
   private void compareTokensFromJsons(String expectedJsonFile, String fileLines)
       throws IOException, JSONException {
-    Lexer lexer = new PrintScriptLexer(VERSION);
-    List<Token> tokens = lexer.lex(fileLines);
+    Lexer lexer = new PrintScriptLexer();
+    List<Token> tokens = lexer.lex(fileLines, VERSION);
 
     String expectedJson = FileUtils.readFileToString(new File(expectedJsonFile), (String) null);
     String actualJson = gson.toJson(tokens);
