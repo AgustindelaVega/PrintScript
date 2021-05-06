@@ -1,0 +1,232 @@
+[
+  {
+    "type": "LET",
+    "lexeme": "let",
+    "line": 1,
+    "column": 0
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "num",
+    "line": 1,
+    "column": 3
+  },
+  {
+    "type": "COLON",
+    "lexeme": ":",
+    "line": 1,
+    "column": 6
+  },
+  {
+    "type": "NUMBERTYPE",
+    "lexeme": "number",
+    "line": 1,
+    "column": 7
+  },
+  {
+    "type": "ASSIGNATION",
+    "lexeme": "\u003d",
+    "line": 1,
+    "column": 13
+  },
+  {
+    "type": "NUMBER",
+    "lexeme": "14",
+    "literal": 14.0,
+    "line": 1,
+    "column": 14
+  },
+  {
+    "type": "PLUS",
+    "lexeme": "+",
+    "line": 1,
+    "column": 16
+  },
+  {
+    "type": "NUMBER",
+    "lexeme": "12",
+    "literal": 12.0,
+    "line": 1,
+    "column": 17
+  },
+  {
+    "type": "SEMICOLON",
+    "lexeme": ";",
+    "line": 1,
+    "column": 19
+  },
+  {
+    "type": "LET",
+    "lexeme": "let",
+    "line": 2,
+    "column": 0
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "num2",
+    "line": 2,
+    "column": 3
+  },
+  {
+    "type": "COLON",
+    "lexeme": ":",
+    "line": 2,
+    "column": 7
+  },
+  {
+    "type": "NUMBERTYPE",
+    "lexeme": "number",
+    "line": 2,
+    "column": 8
+  },
+  {
+    "type": "ASSIGNATION",
+    "lexeme": "\u003d",
+    "line": 2,
+    "column": 14
+  },
+  {
+    "type": "NUMBER",
+    "lexeme": "14",
+    "literal": 14.0,
+    "line": 2,
+    "column": 15
+  },
+  {
+    "type": "MINUS",
+    "lexeme": "-",
+    "line": 2,
+    "column": 17
+  },
+  {
+    "type": "NUMBER",
+    "lexeme": "12",
+    "literal": 12.0,
+    "line": 2,
+    "column": 18
+  },
+  {
+    "type": "SEMICOLON",
+    "lexeme": ";",
+    "line": 2,
+    "column": 20
+  },
+  {
+    "type": "LET",
+    "lexeme": "let",
+    "line": 3,
+    "column": 0
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "num3",
+    "line": 3,
+    "column": 3
+  },
+  {
+    "type": "COLON",
+    "lexeme": ":",
+    "line": 3,
+    "column": 7
+  },
+  {
+    "type": "NUMBERTYPE",
+    "lexeme": "number",
+    "line": 3,
+    "column": 8
+  },
+  {
+    "type": "ASSIGNATION",
+    "lexeme": "\u003d",
+    "line": 3,
+    "column": 14
+  },
+  {
+    "type": "NUMBER",
+    "lexeme": "14",
+    "literal": 14.0,
+    "line": 3,
+    "column": 15
+  },
+  {
+    "type": "MULTIPLY",
+    "lexeme": "*",
+    "line": 3,
+    "column": 17
+  },
+  {
+    "type": "NUMBER",
+    "lexeme": "12",
+    "literal": 12.0,
+    "line": 3,
+    "column": 18
+  },
+  {
+    "type": "SEMICOLON",
+    "lexeme": ";",
+    "line": 3,
+    "column": 20
+  },
+  {
+    "type": "LET",
+    "lexeme": "let",
+    "line": 4,
+    "column": 0
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "num4",
+    "line": 4,
+    "column": 3
+  },
+  {
+    "type": "COLON",
+    "lexeme": ":",
+    "line": 4,
+    "column": 7
+  },
+  {
+    "type": "NUMBERTYPE",
+    "lexeme": "number",
+    "line": 4,
+    "column": 8
+  },
+  {
+    "type": "ASSIGNATION",
+    "lexeme": "\u003d",
+    "line": 4,
+    "column": 14
+  },
+  {
+    "type": "NUMBER",
+    "lexeme": "14",
+    "literal": 14.0,
+    "line": 4,
+    "column": 15
+  },
+  {
+    "type": "DIVIDE",
+    "lexeme": "/",
+    "line": 4,
+    "column": 17
+  },
+  {
+    "type": "NUMBER",
+    "lexeme": "12",
+    "literal": 12.0,
+    "line": 4,
+    "column": 18
+  },
+  {
+    "type": "SEMICOLON",
+    "lexeme": ";",
+    "line": 4,
+    "column": 20
+  },
+  {
+    "type": "EOF",
+    "lexeme": "",
+    "line": 4,
+    "column": 0
+  }
+]

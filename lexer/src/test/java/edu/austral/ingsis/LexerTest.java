@@ -1,79 +1,56 @@
 package edu.austral.ingsis;
 
-import static org.junit.Assert.assertThrows;
-
 import com.google.gson.Gson;
 import edu.austral.ingsis.token.Token;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
+import java.util.*;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
-import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
+@RunWith(Parameterized.class)
 public class LexerTest {
 
-  private Lexer lexer;
   private final Gson gson = new Gson();
-  private final String VERSION = "1.1";
 
-  @Test
-  public void testLexerValidInput() throws IOException, JSONException {
-    String src = FileReader.getFileLines("./src/test/resources/lexer_test01.txt");
-    compareTokensFromJsons("./src/test/resources/lexer_expected01.json", src);
+  @SuppressWarnings("WeakerAccess")
+  @Parameterized.Parameter(value = 0)
+  public String version;
+
+  @SuppressWarnings("WeakerAccess")
+  @Parameterized.Parameter(value = 1)
+  public String directory;
+
+  @Parameterized.Parameters(name = "version {0} - {1})")
+  public static Collection<Object[]> data() {
+    return Arrays.asList(
+        new Object[][] {
+          {"1.0", "declaration"},
+          {"1.0", "print"},
+          {"1.0", "arithmetic-operations"},
+          {"1.1", "boolean-declaration"},
+          {"1.1", "if-else"}
+        });
   }
 
   @Test
-  public void testLexerValidInput2() throws IOException, JSONException {
-    String src = FileReader.getFileLines("./src/test/resources/lexer_test02.txt");
-    compareTokensFromJsons("./src/test/resources/lexer_expected02.json", src);
-  }
+  public void testPrintStatement() throws IOException, JSONException {
+    String testDirectory = "./src/test/resources/" + version + "/valid/" + directory + "/";
 
-  @Test
-  public void testLexerInvalidInput() {
-    Lexer lexer = new PrintScriptLexer();
-    Exception exception =
-        assertThrows(
-            LexerException.class,
-            () ->
-                lexer.lex(
-                    FileReader.getFileLines("./src/test/resources/lexer_test03.txt"), VERSION));
+    String src = FileReader.getFileLines(testDirectory + "main.txt");
 
-    String expectedMessage = "(1, 16) : Error matching group \" ?? \"";
-    String actualMessage = exception.getMessage();
-
-    Assert.assertTrue(actualMessage.contains(expectedMessage));
-  }
-
-  @Test
-  public void testLexerInvalidInput2() {
-    Lexer lexer = new PrintScriptLexer();
-    Exception exception =
-        assertThrows(
-            LexerException.class,
-            () ->
-                lexer.lex(
-                    FileReader.getFileLines("./src/test/resources/lexer_test04.txt"), VERSION));
-
-    String expectedMessage = "(2, 15) : Error matching group \"  ! \"";
-    String actualMessage = exception.getMessage();
-
-    Assert.assertTrue(actualMessage.contains(expectedMessage));
-  }
-
-  @Test
-  public void testLexerValidInput3() throws IOException, JSONException {
-    String src = FileReader.getFileLines("./src/test/resources/lexer_test05.txt");
-    compareTokensFromJsons("./src/test/resources/lexer_expected05.json", src);
+    compareTokensFromJsons(testDirectory + "expected.json", src);
   }
 
   private void compareTokensFromJsons(String expectedJsonFile, String fileLines)
       throws IOException, JSONException {
     Lexer lexer = new PrintScriptLexer();
-    List<Token> tokens = lexer.lex(fileLines, VERSION);
+    List<Token> tokens = lexer.lex(fileLines, version);
 
     String expectedJson = FileUtils.readFileToString(new File(expectedJsonFile), (String) null);
     String actualJson = gson.toJson(tokens);
