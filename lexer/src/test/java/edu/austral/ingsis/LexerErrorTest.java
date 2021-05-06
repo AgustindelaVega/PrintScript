@@ -34,7 +34,7 @@ public class LexerErrorTest {
   }
 
   @Test
-  public void testPrintStatement() {
+  public void testLexerError() {
     String testDirectory = "./src/test/resources/" + version + "/invalid/" + directory + "/";
 
     Lexer lexer = new PrintScriptLexer();

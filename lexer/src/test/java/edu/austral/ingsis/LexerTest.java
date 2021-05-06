@@ -39,7 +39,7 @@ public class LexerTest {
   }
 
   @Test
-  public void testPrintStatement() throws IOException, JSONException {
+  public void testLexerOutput() throws IOException, JSONException {
     String testDirectory = "./src/test/resources/" + version + "/valid/" + directory + "/";
 
     String src = FileReader.getFileLines(testDirectory + "main.txt");
