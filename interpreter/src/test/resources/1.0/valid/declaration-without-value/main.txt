@@ -1,0 +1,3 @@
+let x:number;
+x = 14;
+println(x);

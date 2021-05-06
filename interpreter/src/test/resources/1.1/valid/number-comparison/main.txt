@@ -1,0 +1,12 @@
+let x: number = 12;
+let y: number = 20;
+println(x > y);
+println(x < y);
+
+let z: number = 14;
+let w: number = 14;
+println(z >= w);
+println(z > w);
+println(z <= w);
+println(z < w);
+

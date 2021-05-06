@@ -1,143 +1,71 @@
 package edu.austral.ingsis;
 
-import edu.austral.ingsis.exceptions.InterpreterException;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 import edu.austral.ingsis.parser.Parser;
 import edu.austral.ingsis.parser.impl.PrintScriptParser;
 import edu.austral.ingsis.statement.Statement;
-import edu.austral.ingsis.token.Token;
-import edu.austral.ingsis.token.TokenType;
-import java.util.ArrayList;
-import java.util.List;
-import org.junit.Assert;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.*;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
+@RunWith(Parameterized.class)
 public class InterpreterTest {
 
   private final Interpreter interpreter = new PrintScriptInterpreter();
   private final Parser parser = new PrintScriptParser();
   private final Lexer lexer = new PrintScriptLexer();
 
+  @SuppressWarnings("WeakerAccess")
+  @Parameterized.Parameter(value = 0)
+  public String version;
+
+  @SuppressWarnings("WeakerAccess")
+  @Parameterized.Parameter(value = 1)
+  public String directory;
+
+  @Parameterized.Parameters(name = "version {0} - {1})")
+  public static Collection<Object[]> data() {
+    return Arrays.asList(
+        new Object[][] {
+          {"1.0", "arithmetic-operations"},
+          {"1.0", "declaration"},
+          {"1.0", "negative-number"},
+          {"1.0", "string-number-concatenation"},
+          {"1.0", "variable"},
+          {"1.0", "declaration-without-value"},
+          {"1.1", "else"},
+          {"1.1", "if-else"},
+          {"1.1", "number-comparison"}
+        });
+  }
+
   @Test
-  public void interpreterTest_01() {
+  public void testInterpreterPrint() throws FileNotFoundException {
+    String testDirectory = "./src/test/resources/" + version + "/valid/" + directory + "/";
+    List<String> expectedOutput = readLines(testDirectory + "output.txt");
+
+    List<String> printConsumer = new ArrayList<>();
+
     List<Statement> statements =
-        parser.parse(
-            lexer.lex(
-                FileReader.getFileLines("./src/test/resources/interpreter_test01.txt"), "1.1"));
+        parser.parse(lexer.lex(FileReader.getFileLines(testDirectory + "main.txt"), version));
 
-    interpreter.interpret(statements, null);
+    interpreter.interpret(statements, printConsumer::add);
 
-    Assert.assertEquals(2, interpreter.getRuntimeState().getValues().size());
-    Assert.assertEquals(
-        TokenType.STRINGTYPE, interpreter.getRuntimeState().getValues().get("str").getType());
-    Assert.assertEquals(
-        "test string", interpreter.getRuntimeState().getValues().get("str").getValue());
-
-    Assert.assertEquals(
-        TokenType.NUMBERTYPE, interpreter.getRuntimeState().getValues().get("num").getType());
-    Assert.assertEquals(13.0, interpreter.getRuntimeState().getValues().get("num").getValue());
+    assertThat(printConsumer, is(expectedOutput));
   }
 
-  @Test
-  public void interpreterTest_02() {
-    List<Token> tokens =
-        lexer.lex(FileReader.getFileLines("./src/test/resources/interpreter_test02.txt"), "1.1");
-    List<Statement> statements = parser.parse(tokens);
-    final List<String> output = new ArrayList<>();
-
-    interpreter.interpret(statements, output::add);
-
-    Assert.assertEquals("test print", output.get(0));
-
-    Assert.assertEquals(4, interpreter.getRuntimeState().getValues().size());
-
-    Assert.assertEquals(
-        TokenType.NUMBERTYPE, interpreter.getRuntimeState().getValues().get("num").getType());
-    Assert.assertEquals(26.0, interpreter.getRuntimeState().getValues().get("num").getValue());
-
-    Assert.assertEquals(
-        TokenType.NUMBERTYPE, interpreter.getRuntimeState().getValues().get("num2").getType());
-    Assert.assertEquals(2.0, interpreter.getRuntimeState().getValues().get("num2").getValue());
-
-    Assert.assertEquals(
-        TokenType.NUMBERTYPE, interpreter.getRuntimeState().getValues().get("num3").getType());
-    Assert.assertEquals(168.0, interpreter.getRuntimeState().getValues().get("num3").getValue());
-
-    Assert.assertEquals(
-        TokenType.NUMBERTYPE, interpreter.getRuntimeState().getValues().get("num4").getType());
-    Assert.assertEquals(1.0, interpreter.getRuntimeState().getValues().get("num4").getValue());
-  }
-
-  @Test(expected = InterpreterException.class)
-  public void interpreterTest_03() {
-    List<Token> tokens =
-        lexer.lex(FileReader.getFileLines("./src/test/resources/interpreter_test03.txt"), "1.1");
-    List<Statement> statements = parser.parse(tokens);
-
-    interpreter.interpret(statements, null);
-  }
-
-  @Test
-  public void interpreterTest_04() {
-    List<Token> tokens =
-        lexer.lex(FileReader.getFileLines("./src/test/resources/interpreter_test04.txt"), "1.1");
-    List<Statement> statements = parser.parse(tokens);
-    final List<String> output = new ArrayList<>();
-
-    interpreter.interpret(statements, output::add);
-
-    Assert.assertEquals("34 test", output.get(0));
-
-    Assert.assertEquals(
-        TokenType.NUMBERTYPE, interpreter.getRuntimeState().getValues().get("num2").getType());
-    Assert.assertEquals(34.0, interpreter.getRuntimeState().getValues().get("num2").getValue());
-  }
-
-  @Test
-  public void interpreterTest_05() {
-    List<Token> tokens =
-        lexer.lex(FileReader.getFileLines("./src/test/resources/interpreter_test05.txt"), "1.1");
-    List<Statement> statements = parser.parse(tokens);
-    final List<String> output = new ArrayList<>();
-
-    interpreter.interpret(statements, output::add);
-
-    Assert.assertEquals("false", output.get(0));
-
-    Assert.assertEquals(
-        TokenType.NUMBERTYPE, interpreter.getRuntimeState().getValues().get("x").getType());
-    Assert.assertEquals(1.0, interpreter.getRuntimeState().getValues().get("x").getValue());
-  }
-
-  @Test(expected = InterpreterException.class)
-  public void interpreterTest_06() {
-    List<Token> tokens =
-        lexer.lex(FileReader.getFileLines("./src/test/resources/interpreter_test06.txt"), "1.1");
-    List<Statement> statements = parser.parse(tokens);
-
-    interpreter.interpret(statements, null);
-  }
-
-  @Test
-  public void interpreterTest_07() {
-    List<Token> tokens =
-        lexer.lex(FileReader.getFileLines("./src/test/resources/interpreter_test07.txt"), "1.1");
-    List<Statement> statements = parser.parse(tokens);
-    final List<String> output = new ArrayList<>();
-
-    interpreter.interpret(statements, output::add);
-
-    Assert.assertEquals("else", output.get(0));
-  }
-
-  @Test
-  public void interpreterTest_08() {
-    List<Token> tokens =
-        lexer.lex(FileReader.getFileLines("./src/test/resources/interpreter_test08.txt"), "1.1");
-    List<Statement> statements = parser.parse(tokens);
-    final List<String> output = new ArrayList<>();
-
-    interpreter.interpret(statements, output::add);
-
-    Assert.assertEquals("-4", output.get(0));
+  private List<String> readLines(String file) throws FileNotFoundException {
+    Scanner s = new Scanner(new File(file));
+    ArrayList<String> list = new ArrayList<>();
+    while (s.hasNextLine()) {
+      list.add(s.nextLine());
+    }
+    s.close();
+    return list;
   }
 }
