@@ -1,7 +1,7 @@
 package edu.austral.ingsis;
 
 import edu.austral.ingsis.exceptions.InterpreterException;
-import edu.austral.ingsis.exceptions.ParseException;
+import edu.austral.ingsis.exceptions.ParserException;
 import edu.austral.ingsis.parser.Parser;
 import edu.austral.ingsis.parser.impl.PrintScriptParser;
 import edu.austral.ingsis.statement.Statement;
@@ -67,7 +67,7 @@ public class PrintScript implements Callable<Integer> {
         return 0;
       }
       interpreter.interpret(statements, printConsumer);
-    } catch (LexerException | ParseException | InterpreterException e) {
+    } catch (LexerException | ParserException | InterpreterException e) {
       errorConsumer.accept(e.getMessage());
       e.printStackTrace();
       return 1;

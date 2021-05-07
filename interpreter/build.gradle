@@ -8,7 +8,6 @@ dependencies {
     implementation project(':lexer')
     implementation project(':parser')
     implementation project(':utils')
-    implementation 'org.junit.jupiter:junit-jupiter:5.4.2'
 }
 
 group = 'edu.austral.ingsis.ps'

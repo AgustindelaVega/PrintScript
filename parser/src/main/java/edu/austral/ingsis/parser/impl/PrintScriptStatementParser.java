@@ -3,7 +3,7 @@ package edu.austral.ingsis.parser.impl;
 import static edu.austral.ingsis.token.TokenType.*;
 import static edu.austral.ingsis.token.TokenType.SEMICOLON;
 
-import edu.austral.ingsis.exceptions.ParseException;
+import edu.austral.ingsis.exceptions.ParserException;
 import edu.austral.ingsis.expression.Expression;
 import edu.austral.ingsis.parser.parseHelper.ParseHelper;
 import edu.austral.ingsis.statement.Statement;
@@ -51,17 +51,17 @@ public class PrintScriptStatementParser implements StatementParser {
       } else if (parseHelper.match(BOOLEAN)) {
         type = BOOLEAN;
       } else {
-        throw new ParseException(parseHelper.previous(), "Variable type missing.");
+        throw new ParserException(parseHelper.previous(), "Variable type missing.");
       }
     } else {
-      throw new ParseException(parseHelper.previous(), "Colon missing.");
+      throw new ParserException(parseHelper.previous(), "Colon missing.");
     }
 
     if (parseHelper.match(ASSIGNATION)) {
       expression = expressionParser.parse(parseHelper);
     }
 
-    parseHelper.consume(SEMICOLON, "';' after variable declaration missing.");
+    parseHelper.consume(SEMICOLON, "Semicolon after variable declaration missing.");
     return new DeclarationStatement(keyword, name, type, expression);
   }
 
@@ -70,13 +70,13 @@ public class PrintScriptStatementParser implements StatementParser {
     Expression expression = expressionParser.parse(parseHelper);
     parseHelper.consume(RIGHTPARENTHESIS, "Expect ')' after 'if'.");
 
-    parseHelper.consume(SEMICOLON, "';' after variable declaration missing.");
+    parseHelper.consume(SEMICOLON, "Semicolon after variable declaration missing.");
     return new PrintStatement(expression);
   }
 
   private Statement assignationStatement() {
     Expression expression = expressionParser.parse(parseHelper);
-    parseHelper.consume(SEMICOLON, "';' after variable declaration missing.");
+    parseHelper.consume(SEMICOLON, "Semicolon after variable declaration missing.");
     return new AssigmentStatement(expression);
   }
 

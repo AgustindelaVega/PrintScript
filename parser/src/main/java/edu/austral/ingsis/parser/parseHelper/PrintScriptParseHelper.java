@@ -2,7 +2,7 @@ package edu.austral.ingsis.parser.parseHelper;
 
 import static edu.austral.ingsis.token.TokenType.EOF;
 
-import edu.austral.ingsis.exceptions.ParseException;
+import edu.austral.ingsis.exceptions.ParserException;
 import edu.austral.ingsis.token.Token;
 import edu.austral.ingsis.token.TokenType;
 import java.util.List;
@@ -43,7 +43,7 @@ public class PrintScriptParseHelper implements ParseHelper {
   public Token consume(TokenType type, String message) {
     if (check(type)) return advance();
 
-    throw new ParseException(peek(), message);
+    throw new ParserException(peek(), message);
   }
 
   @Override

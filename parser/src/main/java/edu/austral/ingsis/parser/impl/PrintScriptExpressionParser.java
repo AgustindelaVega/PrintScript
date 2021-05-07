@@ -2,7 +2,7 @@ package edu.austral.ingsis.parser.impl;
 
 import static edu.austral.ingsis.token.TokenType.*;
 
-import edu.austral.ingsis.exceptions.ParseException;
+import edu.austral.ingsis.exceptions.ParserException;
 import edu.austral.ingsis.expression.Expression;
 import edu.austral.ingsis.expression.impl.*;
 import edu.austral.ingsis.parser.parseHelper.ParseHelper;
@@ -30,13 +30,13 @@ public class PrintScriptExpressionParser implements ExpressionParser {
         return new AssigmentExpression(name, value);
       }
 
-      throw new ParseException(token, "Assigment parse error.");
+      throw new ParserException(token, "Assigment parse error.");
     }
 
     return expression;
   }
 
-  private Expression comparison() throws ParseException {
+  private Expression comparison() throws ParserException {
     Expression left = additionAndSubtraction();
 
     while (parseHelper.match(GREATER, GREATEREQUAL, LESS, LESSEQUAL)) {
@@ -48,7 +48,7 @@ public class PrintScriptExpressionParser implements ExpressionParser {
     return left;
   }
 
-  private Expression additionAndSubtraction() throws ParseException {
+  private Expression additionAndSubtraction() throws ParserException {
     Expression left = multiplicationAndDivide();
 
     while (parseHelper.match(MINUS, PLUS)) {
@@ -60,7 +60,7 @@ public class PrintScriptExpressionParser implements ExpressionParser {
     return left;
   }
 
-  private Expression multiplicationAndDivide() throws ParseException {
+  private Expression multiplicationAndDivide() throws ParserException {
     Expression left = unary();
 
     while (parseHelper.match(DIVIDE, MULTIPLY)) {
@@ -94,6 +94,6 @@ public class PrintScriptExpressionParser implements ExpressionParser {
       return new VariableExpression(parseHelper.previous());
     }
 
-    throw new ParseException(parseHelper.peek(), "Expression expected.");
+    throw new ParserException(parseHelper.peek(), "Expression expected.");
   }
 }
