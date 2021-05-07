@@ -2,3 +2,4 @@ println("Hello World");
 let x: number = 10;
 let y: number = 20;
 println(x + y);
+const x: string = "test";

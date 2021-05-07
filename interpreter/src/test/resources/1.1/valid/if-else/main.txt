@@ -1,7 +1,6 @@
 const flag: boolean = true;
 let x: number = 12;
-if(true){
-    x = 1;
+if(flag){
 } else {
     x = 2;
 }

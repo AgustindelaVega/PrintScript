@@ -21,10 +21,10 @@ public class PrintScriptLexer implements Lexer {
 
   private final List<TokenType> patterns = new ArrayList<>();
 
-  private final String version;
+  private String version;
 
-  public PrintScriptLexer(String version) {
-    this.version = version;
+  public PrintScriptLexer() {
+
     addPatterns();
   }
 
@@ -45,7 +45,8 @@ public class PrintScriptLexer implements Lexer {
   }
 
   @Override
-  public List<Token> lex(String input) {
+  public List<Token> lex(String input, String version) {
+    this.version = version;
     Matcher matcher = getMatcher(input);
     int charCount = 0;
     int columnCount = 0;
